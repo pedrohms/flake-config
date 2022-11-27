@@ -14,4 +14,5 @@
 [
   ./docker.nix
   ./qemu.nix
+  ./vbox.nix
 ]
