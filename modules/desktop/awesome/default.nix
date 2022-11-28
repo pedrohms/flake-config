@@ -29,19 +29,6 @@
         gdm = {
           enable = true;
           wayland = false;
-          greeters = {
-            gtk = {
-              theme = {
-                name = "Dracula";
-                package = pkgs.dracula-theme;
-              };
-              cursorTheme = {
-                name = "Dracula-cursors";
-                package = pkgs.dracula-theme;
-                size = 16;
-              };
-            };
-          };
         };
         defaultSession = "none+awesome";
       };
