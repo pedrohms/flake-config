@@ -16,7 +16,7 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs user location  home-manager nvim-nightly;
+          inherit inputs nixpkgs user location home-manager nvim-nightly;
         }
       );
       homeConfigurations = (

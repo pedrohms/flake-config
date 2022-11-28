@@ -37,7 +37,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user, nvim-nightly; };
+        home-manager.extraSpecialArgs = { inherit user nvim-nightly; };
         home-manager.users.${user} = {
           imports = [(import ./home.nix)] ++ [(import ./desenv07/home.nix)];
         };
@@ -55,7 +55,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user, nvim-nightly; }; 
+        home-manager.extraSpecialArgs = { inherit user nvim-nightly; }; 
         home-manager.users.${user} = {
           imports = [(import ./home.nix)] ++ [(import ./vm/home.nix)];
         };
