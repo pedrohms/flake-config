@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, home-manager, user, location, ... }:
+{ lib, inputs, nixpkgs, home-manager, user, location, nvim-nightly, ... }:
 
 let
   system = "x86_64-linux";                                  # System architecture
@@ -20,7 +20,7 @@ in
       home-manager.nixosModules.home-manager {              # Home-Manager module that is used.
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user ; };  # Pass flake variable
+        home-manager.extraSpecialArgs = { inherit user nvim-nightly; };  # Pass flake variable
         home-manager.users.${user} = {
           imports = [(import ./home.nix)] ++ [(import ./notepedro/home.nix)];
         };
@@ -37,7 +37,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user; };
+        home-manager.extraSpecialArgs = { inherit user, nvim-nightly; };
         home-manager.users.${user} = {
           imports = [(import ./home.nix)] ++ [(import ./desenv07/home.nix)];
         };
@@ -55,7 +55,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user; }; 
+        home-manager.extraSpecialArgs = { inherit user, nvim-nightly; }; 
         home-manager.users.${user} = {
           imports = [(import ./home.nix)] ++ [(import ./vm/home.nix)];
         };
