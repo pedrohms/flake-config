@@ -61,7 +61,7 @@ in
       libinput.enable = true; # Enable touchpad
       displayManager.gdm.enable = true;
       displayManager.gdm.wayland = false;
-      desktopManager.gnome.enable = true;
+      desktopManager.gnome.enable = false;
       windowManager.awesome.enable = true;
     };
     printing.enable = true;
