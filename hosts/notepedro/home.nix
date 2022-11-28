@@ -19,19 +19,19 @@
 #     ../../modules/desktop/bspwm/home.nix # Window Manager
 #   ];
 
-# home = {                                # Specific packages for laptop
-#   packages = with pkgs; [
-#     # Applications
-#     libreoffice                         # Office packages
+  home = {                                # Specific packages for laptop
+    packages = with pkgs; [
+      # Applications
+      android-studio                         # Office packages
 
-#     # Display
-#     #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
+      # Display
+      #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
-#     # Power Management
-#     #auto-cpufreq                       # Power management
-#     #tlp                                # Power management
-#   ];
-# };
+      # Power Management
+      #auto-cpufreq                       # Power management
+      #tlp                                # Power management
+    ];
+  };
 
 # programs = {
 #   alacritty.settings.font.size = 11;
