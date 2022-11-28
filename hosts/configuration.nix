@@ -52,6 +52,7 @@ in
   # Enable the X11 windowing system.
   services = {
     flatpak.enable = true;
+    xdg.portal.enable = true;
     xserver = {
       videoDrivers = [ "nvidia" ];
       enable = true;
