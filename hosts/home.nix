@@ -21,6 +21,14 @@
       conky
       lxappearance
       pcmanfm
+      android-studio
+      flutter
+    ];
+
+    nixpkgs.overlays = [
+      (import (builtins.fetchTarball {
+        url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+      }))
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
