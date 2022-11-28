@@ -20,8 +20,6 @@
     [ { device = "/dev/disk/by-label/swap"; }
     ];
 
-  swapDevices = [ ];
-
   networking = {
     useDHCP = false;                        # Deprecated
     hostName = "vm";
