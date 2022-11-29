@@ -4,7 +4,6 @@
 
 { config, lib, pkgs, inputs, user, location, ... }:
 let
-  user="pedro";
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -28,25 +27,6 @@ in
   console = {
     font = "Lat2-Terminus16";
     useXkbConfig = true; # use xkbOptions in tty.
-  };
-
-  # Enable the X11 windowing system.
-  # xdg.portal.enable = true;
-  services = {
-    # flatpak.enable = true;
-    xserver = {
-      videoDrivers = [ "nvidia" ];
-      enable = true;
-      layout = "br";
-      xkbVariant = "abnt2";
-      xkbModel = "pc105";
-      libinput.enable = true; # Enable touchpad
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = false;
-      desktopManager.gnome.enable = false;
-      windowManager.awesome.enable = true;
-    };
-    printing.enable = true;
   };
 
   # Enable sound.

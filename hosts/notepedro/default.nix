@@ -72,6 +72,7 @@
       openFirewall = true;
     };
     xserver = {
+      videoDrivers = [ "nvidia" ];
       libinput = {                          # Trackpad support & gestures
         touchpad = {
           tapping = true;

@@ -19,7 +19,7 @@
   services = {
     # flatpak.enable = true;
     xserver = {
-      videoDrivers = [ "nvidia" ];
+      # videoDrivers = [ "nvidia" ];
       enable = true;
       layout = "br";
       xkbVariant = "abnt2";
