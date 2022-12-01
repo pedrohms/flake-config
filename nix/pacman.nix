@@ -11,11 +11,8 @@
 
 {
   home = {
-    packages = [
-      (import nixgl { inherit pkgs; }).nixGLIntel       # OpenGL for GUI apps. Add to aliases is recommended
-                                     #.nixVulkanIntel
-      pkgs.hello
-      pkgs.emacs
+    packages = with pkgs; [
+      htop
     ];
 
     activation = {                                      # Run script during rebuild/switch

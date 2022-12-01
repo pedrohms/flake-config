@@ -24,6 +24,8 @@
       appimage-run
       feh
       dmenu
+      bat
+      ripgrep
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
