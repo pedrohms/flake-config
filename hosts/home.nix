@@ -26,6 +26,11 @@
       dmenu
       bat
       ripgrep
+      neovim-nightly
+      nodenv
+      nodejs
+      go
+      sumneko-lua-language-server
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own

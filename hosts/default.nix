@@ -1,11 +1,12 @@
-{ lib, inputs, nixpkgs, home-manager, user, location, ... }:
+{ lib, inputs, nixpkgs, home-manager, user, location, my-overlays, ... }:
 
 let
   system = "x86_64-linux";                                  # System architecture
 
   pkgs = import nixpkgs {
-    inherit system;
+    inherit system ;
     config.allowUnfree = true;                              # Allow proprietary software
+    overlays = my-overlays;
   };
 
   lib = nixpkgs.lib;
@@ -20,7 +21,7 @@ in
       home-manager.nixosModules.home-manager {              # Home-Manager module that is used.
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user ; };  # Pass flake variable
+        home-manager.extraSpecialArgs = { inherit user pkgs; };  # Pass flake variable
         home-manager.users.${user} = {
           imports = [(import ./home.nix)] ++ [(import ./notepedro/home.nix)];
         };
@@ -37,7 +38,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user; };
+        home-manager.extraSpecialArgs = { inherit user pkgs; };
         home-manager.users.${user} = {
           imports = [(import ./home.nix)] ++ [(import ./desenv07/home.nix)];
         };
