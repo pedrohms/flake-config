@@ -37,14 +37,14 @@
     hostName = "notepedro";
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
-    interfaces = {
-      enp0s20f0u2u4 = {
-        useDHCP = true;
-      };
-      wlp2s0 = {
-        useDHCP = true;
-      };
-    };
+    # interfaces = {
+    #   enp0s20f0u2u4 = {
+    #     useDHCP = true;
+    #   };
+    #   wlp2s0 = {
+    #     useDHCP = true;
+    #   };
+    # };
     firewall = {
       enable = true;
       #allowedUDPPorts = [ 53 67 ];
