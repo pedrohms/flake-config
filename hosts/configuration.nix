@@ -48,6 +48,7 @@ in
 
   programs = {
     fish.enable = true;
+    nm-applet.enable = true;
   };
 
   users.users.${user} = {
@@ -91,6 +92,7 @@ in
       nvidia-offload
       pciutils
       usbutils
+      networkmanagerapplet
     ];
   };
 
