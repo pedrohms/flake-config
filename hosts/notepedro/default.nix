@@ -1,5 +1,14 @@
 { config, pkgs, user, ... }:
 
+let
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec "$@"
+  '';
+in
 {
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
@@ -26,14 +35,28 @@
     };
   };
 
-  hardware.sane = {                           # Used for scanning with Xsane
-    enable = true;
-    extraBackends = [ pkgs.sane-airscan ];
+  hardware = {
+    nvidia = {
+      powerManagement.enable = true;
+      modesetting.enable = true;
+      prime = {
+        offload.enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    };
+    opengl.enable = true;
+    pulseaudio.enable = true;
+    sane = {                           # Used for scanning with Xsane
+      enable = true;
+      extraBackends = [ pkgs.sane-airscan ];
+    };
   };
 
   environment = {
     systemPackages = with pkgs; [
       simple-scan
+      nvidia-offload
     ];
   };
 
