@@ -10,7 +10,11 @@
 
 let
   system = "x86_64-linux";                                  # System architecture
-  pkgs = nixpkgs.legacyPackages.${system};
+  pkgs = import nixpkgs {
+    inherit system ;
+    config.allowUnfree = true;                              # Allow proprietary software
+    overlays = my-overlays;
+  };
 in
 {
   defaultNix = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
