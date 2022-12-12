@@ -23,7 +23,6 @@
     packages = with pkgs; [
       # Applications
       android-studio                         # Office packages
-
       # Display
       #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
