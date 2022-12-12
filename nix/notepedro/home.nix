@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, home-manager, user, my-overlays, ... }:
+{ inputs, user, pkgs, my-overlays, ... }:
 
 {
   home.packages = [ 

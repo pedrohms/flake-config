@@ -10,14 +10,7 @@
 
 let
   system = "x86_64-linux";                                  # System architecture
-
-  pkgs = import nixpkgs {
-    inherit system;
-    config.allowUnfree = true;                              # Allow proprietary software
-    overlays = my-overlays;
-  };
-
-  lib = nixpkgs.lib;
+  pkgs = nixpkgs.legacyPackages.${system};
 in
 {
   defaultNix = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
@@ -29,10 +22,18 @@ in
   };
 
   homePedro = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
-    system = "x86_64-linux";
-    username = "${user}";
-    homeDirectory = "/home/${user}";
-    configuration = import ./notepedro/home.nix;
+    inherit pkgs;
     extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
+    modules = [
+      ./notepedro/home.nix
+      {
+        home = {
+          username = "${user}";
+          homeDirectory = "/home/${user}";
+          packages = [ pkgs.home-manager ];
+          stateVersion = "23.05";
+        };
+      }
+    ];
   };
 }
