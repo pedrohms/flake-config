@@ -31,6 +31,7 @@
       nodejs
       go
       sumneko-lua-language-server
+      scrot
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own

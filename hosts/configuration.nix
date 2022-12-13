@@ -31,7 +31,13 @@
   programs = {
     fish.enable = true;
     nm-applet.enable = true;
+    gnupg.agent = {
+        enable = true;
+        enableSSHSupport =true;
+    };
   };
+
+  services.pcscd.enable = true;
 
   users.users.${user} = {
     isNormalUser = true;
