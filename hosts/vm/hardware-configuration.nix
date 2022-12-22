@@ -23,9 +23,6 @@
   networking = {
     useDHCP = false;                        # Deprecated
     hostName = "vm";
-    interfaces = {
-      enp0s3.useDHCP = true;
-    };
   };
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

@@ -29,7 +29,6 @@
   };
 
   programs = {
-    fish.enable = true;
     nm-applet.enable = true;
     gnupg.agent = {
         enable = true;
@@ -43,7 +42,6 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" ];
     initialPassword = "123456";
-    shell = pkgs.fish;
   };
 
   fonts.fonts = with pkgs; [                # Fonts

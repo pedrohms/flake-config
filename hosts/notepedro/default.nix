@@ -61,6 +61,7 @@ in
   };
 
   programs = {                              # No xbacklight, this is the alterantive
+    fish.enable = true;
     dconf.enable = true;
     light.enable = true;
   };
@@ -119,4 +120,9 @@ in
     "d /var/lib/bluetooth 700 root root - -"
   ];
   systemd.targets."bluetooth".after = ["systemd-tmpfiles-setup.service"];
+
+
+  users.users.${user} = {
+    shell = pkgs.fish;
+  };
 }

@@ -38,6 +38,7 @@
   };
 
   programs = {                              # No xbacklight, this is the alterantive
+    fish.enable = true;
     dconf.enable = true;
     light.enable = true;
   };
@@ -74,5 +75,8 @@
         { x = 1920; y = 1080; }
       ];
     };
+  };
+  users.users.${user} = {
+    shell = pkgs.fish;
   };
 }

@@ -31,6 +31,7 @@ in
 
   desenv07 = lib.nixosSystem {                                # Laptop profile
     inherit system;
+    user = "framework"
     specialArgs = { inherit inputs user location ; };
     modules = [
       ./desenv07
@@ -48,17 +49,17 @@ in
 
   vm = lib.nixosSystem {                                    # VM profile
     inherit system;
+    user = "vmuser"
     specialArgs = { inherit inputs user location; };
     modules = [
       ./vm
       ./configuration.nix
-
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user pkgs; }; 
         home-manager.users.${user} = {
-          imports = [(import ./home.nix)] ++ [(import ./vm/home.nix)];
+          imports = [(import ./vm/home.nix)];
         };
       }
     ];

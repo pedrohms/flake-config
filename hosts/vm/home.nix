@@ -11,16 +11,31 @@
 #               └─ home.nix
 #
 
-{ pkgs, ... }:
+{ config, lib, pkgs, user, ... }:
 
 {
-  imports =
-    [
+
+  home = {
+    username = "${user}";
+    homeDirectory = "/home/${user}";
+   
+    stateVersion = "23.05";
+    packages = with pkgs; [
+      home-manager
+      exa
+      stow
+      starship
+      lazygit
+      fzf
+      feh
+      bat
+      ripgrep
+      neovim-nightly
+      sumneko-lua-language-server
     ];
 
-  home = {                                  # Specific packages for desktop
-    packages = with pkgs; [
-      firefox
-    ];
+  };
+  programs = {
+    home-manager.enable = true;
   };
 }

@@ -17,8 +17,8 @@
 {
   imports =  [                                  # For now, if applying to other system, swap files
     ./hardware-configuration.nix                # Current system hardware config @ /etc/nixos/hardware-configuration.nix
-    ../../modules/desktop/awesome/default.nix
-  ];
+    ../../modules/virtualization/podman.nix
+  ] ;
 
   boot = {                                      # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
@@ -34,12 +34,5 @@
   };
 
   services = {
-    xserver = {                                 
-      resolutions = [
-        { x = 1920; y = 1080; }
-        { x = 1600; y = 900; }
-        { x = 3840; y = 2160; }
-      ];
-    };
   };
 }
