@@ -23,6 +23,7 @@
   networking = {
     useDHCP = false;                        # Deprecated
     hostName = "vm";
+    firewall.enable = false;
   };
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
