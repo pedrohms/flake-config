@@ -31,7 +31,7 @@ in
 
   desenv07 = lib.nixosSystem {                                # Laptop profile
     inherit system;
-    user = "framework"
+    user = "framework";
     specialArgs = { inherit inputs user location ; };
     modules = [
       ./desenv07
@@ -49,7 +49,7 @@ in
 
   vm = lib.nixosSystem {                                    # VM profile
     inherit system;
-    user = "vmuser"
+    user = "vmuser";
     specialArgs = { inherit inputs user location; };
     modules = [
       ./vm
