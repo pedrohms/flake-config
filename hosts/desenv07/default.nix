@@ -48,14 +48,6 @@
   };
 
   services = {
-    #tlp.enable = true;                      # TLP and auto-cpufreq for power management
-    #logind.lidSwitch = "ignore";            # Laptop does not go to sleep when lid is closed
-    auto-cpufreq.enable = true;
-    blueman.enable = true;
-#   printing = {                            # Printing and drivers for TS5300
-#     enable = true;
-#     drivers = [ pkgs.cnijfilter2 ];
-#   };
     avahi = {                               # Needed to find wireless printer
       enable = true;
       nssmdns = true;
@@ -70,7 +62,7 @@
       shares = {
         share = {
           "path" = "/home/${user}/Public";
-          "guest ok" = "no";
+          "guest ok" = "true";
           "read only" = "no";
         };
       };
@@ -84,7 +76,6 @@
       ];
     };
   };
-
   users.users.${user} = {
     shell = pkgs.fish;
   };
