@@ -38,7 +38,7 @@
     hostName = "desenv07";
     networkmanager.enable = true;
     firewall.enable = false;
-  }
+  };
   # networking.interfaces.enp0s20f0u2u4.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
 
