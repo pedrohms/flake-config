@@ -24,6 +24,7 @@
       # Applications
       libreoffice                         # Office packages
       android-studio
+      gradle
       # Display
       #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
