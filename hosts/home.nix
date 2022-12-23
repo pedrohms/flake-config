@@ -15,7 +15,6 @@
       picom
       rofi
       tmux
-      python3
       lazygit
       fzf
       conky
@@ -27,10 +26,6 @@
       bat
       ripgrep
       neovim-nightly
-      nodenv
-      nodejs
-      go
-      sumneko-lua-language-server
       scrot
     ];
 
