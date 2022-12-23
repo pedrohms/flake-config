@@ -25,6 +25,7 @@
 
   fileSystems."/mnt/dados" =
     { device = "/dev/disk/by-label/dados";
+      options = [ "rw" "users" "defaults" ];
       fsType = "ext4";
     };
 
@@ -32,18 +33,11 @@
     [ { device = "/dev/disk/by-label/swap"; }
     ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking = {
     useDHCP = lib.mkDefault true;
     hostName = "desenv07";
-    firewall = {
-      enable = true;
-      #allowedUDPPorts = [ 53 67 ];
-      allowedTCPPorts = [ 80 8080 443 3000 3001 16000 16001 22 15000 15001 17000 443 3306 ];
-    };
+    networkmanager.enable = true;
+    firewall.enable = false;
   }
   # networking.interfaces.enp0s20f0u2u4.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;

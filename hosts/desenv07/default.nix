@@ -26,9 +26,13 @@
     };
   };
 
-  hardware.sane = {                           # Used for scanning with Xsane
-    enable = true;
-    extraBackends = [ pkgs.sane-airscan ];
+  hardware = {
+    opengl.enable = true;
+    pulseaudio.enable = true;
+    sane = {                           # Used for scanning with Xsane
+      enable = true;
+      extraBackends = [ pkgs.sane-airscan ];
+    };
   };
 
   environment = {
@@ -44,10 +48,6 @@
   };
 
   services = {
-#   printing = {                            # Printing and drivers for TS5300
-#     enable = true;
-#     drivers = [ pkgs.cnijfilter2 ];
-#   };
     avahi = {                               # Needed to find wireless printer
       enable = true;
       nssmdns = true;
@@ -62,7 +62,7 @@
       shares = {
         share = {
           "path" = "/home/${user}/Public";
-          "guest ok" = "no";
+          "guest ok" = "true";
           "read only" = "no";
         };
       };
