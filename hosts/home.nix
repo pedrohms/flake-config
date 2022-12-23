@@ -14,6 +14,7 @@
       starship
       picom
       rofi
+      rofi-calc
       tmux
       lazygit
       fzf
