@@ -15,4 +15,5 @@
   ./docker.nix
   ./qemu.nix
   ./vbox.nix
+  ./podman.nix
 ]
