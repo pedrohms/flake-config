@@ -10,7 +10,8 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
-      user = "pedro"; 
+      # user = "pedro"; 
+      user = "framework"; 
       my-overlays = [
           inputs.neovim-nightly-overlay.overlay
         ];
