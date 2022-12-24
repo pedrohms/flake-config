@@ -37,11 +37,19 @@
     hostName = "notepedro";
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
-    bridges.br0.interfaces = ["virbr0"];
+    bridges.br0.interfaces = ["wlp2s0"];
+    bridges.br1.interfaces = ["enp0s20f0u2u4"];
     interfaces.br0 = {
       useDHCP = false;
       ipv4.addresses = [ {
         "address" = "192.168.122.1";
+        "prefixLength" = 24;
+      } ];
+    };
+    interfaces.br1 = {
+      useDHCP = false;
+      ipv4.addresses = [ {
+        "address" = "192.168.123.1";
         "prefixLength" = 24;
       } ];
     };
