@@ -37,14 +37,6 @@
     hostName = "notepedro";
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
-    bridges.virbr0.interfaces = ["wlp2s0" "enp0s20f0u2u4"];
-    interfaces.virbr0 = {
-      useDHCP = false;
-      ipv4.addresses = [ {
-        "address" = "192.168.122.1";
-        "prefixLength" = 24;
-      } ];
-    };
     # interfaces = {
     #   enp0s20f0u2u4 = {
     #     useDHCP = true;
