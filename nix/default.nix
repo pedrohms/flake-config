@@ -17,12 +17,20 @@ let
   };
 in
 {
-  defaultNix = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
-    system = "x86_64-linux";
-    username = "${user}";
-    homeDirectory = "/home/${user}";
-    configuration = import ./desenv07/home.nix;
+  desenv07 = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
+    inherit pkgs;
     extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
+    modules = [
+      ./desenv07/home.nix
+      {
+        home = {
+          username = "${user}";
+          homeDirectory = "/home/${user}";
+          packages = [ pkgs.home-manager ];
+          stateVersion = "23.05";
+        };
+      }
+    ];
   };
 
   homePedro = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
