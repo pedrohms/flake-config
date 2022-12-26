@@ -37,7 +37,7 @@
   };
 
   services = {
-    gnome.gnome-keyring.enable;
+    gnome.gnome-keyring.enable = true;
     pcscd.enable = true;
   };
 
