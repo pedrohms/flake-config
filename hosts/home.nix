@@ -28,6 +28,7 @@
       ripgrep
       neovim-nightly
       scrot
+      gnome.gnome-keyring
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
