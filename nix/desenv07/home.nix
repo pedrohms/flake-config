@@ -1,7 +1,7 @@
 { inputs, user, pkgs, my-overlays, ... }:
 
 {
-  home.packages = [ 
+  home.packages = with pkgs; [ 
     xarchiver
   ];
 }
