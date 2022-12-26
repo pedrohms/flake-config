@@ -36,7 +36,10 @@
     };
   };
 
-  services.pcscd.enable = true;
+  services = {
+    gnome.gnome-keyring.enable;
+    pcscd.enable = true;
+  };
 
   users.users.${user} = {
     isNormalUser = true;
