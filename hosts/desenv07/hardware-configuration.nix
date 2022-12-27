@@ -23,6 +23,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/dados" =
+    { device = "/dev/sdb5";
+      options = [ "rw" "users" "defaults" ];
+      fsType = "ntfs3";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-label/swap"; }
     ];
