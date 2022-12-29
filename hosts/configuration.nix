@@ -29,6 +29,7 @@
   };
 
   programs = {
+    adb.enable = true;
     nm-applet.enable = true;
     gnupg.agent = {
         enable = true;
@@ -37,6 +38,9 @@
   };
 
   services = {
+    udev.packages = [
+     pkgs.android-udev-rules
+    ];
     gnome.gnome-keyring.enable = true;
     pcscd.enable = true;
   };
