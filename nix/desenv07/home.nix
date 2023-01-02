@@ -4,5 +4,6 @@
   home.packages = with pkgs; [ 
     xarchiver
     ghq
+    sumneko-lua-language-server
   ];
 }
