@@ -28,7 +28,7 @@
       enable = true;
       driSupport32Bit = true;
       driSupport = true;
-    }
+    };
     pulseaudio.enable = true;
   };
 
