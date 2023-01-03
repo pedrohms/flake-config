@@ -24,7 +24,11 @@
   sound.enable = true;
 
   hardware = {
-    opengl.enable = true;
+    opengl = {
+      enable = true;
+      driSupport32Bit = true;
+      driSupport = true;
+    }
     pulseaudio.enable = true;
   };
 

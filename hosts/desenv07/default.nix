@@ -27,7 +27,12 @@
   };
 
   hardware = {
-    opengl.enable = true;
+    opengl.extraPackages = with pkgs; [
+      amdvlk
+    ];
+    opengl.extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+    ];
     pulseaudio.enable = true;
     sane = {                           # Used for scanning with Xsane
       enable = true;
@@ -69,6 +74,7 @@
       openFirewall = true;
     };
     xserver = {
+      videoDrivers = [ "amdgpu" ];
       resolutions = [
         { x = 1600; y = 920; }
         { x = 1280; y = 720; }
