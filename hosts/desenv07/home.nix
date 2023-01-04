@@ -27,7 +27,6 @@
       gradle
       azuredatastudio
       vscode
-      zip
       anydesk
       postman
       # Display

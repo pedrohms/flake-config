@@ -86,6 +86,7 @@
       lshw
       killall
       unzip
+      zip
       pciutils
       usbutils
       networkmanagerapplet
