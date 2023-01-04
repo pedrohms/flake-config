@@ -27,6 +27,8 @@
       gradle
       azuredatastudio
       vscode
+      zip
+      anydesk
       # Display
       #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
