@@ -5,5 +5,6 @@
     xarchiver
     ghq
     sumneko-lua-language-server
+    authenticator
   ];
 }
