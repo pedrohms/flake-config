@@ -29,6 +29,7 @@
       vscode
       zip
       anydesk
+      postman
       # Display
       #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
