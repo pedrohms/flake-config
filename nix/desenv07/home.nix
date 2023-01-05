@@ -6,5 +6,6 @@
     ghq
     sumneko-lua-language-server
     authenticator
+    discord
   ];
 }
