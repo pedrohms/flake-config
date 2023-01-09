@@ -53,6 +53,7 @@
   };
 
   services = {
+    flatpak.enable = true;
     avahi = {                               # Needed to find wireless printer
       enable = true;
       nssmdns = true;
