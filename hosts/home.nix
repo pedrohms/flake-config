@@ -19,7 +19,7 @@
       lazygit
       fzf
       conky
-      lxappearance
+      # lxappearance
       pcmanfm
       appimage-run
       feh
