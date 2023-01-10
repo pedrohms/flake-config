@@ -16,5 +16,5 @@
       package = pkgs.catppuccin-cursors.mochaDark;
       size = 16;
     };
-  }
+  };
 }
