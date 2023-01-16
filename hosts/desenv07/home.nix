@@ -29,6 +29,12 @@
       vscode
       anydesk
       postman
+      xarchiver
+      ghq
+      sumneko-lua-language-server
+      authenticator
+      discord
+      firefox
       # Display
       #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
