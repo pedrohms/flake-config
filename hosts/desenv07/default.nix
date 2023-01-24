@@ -72,6 +72,10 @@
           "read only" = "no";
         };
       };
+      extraConfig =''
+        force user = framework
+        force group = framework
+      '';
       openFirewall = true;
     };
     xserver = {
