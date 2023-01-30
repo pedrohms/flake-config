@@ -48,7 +48,7 @@
     ];
     gnome.gnome-keyring.enable = true;
     pcscd.enable = true;
-    services.pipewire = {
+    pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
