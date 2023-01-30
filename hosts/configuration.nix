@@ -29,7 +29,7 @@
       driSupport32Bit = true;
       driSupport = true;
     };
-    # pulseaudio.enable = true;
+    pulseaudio.enable = false;
   };
 
   programs = {

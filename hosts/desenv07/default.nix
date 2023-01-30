@@ -33,7 +33,7 @@
     opengl.extraPackages32 = with pkgs; [
       driversi686Linux.amdvlk
     ];
-    pulseaudio.enable = true;
+    pulseaudio.enable = false;
     sane = {                           # Used for scanning with Xsane
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
