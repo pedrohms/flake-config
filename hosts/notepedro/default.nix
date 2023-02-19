@@ -67,6 +67,7 @@ in
   };
 
   services = {
+    flatpak.enable = true;
     #tlp.enable = true;                      # TLP and auto-cpufreq for power management
     #logind.lidSwitch = "ignore";            # Laptop does not go to sleep when lid is closed
     auto-cpufreq.enable = true;
