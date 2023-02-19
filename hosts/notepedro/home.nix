@@ -24,6 +24,8 @@
       # Applications
       android-studio                         # Office packages
       jq
+      authenticator
+      discord
       # Display
       #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
