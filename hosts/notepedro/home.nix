@@ -26,6 +26,7 @@
       jq
       authenticator
       discord
+      google-chrome
       # Display
       #light                              # xorg.xbacklight not supported. Other option is just use xrandr.
 
