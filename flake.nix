@@ -10,24 +10,24 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
-      # user = "pedro"; 
+      user = genAttrs[ "desenv07" "notepedro" ] { desenv07 = "framework" ; notepedro = "pedro"; }; 
       # user = "framework"; 
       my-overlays = [
           inputs.neovim-nightly-overlay.overlay
         ];
       location = "$HOME/.setup";
     in {
-      nixosConfigurations = genAttrs [ "framework" "pedro"]( user: nixosSystem { (
+      nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs user location  home-manager my-overlays;
-        } );
-      });
-      homeConfigurations = genAttrs [ "framework" "pedro"]( user: nixosSystem {(
+        }
+      );
+      homeConfigurations = (
         import ./nix {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs home-manager user my-overlays;
-        } );
-      });
+        }
+      );
     };
 }
