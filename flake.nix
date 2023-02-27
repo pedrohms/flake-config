@@ -17,17 +17,13 @@
         ];
       location = "$HOME/.setup";
     in {
-      nixosConfigurations = genAttrs [ "notepedro", "desenv07"]( user: nixosSystem {
-        notepedro = "pedro";
-        desenv07 = "framework";
+      nixosConfigurations = genAttrs [ "framework", "pedro"]( user: nixosSystem {
         import ./hosts {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs user location  home-manager my-overlays;
         }
       });
-      homeConfigurations = genAttrs [ "notepedro", "desenv07"]( user: nixosSystem {
-        notepedro = "pedro";
-        desenv07 = "framework";
+      homeConfigurations = genAttrs [ "framework", "pedro"]( user: nixosSystem {
         import ./nix {
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs home-manager user my-overlays;
