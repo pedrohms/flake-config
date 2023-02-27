@@ -10,8 +10,8 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
-      user = genAttrs[ "desenv07" "notepedro" ] { desenv07 = "framework" ; notepedro = "pedro"; }; 
-      # user = "framework"; 
+      # user = "pedro"; 
+      user = "framework"; 
       my-overlays = [
           inputs.neovim-nightly-overlay.overlay
         ];
