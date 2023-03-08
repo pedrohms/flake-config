@@ -11,6 +11,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "amdgpu" ];
+  boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

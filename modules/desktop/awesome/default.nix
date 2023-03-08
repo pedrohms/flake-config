@@ -25,10 +25,11 @@
       xkbVariant = "abnt2";
       xkbModel = "pc105";
       libinput.enable = true; # Enable touchpad
+      desktopManager.gnome.enable = true;
       displayManager = {
         gdm = {
           enable = true;
-          wayland = false;
+          wayland = true;
         };
         defaultSession = "none+awesome";
       };
@@ -53,8 +54,8 @@
     xorg.xrandr
   ];
 
-  xdg.portal = {                                  # Required for flatpak with windowmanagers
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
+  # xdg.portal = {                                  # Required for flatpak with windowmanagers
+  #   enable = true;
+  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # };
 }
