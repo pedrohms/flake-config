@@ -9,6 +9,7 @@
       authenticator
       discord
       firefox
+      google-chrome
     ];
   };
 }
