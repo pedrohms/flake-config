@@ -13,6 +13,7 @@
       discord
       firefox
       google-chrome
+      remmina
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
