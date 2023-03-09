@@ -99,6 +99,26 @@
       pciutils
       usbutils
       networkmanagerapplet
+      # lxappearance
+      home-manager
+      exa
+      stow
+      starship
+      picom
+      rofi
+      rofi-calc
+      tmux
+      lazygit
+      fzf
+      conky
+      pcmanfm
+      feh
+      dmenu
+      bat
+      ripgrep
+      neovim-nightly
+      scrot
+      gnome.gnome-keyring
     ];
   };
 
