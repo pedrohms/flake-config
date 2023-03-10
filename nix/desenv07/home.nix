@@ -14,6 +14,7 @@
       firefox
       google-chrome
       remmina
+      jdk11
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
