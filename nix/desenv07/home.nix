@@ -15,6 +15,8 @@
       google-chrome
       remmina
       jdk11
+      ghq
+      anydesk
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
