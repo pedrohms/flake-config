@@ -17,6 +17,8 @@
       jdk11
       ghq
       anydesk
+      rustdesk
+      moonlight-qt
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
