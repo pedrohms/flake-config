@@ -48,4 +48,20 @@ in
       }
     ];
   };
+
+  homeVm = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
+    inherit pkgs;
+    extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
+    modules = [
+      ./vm/home.nix
+      {
+        home = {
+          username = "${user}";
+          homeDirectory = "/home/${user}";
+          packages = [ pkgs.home-manager ];
+          stateVersion = "23.11";
+        };
+      }
+    ];
+  };
 }
