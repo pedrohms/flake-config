@@ -64,6 +64,24 @@
     initialPassword = "123456";
   };
 
+  users.users.priscila = {
+    isNormalUser = true;
+    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" ];
+    initialPassword = "123456";
+  };
+
+  users.users.sofia = {
+    isNormalUser = true;
+    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" ];
+    initialPassword = "123456";
+  };
+
+  users.users.arthur = {
+    isNormalUser = true;
+    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" ];
+    initialPassword = "123456";
+  };
+
   fonts.fonts = with pkgs; [                # Fonts
     carlito                                 # NixOS
     vegur                                   # NixOS
@@ -146,7 +164,7 @@
       enable = true;
       channel = "https://nixos.org/channels/nixos-unstable";
     };
-    stateVersion = "23.05";
+    stateVersion = "23.11";
   };
 
 }

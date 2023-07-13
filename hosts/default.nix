@@ -14,7 +14,7 @@ in
 {
   notepedro = lib.nixosSystem {                               # Desktop profile
     inherit system;
-    specialArgs = { inherit inputs user location; }; # Pass flake variable
+    specialArgs = { inherit inputs user location pkgs; }; # Pass flake variable
     modules = [                                             # Modules that are used.
       ./notepedro
       ./configuration.nix
@@ -32,18 +32,10 @@ in
 
   vm = lib.nixosSystem {                                    # VM profile
     inherit system;
-    specialArgs = { inherit inputs user location; };
+    specialArgs = { inherit inputs user location pkgs; };
     modules = [
       ./vm
       ./configuration.nix
-      home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user pkgs; }; 
-        home-manager.users.${user} = {
-          imports = [(import ./vm/home.nix)];
-        };
-      }
     ];
   };
 }

@@ -19,14 +19,8 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
+    { device = "/dev/disk/by-label/boot";
       fsType = "vfat";
-    };
-
-  fileSystems."/mnt/dados" =
-    { device = "/dev/disk/by-label/dados";
-      options = [ "rw" "users" "defaults" ];
-      fsType = "ext4";
     };
 
   swapDevices =
