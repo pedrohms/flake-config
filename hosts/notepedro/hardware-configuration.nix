@@ -18,6 +18,16 @@
       fsType = "ext4";
     };
 
+  fileSystems."/home" =
+    { device = "/dev/disk/by-label/dados";
+      fsType = "ext4";
+    };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-label/store";
+    fsType = "btrfs";
+  };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-label/boot";
       fsType = "vfat";
