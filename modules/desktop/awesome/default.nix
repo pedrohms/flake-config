@@ -11,10 +11,13 @@
 #               └─ default.nix *
 #
 
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
-  programs.dconf.enable = true;
+
+  programs = {
+    dconf.enable = true;
+  };
 
   services = {
     # flatpak.enable = true;
@@ -31,9 +34,14 @@
           enable = true;
           wayland = true;
         };
-        defaultSession = "none+awesome";
+        defaultSession = "gnome";
       };
-      windowManager.awesome.enable = true;
+      windowManager.awesome = {
+        enable = true;
+        package = pkgs.awesome-git;
+      };
+      windowManager.qtile.enable = true;
+      # windowManager.qtile.backend = "wayland";
       serverFlagsSection = ''
         Option "BlankTime" "0"
         Option "StandbyTime" "0"
@@ -49,13 +57,18 @@
 
   environment.systemPackages = with pkgs; [       # Packages installed
     xclip
+    sxhkd
+    deckmaster
+    dunst
+    pywal
+    clipmenu
     xorg.xev
     xorg.xkill
     xorg.xrandr
   ];
 
-  # xdg.portal = {                                  # Required for flatpak with windowmanagers
-  #   enable = true;
-  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # };
+  xdg.portal = {                                  # Required for flatpak with windowmanagers
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal ];
+  };
 }

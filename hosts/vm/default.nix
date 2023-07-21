@@ -26,7 +26,6 @@
     loader = {                                  # For legacy boot:
       grub = {
         enable = true;
-        version = 2;
         device = "/dev/sda";                    # Name of harddrive (can also be vda)
       };
       timeout = 1;                              # Grub auto select time

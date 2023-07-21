@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }:
+{inputs, config, pkgs, user, ... }:
 
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
@@ -25,7 +25,6 @@ in
       };
       grub = {                              # Most of grub is set up for dual boot
         enable = true;
-        version = 2;
         devices = [ "nodev" ];
         efiSupport = true;
         useOSProber = true;                 # Find all boot options

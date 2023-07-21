@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     home-manager = {
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +15,7 @@
       # user = "framework"; 
       my-overlays = [
           inputs.neovim-nightly-overlay.overlay
+          inputs.nixpkgs-f2k.overlays.window-managers
         ];
       location = "$HOME/.setup";
     in {
