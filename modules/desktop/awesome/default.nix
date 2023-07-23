@@ -67,8 +67,8 @@
     xorg.xrandr
   ];
 
-  xdg.portal = {                                  # Required for flatpak with windowmanagers
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal ];
-  };
+  # xdg.portal = {                                  # Required for flatpak with windowmanagers
+  #   enable = true;
+  #   extraPortals = [ pkgs.xdg-desktop-portal ];
+  # };
 }

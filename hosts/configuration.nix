@@ -39,6 +39,18 @@
         enable = true;
         enableSSHSupport =true;
     };
+    direnv = {
+      enable = true;
+      package = pkgs.direnv;
+      silent = true;
+      persistDerivations = true;
+      loadInNixShell = true;
+      direnvrcExtra = "";
+      nix-direnv = {
+        enable = true;
+        package = pkgs.nix-direnv;
+      };
+    };
   };
 
   security.rtkit.enable = true;
@@ -89,11 +101,12 @@
     jetbrains-mono
     font-awesome                            # Icons
     corefonts                               # MS
-    (nerdfonts.override {                   # Nerdfont Icons override
-      fonts = [
-        "FiraCode"
-      ];
-    })
+    nerdfonts
+    # (nerdfonts.override {                   # Nerdfont Icons override
+    #   fonts = [
+    #     "FiraCode"
+    #   ];
+    # })
   ]; 
 
   environment = {
@@ -137,6 +150,7 @@
       neovim-nightly
       scrot
       gnome.gnome-keyring
+      acpi
     ];
   };
 
