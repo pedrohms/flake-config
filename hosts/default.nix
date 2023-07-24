@@ -35,7 +35,6 @@ in
     specialArgs = { inherit inputs user location pkgs; };
     modules = [
       ./vm
-      ./configuration.nix
     ];
   };
 }
