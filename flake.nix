@@ -16,6 +16,11 @@
       my-overlays = [
           inputs.neovim-nightly-overlay.overlay
           inputs.nixpkgs-f2k.overlays.window-managers
+          (self: super: {
+            waybar = super.waybar.overrideAttrs (oldAttrs: {
+              mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+            });
+          })
         ];
       location = "$HOME/.setup";
     in {

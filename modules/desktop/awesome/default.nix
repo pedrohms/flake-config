@@ -61,7 +61,6 @@
     };
     printing.enable = true;
   };
-
   environment.systemPackages = with pkgs; [       # Packages installed
     xclip
     sxhkd
@@ -75,6 +74,7 @@
     waybar
     swaybg
     wl-clipboard
+    playerctl
   ];
 
   # xdg.portal = {                                  # Required for flatpak with windowmanagers
