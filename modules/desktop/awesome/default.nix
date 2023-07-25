@@ -75,6 +75,10 @@
     swaybg
     wl-clipboard
     playerctl
+    libappindicator-gtk3
+    imagemagick_light
+    sway-contrib.grimshot
+    wf-recorder
   ];
 
   # xdg.portal = {                                  # Required for flatpak with windowmanagers
