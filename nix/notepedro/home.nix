@@ -17,7 +17,6 @@
       vscode
       firefox
       bitcoin
-      nixos-shell
     ];
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
       #name = "Dracula-cursors";

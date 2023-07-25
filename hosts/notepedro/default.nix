@@ -38,6 +38,8 @@ in
     nvidia = {
       powerManagement.enable = true;
       modesetting.enable = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
         offload = { 
           enable = true;
@@ -47,7 +49,7 @@ in
         nvidiaBusId = "PCI:1:0:0";
       };
     };
-    opengl.enable = true;
+
     pulseaudio.enable = false;
     sane = {                           # Used for scanning with Xsane
       enable = true;
@@ -100,6 +102,7 @@ in
     };
     xserver = {
       videoDrivers = [ "nvidia" ];
+      # videoDrivers = [ "nouveau" ];
       libinput = {                          # Trackpad support & gestures
         touchpad = {
           tapping = true;

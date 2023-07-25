@@ -28,6 +28,7 @@
       enable = true;
       driSupport32Bit = true;
       driSupport = true;
+      extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
     };
     pulseaudio.enable = false;
   };
@@ -161,7 +162,7 @@
     gc = {                                  # Automatic garbage collection
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 2d";
+      options = "--delete-older-than 5d";
     };
     package = pkgs.nixVersions.unstable;
     registry.nixpkgs.flake = inputs.nixpkgs;

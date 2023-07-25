@@ -17,6 +17,13 @@
 
   programs = {
     dconf.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland = {
+        enable = true;
+      };
+      nvidiaPatches = true;
+    };
   };
 
   services = {
@@ -65,6 +72,9 @@
     xorg.xev
     xorg.xkill
     xorg.xrandr
+    waybar
+    swaybg
+    wl-clipboard
   ];
 
   # xdg.portal = {                                  # Required for flatpak with windowmanagers
