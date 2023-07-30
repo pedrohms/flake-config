@@ -152,6 +152,7 @@
       scrot
       gnome.gnome-keyring
       acpi
+      libstdcxx5
     ];
   };
 
