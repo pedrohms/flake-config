@@ -21,6 +21,7 @@
       enable = true;
       xwayland = {
         enable = true;
+        hidpi = true;
       };
       nvidiaPatches = true;
     };
@@ -47,8 +48,10 @@
         enable = true;
         package = pkgs.awesome-git;
       };
+
       windowManager.qtile.enable = true;
-      # windowManager.qtile.backend = "wayland";
+      windowManager.qtile.backend = "wayland";
+
       serverFlagsSection = ''
         Option "BlankTime" "0"
         Option "StandbyTime" "0"
