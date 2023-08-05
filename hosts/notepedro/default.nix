@@ -39,6 +39,7 @@ in
       powerManagement.enable = true;
       modesetting.enable = true;
       nvidiaSettings = true;
+      nvidiaPersistenced = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
         offload = { 
@@ -101,7 +102,7 @@ in
       openFirewall = true;
     };
     xserver = {
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "modeset" "nvidia" ];
       # videoDrivers = [ "nouveau" ];
       libinput = {                          # Trackpad support & gestures
         touchpad = {

@@ -50,7 +50,7 @@
       };
 
       windowManager.qtile.enable = true;
-      windowManager.qtile.backend = "wayland";
+      # windowManager.qtile.backend = "wayland";
 
       serverFlagsSection = ''
         Option "BlankTime" "0"
