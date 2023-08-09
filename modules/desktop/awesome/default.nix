@@ -49,7 +49,12 @@
         package = pkgs.awesome-git;
       };
 
-      windowManager.qtile.enable = true;
+      windowManager.qtile = {
+        enable = true;
+        extraPackages = python3Packages: with python3Packages; [
+          qtile-extras
+        ];
+      };
       # windowManager.qtile.backend = "wayland";
 
       serverFlagsSection = ''
