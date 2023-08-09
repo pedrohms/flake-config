@@ -17,7 +17,7 @@ in
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
-
+    blacklistedKernelModules =  [ "nouveau" ];
     loader = {                              # EFI Boot
       efi = {
         canTouchEfiVariables = true;
@@ -36,7 +36,7 @@ in
 
   hardware = {
     nvidia = {
-      powerManagement.enable = true;
+      # powerManagement.enable = true;
       modesetting.enable = true;
       nvidiaSettings = true;
       nvidiaPersistenced = true;
@@ -73,7 +73,12 @@ in
 
   services = {
     flatpak.enable = true;
-    #tlp.enable = true;                      # TLP and auto-cpufreq for power management
+    # tlp = {                                  # TLP and auto-cpufreq for power management
+    #   enable = true;
+    #   settings = {
+    #     RUNTIME_PM_DRIVER_BLACKLIST = "nouveau mei_me";
+    #   };
+    # };
     #logind.lidSwitch = "ignore";            # Laptop does not go to sleep when lid is closed
     auto-cpufreq.enable = true;
     blueman.enable = true;

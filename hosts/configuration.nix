@@ -29,6 +29,12 @@
       driSupport32Bit = true;
       driSupport = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+      extraPackages = with pkgs; [
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+        intel-media-driver
+      ];
     };
     pulseaudio.enable = false;
   };
