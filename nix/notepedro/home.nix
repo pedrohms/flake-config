@@ -3,6 +3,7 @@
 {
   home = {
     packages = with pkgs; [ 
+      dconf
       xarchiver
       ghq
       sumneko-lua-language-server
@@ -25,6 +26,15 @@
       #package = pkgs.dracula-theme;
       package = pkgs.catppuccin-cursors.mochaDark;
       size = 16;
+    };
+  };
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
     };
   };
 
