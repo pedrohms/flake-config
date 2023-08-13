@@ -17,7 +17,7 @@ in
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
-    blacklistedKernelModules =  [ "nouveau" ];
+    # blacklistedKernelModules =  [ "nouveau" ];
     loader = {                              # EFI Boot
       efi = {
         canTouchEfiVariables = true;
@@ -39,7 +39,7 @@ in
       # powerManagement.enable = true;
       modesetting.enable = true;
       nvidiaSettings = true;
-      nvidiaPersistenced = true;
+      # nvidiaPersistenced = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
         offload = { 
@@ -124,6 +124,38 @@ in
         { x = 1280; y = 720; }
         { x = 1920; y = 1080; }
       ];
+       config = pkgs.lib.mkOverride 0 ''
+       Section "Module"
+           Load           "modesetting"
+       EndSection
+      
+       Section "Device"
+           Identifier     "Device0"
+           Driver         "nvidia"
+           BusID          "1:0:0"
+           Option         "AllowEmptyInitialConfiguration"
+           Option         "AllowExternalGpus" "True"
+       EndSection
+      
+       Section "Device"
+         Identifier "intel"
+         Driver "modesetting"
+       EndSection
+      
+       Section "Screen"
+         Identifier "nvidia"
+         Device "nvidia"
+         Option "AllowEmptyInitialConfiguration"
+       EndSection
+      
+      
+       Section "Screen"
+         Identifier "intel"
+         Device "intel"
+       EndSection
+       '';
+
+
     };
   };
 
@@ -138,3 +170,45 @@ in
     shell = pkgs.fish;
   };
 }
+# config = pkgs.lib.mkOverride 0 ''
+# Section "ServerLayout"
+#   Identifier "Layout0"
+#   Screen  0  "Screen0"
+#   Inactive   "Device0"
+#   Option     "AllowNVIDIAGPUScreens"
+# EndSection
+#
+# Section "Module"
+#     Load           "modesetting"
+# EndSection
+#
+# Section "Monitor"
+#   Identifier "Monitor0"
+#   VendorName "Unknown"
+#   ModelName "Unknown"
+#   Option "DPMS"
+# EndSection
+#
+# Section "Device"
+#     Identifier     "Device0"
+#     Driver         "nvidia"
+#     BusID          "1:0:0"
+#     VendorName     "NVIDIA Corporation"
+# EndSection
+#
+# Section "Device"
+#   Identifier "intel"
+#   Driver "modesetting"
+# EndSection
+#
+# Section "Screen"
+#   Identifier "Screen0"
+#   Device "intel"
+#   Monitor "Monitor0"
+#   DefaultDepth 24
+#   Option  "AllowEmptyInitialConfiguration" "True"
+#   SubSection  "Display"
+#     Depth 24
+#   EndSubSection
+# EndSection
+# '';
