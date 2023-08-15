@@ -6,7 +6,7 @@ let
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec "$@"
+    exec -a "$0" "$@"
   '';
 in
 {
@@ -17,7 +17,7 @@ in
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
-    # blacklistedKernelModules =  [ "nouveau" ];
+
     loader = {                              # EFI Boot
       efi = {
         canTouchEfiVariables = true;
@@ -30,22 +30,22 @@ in
         useOSProber = true;                 # Find all boot options
         configurationLimit = 2;
       };
-      timeout = 1;                          # Grub auto select time
+      timeout = 4;                          # Grub auto select time
     };
   };
 
   hardware = {
     nvidia = {
-      # powerManagement.enable = true;
+      powerManagement.enable = true;
       modesetting.enable = true;
       nvidiaSettings = true;
-      # nvidiaPersistenced = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
-        offload = { 
-          enable = true;
-          enableOffloadCmd = true;
-        };
+        sync.enable = true;
+        # offload = { 
+        #   enable = true;
+        #   enableOffloadCmd = true;
+        # };
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
@@ -108,7 +108,7 @@ in
     };
     xserver = {
       videoDrivers = [ "modeset" "nvidia" ];
-      # videoDrivers = [ "nouveau" ];
+      dpi = 88;
       libinput = {                          # Trackpad support & gestures
         touchpad = {
           tapping = true;
@@ -128,7 +128,7 @@ in
        Section "Module"
            Load           "modesetting"
        EndSection
-      
+
        Section "Device"
            Identifier     "Device0"
            Driver         "nvidia"
@@ -136,25 +136,24 @@ in
            Option         "AllowEmptyInitialConfiguration"
            Option         "AllowExternalGpus" "True"
        EndSection
-      
+
        Section "Device"
          Identifier "intel"
          Driver "modesetting"
        EndSection
-      
+
        Section "Screen"
          Identifier "nvidia"
          Device "nvidia"
          Option "AllowEmptyInitialConfiguration"
        EndSection
-      
-      
+
+
        Section "Screen"
          Identifier "intel"
          Device "intel"
        EndSection
        '';
-
 
     };
   };
