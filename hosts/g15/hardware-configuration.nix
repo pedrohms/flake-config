@@ -29,7 +29,7 @@
     ];
 
   networking = {
-    hostName = "notepedro";
+    hostName = "notepedro-g15";
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
     # interfaces = {
