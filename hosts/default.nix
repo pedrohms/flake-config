@@ -30,6 +30,15 @@ in
     ];
   };
 
+  g15 = lib.nixosSystem {                               # Desktop profile
+    inherit system;
+    specialArgs = { inherit inputs user location pkgs; }; # Pass flake variable
+    modules = [                                             # Modules that are used.
+      ./g15
+      ./configuration.nix
+    ];
+  };
+
   vm = lib.nixosSystem {                                    # VM profile
     inherit system;
     specialArgs = { inherit inputs user location pkgs; };

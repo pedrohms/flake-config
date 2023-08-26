@@ -21,7 +21,6 @@
       enable = true;
       xwayland = {
         enable = true;
-        hidpi = true;
       };
       nvidiaPatches = true;
     };
@@ -42,7 +41,7 @@
           enable = true;
           wayland = true;
         };
-        defaultSession = "gnome";
+      #  defaultSession = "gnome";
       };
       windowManager.awesome = {
         enable = true;

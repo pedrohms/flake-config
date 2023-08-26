@@ -12,7 +12,6 @@
       authenticator
       discord
       google-chrome
-      parsec-bin
       azuredatastudio
       gradle
       vscode

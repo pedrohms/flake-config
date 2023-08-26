@@ -72,7 +72,8 @@
   services = {
   };
 
-  users.users.${user} = {
+  users.users.vmuser = {
+    shell = pkgs.fish;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "${user}" ];
     initialPassword = "123456";

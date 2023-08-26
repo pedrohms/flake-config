@@ -1,5 +1,14 @@
-{ config, pkgs, user, ... }:
+{inputs, config, pkgs, user, ... }:
 
+let
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
+in
 {
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
@@ -21,17 +30,27 @@
         useOSProber = true;                 # Find all boot options
         configurationLimit = 2;
       };
-      timeout = 1;                          # Grub auto select time
+      timeout = 4;                          # Grub auto select time
     };
   };
 
   hardware = {
-    opengl.extraPackages = with pkgs; [
-      amdvlk
-    ];
-    opengl.extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
-    ];
+    nvidia = {
+      powerManagement.enable = true;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      prime = {
+        #sync.enable = true;
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    };
+
     pulseaudio.enable = false;
     sane = {                           # Used for scanning with Xsane
       enable = true;
@@ -42,6 +61,7 @@
   environment = {
     systemPackages = with pkgs; [
       simple-scan
+      nvidia-offload
     ];
   };
 
@@ -53,6 +73,19 @@
 
   services = {
     flatpak.enable = true;
+    # tlp = {                                  # TLP and auto-cpufreq for power management
+    #   enable = true;
+    #   settings = {
+    #     RUNTIME_PM_DRIVER_BLACKLIST = "nouveau mei_me";
+    #   };
+    # };
+    #logind.lidSwitch = "ignore";            # Laptop does not go to sleep when lid is closed
+    auto-cpufreq.enable = true;
+    blueman.enable = true;
+#   printing = {                            # Printing and drivers for TS5300
+#     enable = true;
+#     drivers = [ pkgs.cnijfilter2 ];
+#   };
     avahi = {                               # Needed to find wireless printer
       enable = true;
       nssmdns = true;
@@ -67,29 +100,46 @@
       shares = {
         share = {
           "path" = "/home/${user}/Public";
-          "guest ok" = "true";
+          "guest ok" = "no";
           "read only" = "no";
         };
       };
-      extraConfig =''
-        force user = framework
-        force group = framework
-      '';
       openFirewall = true;
     };
     xserver = {
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = [ "modeset" "nvidia" ];
+      dpi = 88;
+      libinput = {                          # Trackpad support & gestures
+        touchpad = {
+          tapping = true;
+          scrollMethod = "twofinger";
+          naturalScrolling = true;            # The correct way of scrolling
+          accelProfile = "adaptive";          # Speed settings
+          #accelSpeed = "-0.5";
+          disableWhileTyping = true;
+        };
+      };
       resolutions = [
         { x = 1600; y = 920; }
         { x = 1280; y = 720; }
         { x = 1920; y = 1080; }
       ];
+      screenSection = ''
+        Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
+      '';
+
     };
   };
-  users.users.framework = {
+
+  #temporary bluetooth fix
+  systemd.tmpfiles.rules = [
+    "d /var/lib/bluetooth 700 root root - -"
+  ];
+  systemd.targets."bluetooth".after = ["systemd-tmpfiles-setup.service"];
+
+  users.users.${user} = {
     shell = pkgs.fish;
     isNormalUser = true;
-    shell = pkgs.fish;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "${user}" ];
     initialPassword = "123456";
   };
