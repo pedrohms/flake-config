@@ -79,7 +79,7 @@
     initialPassword = "123456";
   };
 
-  fonts.fonts = with pkgs; [                # Fonts
+  fonts.packages = with pkgs; [                # Fonts
     carlito                                 # NixOS
     vegur                                   # NixOS
     source-code-pro

@@ -3,6 +3,17 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, lib, pkgs, inputs, user, location, ... }:
+let
+  picom = pkgs.picom.overrideAttrs (prev: {
+    version = "git";
+    src = pkgs.fetchFromGitHub {
+      owner = "yshui";
+      repo = "picom";
+      rev = "next";
+      sha256 = "VBnIzisg/7Xetd/AWVHlnaWXlxX+wqeYTpstO6+T5cE=";
+    };
+  });
+in
 {
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
@@ -77,7 +88,7 @@
     };
   };
 
-  fonts.fonts = with pkgs; [                # Fonts
+  fonts.packages = with pkgs; [                # Fonts
     carlito                                 # NixOS
     vegur                                   # NixOS
     source-code-pro
@@ -131,6 +142,7 @@
       bat
       ripgrep
       neovim-nightly
+
       scrot
       gnome.gnome-keyring
       acpi
