@@ -29,9 +29,10 @@
       fsType = "vfat";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-label/swap"; }
-    ];
+  swapDevices = [ {
+      device = "/var/lib/swapfile"; 
+      size = 16*1024;
+    } ];
 
   networking = {
     hostName = "notepedro-g15";
