@@ -19,8 +19,13 @@
       fsType = "ext4";
     };
 
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-label/store";
+      fsType = "btrfs";
+    };
+
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+    { device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
     };
 
