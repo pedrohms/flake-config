@@ -137,10 +137,17 @@ in
   ];
   systemd.targets."bluetooth".after = ["systemd-tmpfiles-setup.service"];
 
+
   users.users.${user} = {
+    uid = 1000;
     shell = pkgs.fish;
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "${user}" ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
+  };
+  
+  users.groups.${user} = {
+    gid = 1000;
+    members = [ "${user}" ];
   };
 }

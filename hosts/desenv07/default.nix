@@ -87,10 +87,16 @@
     };
   };
   users.users.framework = {
+    uid = 1000;
     shell = pkgs.fish;
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "${user}" ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
+  };
+
+  users.groups.framework = {
+    gid = 1000;
+    members = [ "framework" ];
   };
 }

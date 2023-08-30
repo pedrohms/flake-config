@@ -166,29 +166,54 @@ in
 
 
   users.users.${user} = {
+    uid = 1000;
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "${user}" ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };
 
   users.users.priscila = {
+    uid = 1001;
     isNormalUser = true;
-    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "priscila" ];
+    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };
 
   users.users.sofia = {
+    uid = 1002;
     isNormalUser = true;
-    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "sofia" ];
+    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };
 
   users.users.arthur = {
+    uid = 1003;
     isNormalUser = true;
-    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "arthur" ];
+    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };
+
+  users.groups.${user} = {
+    gid = 1000;
+    members = [ "${user}" ];
+  };
+
+  users.groups.priscila = {
+    gid = 1001;
+    members = [ "priscila" ];
+  };
+
+  users.groups.sofia = {
+    gid = 1002;
+    members = [ "sofia" ];
+  };
+
+  users.groups.arthur = {
+    gid = 1003;
+    members = [ "arthur" ];
+  };
+
 }
 # config = pkgs.lib.mkOverride 0 ''
 # Section "ServerLayout"
