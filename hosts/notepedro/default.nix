@@ -124,36 +124,6 @@ in
         { x = 1280; y = 720; }
         { x = 1920; y = 1080; }
       ];
-       config = pkgs.lib.mkOverride 0 ''
-       Section "Module"
-           Load           "modesetting"
-       EndSection
-
-       Section "Device"
-           Identifier     "Device0"
-           Driver         "nvidia"
-           BusID          "1:0:0"
-           Option         "AllowEmptyInitialConfiguration"
-           Option         "AllowExternalGpus" "True"
-       EndSection
-
-       Section "Device"
-         Identifier "intel"
-         Driver "modesetting"
-       EndSection
-
-       Section "Screen"
-         Identifier "nvidia"
-         Device "nvidia"
-         Option "AllowEmptyInitialConfiguration"
-       EndSection
-
-
-       Section "Screen"
-         Identifier "intel"
-         Device "intel"
-       EndSection
-       '';
 
     };
   };
@@ -166,7 +136,7 @@ in
 
 
   users.users.${user} = {
-    uid = 1000;
+    uid = 1001;
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
@@ -174,43 +144,43 @@ in
   };
 
   users.users.priscila = {
-    uid = 1001;
-    isNormalUser = true;
-    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
-    initialPassword = "123456";
-  };
-
-  users.users.sofia = {
     uid = 1002;
     isNormalUser = true;
     extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };
 
-  users.users.arthur = {
+  users.users.sofia = {
     uid = 1003;
     isNormalUser = true;
     extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };
 
+  users.users.arthur = {
+    uid = 1000;
+    isNormalUser = true;
+    extraGroups = [ "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
+    initialPassword = "123456";
+  };
+
   users.groups.${user} = {
-    gid = 1000;
+    gid = 1001;
     members = [ "${user}" ];
   };
 
   users.groups.priscila = {
-    gid = 1001;
+    gid = 1002;
     members = [ "priscila" ];
   };
 
   users.groups.sofia = {
-    gid = 1002;
+    gid = 1003;
     members = [ "sofia" ];
   };
 
   users.groups.arthur = {
-    gid = 1003;
+    gid = 1000;
     members = [ "arthur" ];
   };
 
