@@ -28,7 +28,6 @@ in
         devices = [ "nodev" ];
         efiSupport = true;
         useOSProber = true;                 # Find all boot options
-        configurationLimit = 2;
       };
       timeout = 4;                          # Grub auto select time
     };
