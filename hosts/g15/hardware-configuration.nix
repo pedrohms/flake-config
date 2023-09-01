@@ -29,6 +29,17 @@
       fsType = "vfat";
     };
 
+  fileSystems."/home" =
+    { device = "/dev/disk/by-label/home";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/mnt/backup" =
+    { device = "/dev/disk/by-label/backup";
+      fsType = "btrfs";
+      options = [ "rw" "user" ];
+    };
+
   swapDevices = [ {
       device = "/var/lib/swapfile"; 
       size = 16*1024;
