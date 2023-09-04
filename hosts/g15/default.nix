@@ -41,6 +41,10 @@ in
     };
   };
 
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "ondemand";
+  };
   hardware = {
     nvidia = {
       powerManagement.enable = true;

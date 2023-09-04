@@ -17,11 +17,12 @@
       vscode
       firefox
       bitcoin
-      steam
       lutris
       wine
       winetricks
       flameshot
+      wezterm
+      wofi
     ];
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
       #name = "Dracula-cursors";
