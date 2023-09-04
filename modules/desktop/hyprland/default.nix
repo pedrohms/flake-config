@@ -1,4 +1,3 @@
-
 #  Awesome configuration
 #
 #  flake.nix
@@ -7,19 +6,20 @@
 #   │       └─ default.nix
 #   └─ ./modules
 #       └─ ./desktop
-#           └─ ./awesome
+#           └─ ./hyprland
 #               └─ default.nix *
 #
 
 { inputs, config, lib, pkgs, ... }:
 
 {
-  services = {
-    xserver = {
-      windowManager.awesome = {
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland = {
         enable = true;
-        package = pkgs.awesome-git;
       };
+      enableNvidiaPatches = true;
     };
   };
 }

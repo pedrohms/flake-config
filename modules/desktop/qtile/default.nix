@@ -1,4 +1,4 @@
-
+#
 #  Awesome configuration
 #
 #  flake.nix
@@ -7,7 +7,7 @@
 #   │       └─ default.nix
 #   └─ ./modules
 #       └─ ./desktop
-#           └─ ./awesome
+#           └─ ./qtile
 #               └─ default.nix *
 #
 
@@ -16,10 +16,13 @@
 {
   services = {
     xserver = {
-      windowManager.awesome = {
+      windowManager.qtile = {
         enable = true;
-        package = pkgs.awesome-git;
+        extraPackages = python3Packages: with python3Packages; [
+          qtile-extras
+        ];
       };
+      # windowManager.qtile.backend = "wayland";
     };
   };
 }
