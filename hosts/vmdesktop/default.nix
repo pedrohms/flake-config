@@ -71,6 +71,10 @@
 
   security.rtkit.enable = true;
   services = {
+    openssh = {
+      enable = true;
+      openFirewall = true;
+    };
     xserver = {
       layout = "us";
       xkbVariant = "intl";
@@ -114,6 +118,7 @@
       git
       fish
       lshw
+      networkmanagerapplet
       killall
       unzip
       zip
