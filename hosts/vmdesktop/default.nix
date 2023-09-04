@@ -71,6 +71,10 @@
 
   security.rtkit.enable = true;
   services = {
+    xserver = {
+      layout = "us";
+      xkbVariant = "intl";
+    };
   };
 
   users.users.vmuser = {
@@ -125,6 +129,10 @@
       bat
       ripgrep
       neovim-nightly
+      alacritty
+      tmux
+      dmenu
+      home-manager
     ];
   };
 

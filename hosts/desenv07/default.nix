@@ -78,6 +78,9 @@
       openFirewall = true;
     };
     xserver = {
+      layout = "us";
+      xkbVariant = "intl";
+      xkbModel = "pc105";
       videoDrivers = [ "amdgpu" ];
       resolutions = [
         { x = 1600; y = 920; }

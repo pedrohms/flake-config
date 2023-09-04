@@ -118,6 +118,9 @@ in
       openFirewall = true;
     };
     xserver = {
+      layout = "br";
+      xkbVariant = "abnt2";
+      xkbModel = "pc105";
       videoDrivers = [ "modeset" "nvidia" ];
       dpi = 88;
       libinput = {                          # Trackpad support & gestures

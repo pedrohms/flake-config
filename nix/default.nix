@@ -64,4 +64,20 @@ in
       }
     ];
   };
+
+  homeVmDesktop = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
+    inherit pkgs;
+    extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
+    modules = [
+      ./vmdesktop/home.nix
+      {
+        home = {
+          username = "vmuser";
+          homeDirectory = "/home/vmuser";
+          packages = [ pkgs.home-manager ];
+          stateVersion = "23.11";
+        };
+      }
+    ];
+  };
 }

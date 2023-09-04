@@ -31,9 +31,6 @@
     xserver = {
       # videoDrivers = [ "nvidia" ];
       enable = true;
-      layout = "br";
-      xkbVariant = "abnt2";
-      xkbModel = "pc105";
       libinput.enable = true; # Enable touchpad
       desktopManager.gnome.enable = true;
       displayManager = {
