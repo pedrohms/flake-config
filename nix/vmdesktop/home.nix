@@ -12,6 +12,7 @@
       flameshot
       wezterm
       wofi
+      firefox
     ];
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
       #name = "Dracula-cursors";

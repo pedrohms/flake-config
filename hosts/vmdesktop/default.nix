@@ -133,6 +133,7 @@
       tmux
       dmenu
       home-manager
+      picom
     ];
   };
 
