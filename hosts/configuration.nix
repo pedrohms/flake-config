@@ -136,6 +136,8 @@
       gnome.gnome-keyring
       acpi
       libstdcxx5
+      ffmpeg_6
+      pamixer
     ];
   };
 
