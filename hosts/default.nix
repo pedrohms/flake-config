@@ -46,4 +46,12 @@ in
       ./vm
     ];
   };
+
+  vmdesktop = lib.nixosSystem {                                    # VM profile
+    inherit system;
+    specialArgs = { inherit inputs user location pkgs; };
+    modules = [
+      ./vmdesktop
+    ];
+  };
 }
