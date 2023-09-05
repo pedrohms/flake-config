@@ -6,7 +6,6 @@
       enable = true;
       defaultNetwork.settings.dns_enabled = true;
     };
-    lxd.enable = true;
   };
 
 
