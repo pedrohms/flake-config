@@ -1,19 +1,13 @@
 with import <nixpkgs> {};
 stdenv.mkDerivation rec {
   name = "local-dwm-${version}";
-  version = "6.5.1";
+  version = "6.5.1.1";
 
-  src = pkgs.fetchFromGitHub {
-    name  = "6.5.2";
-    owner = "pedrohms";
-    repo  = "dwm";
-    rev   = "main";
-    sha256 = "RutLhcDb7+vCwl/CtehirJjnyRThOuNdomBtgABrK+A=";
-  };
+  src = /home/vmuser/ghq/github.com/pedrohms/dwm;
 
-  # unpackPhase = ''tar -xf $src'';
-  
   buildInputs = [ xorg.libX11 xorg.libXinerama xorg.libXft ];
+  
+  unpackPhase = ''cp -r $src/* .'';
 
   buildPhase  = ''make'';
 
