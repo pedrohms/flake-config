@@ -12,7 +12,7 @@
 #               └─ bspwm.nix
 #
 
-{ config, lib, pkgs, inputs, user, location, ... }:
+{ config, lib, pkgs, inputs, user, location , myFlakeVersion, ... }:
 
 {
   imports =                                   # For now, if applying to other system, swap files
