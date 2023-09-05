@@ -1,4 +1,4 @@
-#  Awesome configuration
+#  Hyprland configuration
 #
 #  flake.nix
 #   ├─ ./hosts

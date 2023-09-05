@@ -1,5 +1,5 @@
 #
-#  Awesome configuration
+#  Qtile configuration
 #
 #  flake.nix
 #   ├─ ./hosts
@@ -18,7 +18,7 @@
     xserver = {
       windowManager.qtile = {
         enable = true;
-        extraPackages = python3Packages: with python3Packages; [
+        extraPackages = python311Packages: with python311Packages; [
           qtile-extras
         ];
       };

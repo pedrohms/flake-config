@@ -12,8 +12,9 @@ in
 {
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
-    (import ../../modules/virtualization) ++
-    [(import ../../modules/desktop/awesome/default.nix)];   # virtualization
+    (import ../../modules/virtualization) ++              # virtualization
+    [(import ../../modules/desktop/default.nix)]++  
+    [(import ../../modules/desktop/qtile/default.nix)];
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;

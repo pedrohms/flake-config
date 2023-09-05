@@ -1,5 +1,5 @@
 #
-#  Awesome configuration
+#  Desktop configuration
 #
 #  flake.nix
 #   ├─ ./hosts
