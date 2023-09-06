@@ -28,5 +28,4 @@
   };
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  virtualisation.vmware.guest.enable = true;
 }

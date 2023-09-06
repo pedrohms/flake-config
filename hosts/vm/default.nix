@@ -15,11 +15,10 @@
 { config, lib, pkgs, inputs, user, location, ... }:
 
 {
-  imports =  [                                  # For now, if applying to other system, swap files
-    ./hardware-configuration.nix                # Current system hardware config @ /etc/nixos/hardware-configuration.nix
-    ../../modules/virtualization/podman.nix
-    ../../modules/virtualization/docker.nix
-  ] ;
+  imports =                                     # For now, if applying to other system, swap files
+    [(./hardware-configuration.nix)] ++         # Current system hardware config @ /etc/nixos/hardware-configuration.nix
+    ( import ./virtualisation.nix )
+   ;
 
   boot = {                                      # Boot options
     kernelPackages = pkgs.linuxPackages_latest;

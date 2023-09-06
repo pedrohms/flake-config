@@ -7,13 +7,14 @@
 #   │       └─ default.nix
 #   └─ ./modules
 #       └─ ./desktop
-#           └─ ./dwm
-#               └─ default.nix *
+#           └─ ./windowManager
+#               └─ ./dwm
+#                   └─ default.nix *
 #
 
 { config, lib, pkgs, myFlakeVersion, ... }:
 let
-  localPkgs = import ../../packages/default.nix { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
+  localPkgs = import ../../../packages/default.nix { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
   customPackages = with localPkgs; [
     dwm
     dwmblocks

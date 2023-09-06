@@ -12,10 +12,8 @@ in
 {
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
-    [(import ../../modules/virtualization/podman.nix)] ++              # virtualization
-    [(import ../../modules/desktop/default.nix)]++  
-    [(import ../../modules/desktop/dwm/default.nix)] ++
-    [(import ../../modules/desktop/qtile/default.nix)];
+     (import ./virtualisation.nix) ++                     # virtualisation
+    [(import ./desktop.nix)];                             # desktop
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;

@@ -39,19 +39,39 @@ in
     ];
   };
 
-  vm = lib.nixosSystem {                                    # VM profile
+  vmware = lib.nixosSystem {                                    # VM profile - VMware
     inherit system;
     specialArgs = { inherit inputs user location pkgs myFlakeVersion; };
     modules = [
       ./vm
+      ../modules/virtualisation/guest/vmware.nix
     ];
   };
 
-  vmdesktop = lib.nixosSystem {                                    # VM profile
+  virtualbox = lib.nixosSystem {                                    # VM profile - VirtualBox
+    inherit system;
+    specialArgs = { inherit inputs user location pkgs myFlakeVersion; };
+    modules = [
+      ./vm
+      ../modules/virtualisation/guest/virtualbox.nix
+    ];
+  };
+
+  vmware-desktop = lib.nixosSystem {                                    # VM profile - VMware
     inherit system;
     specialArgs = { inherit inputs user location pkgs myFlakeVersion; };
     modules = [
       ./vmdesktop
+      ../modules/virtualisation/guest/vmware.nix
+    ];
+  };
+
+  virtualbox-desktop = lib.nixosSystem {                                    # VM profile - VirtualBox
+    inherit system;
+    specialArgs = { inherit inputs user location pkgs myFlakeVersion; };
+    modules = [
+      ./vmdesktop
+      ../modules/virtualisation/guest/virtualbox.nix
     ];
   };
 }
