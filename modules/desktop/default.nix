@@ -27,11 +27,6 @@
           wayland = true;
         };
       };
-      desktopManager = {
-        gnome = {
-          enable = true;
-        };
-      };
       serverFlagsSection = ''
         Option "BlankTime" "0"
         Option "StandbyTime" "0"
