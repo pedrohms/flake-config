@@ -13,7 +13,8 @@ in
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
      (import ./virtualisation.nix) ++                     # virtualisation
-    [(import ./desktop.nix)];                             # desktop
+     (import ./desktop.nix)                             # desktop
+  ;
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
