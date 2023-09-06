@@ -11,7 +11,7 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
-      myFlakeVersion = "1.0.23";
+      myFlakeVersion = "1.0.24";
       user = "pedro"; 
       # user = "framework"; 
       my-overlays = [
