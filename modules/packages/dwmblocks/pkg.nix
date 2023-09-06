@@ -2,15 +2,15 @@
 with pkgs.lib;
 
 stdenv.mkDerivation rec {
-  name = "local-dwm-${version}";
-  version = "6.4.0-pedrohms-${myFlakeVersion}";
+  name = "local-dwmblocks-${version}";
+  version = "1.0.0-pedrohms-${myFlakeVersion}";
 
   src = pkgs.fetchFromGitHub {
-    name  = "6.4.0-050920231255-${myFlakeVersion}";
+    name  = "1.0.0-${myFlakeVersion}";
     owner = "pedrohms";
-    repo  = "dwm";
-    rev   = "574d286cc62fc0d0e053626b353382ad306f32f4";
-    sha256 = "UBSdQme2PhIFiaiihSb4wxpPRq5RKtarOYZdTaUsQ1E=";
+    repo  = "dwmblocks";
+    rev   = "992222857d50ab371f29636f1243530acef28e6d";
+    sha256 = "ihIN6MBzTXTgMqQeiUW2tpsxEYU/a+16prelzaCFU6Y=";
   };
 
   # unpackPhase = ''tar -xf $src'';

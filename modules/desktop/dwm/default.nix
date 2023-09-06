@@ -16,8 +16,6 @@ let
   localPkgs = import ../../packages/default.nix { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
   customPackages = with localPkgs; [
     dwm
-  ];
-  apps = with pkgs; [
     dwmblocks
   ];
 in 
@@ -32,5 +30,5 @@ in
     };
   };
 
-  environment.systemPackages = customPackages ++ apps;
+  environment.systemPackages = customPackages;
 }
