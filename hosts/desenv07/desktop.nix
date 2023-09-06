@@ -1,5 +1,5 @@
 [
     ( import ../../modules/desktop)
-    ( import ../../modules/windowManager/dwm)
-    ( import ../../modules/displayManager/gdm)
+    ( import ../../modules/desktop/windowManager/dwm)
+    ( import ../../modules/desktop/displayManager/gdm)
 ]

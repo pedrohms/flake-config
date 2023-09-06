@@ -1,6 +1,6 @@
 [
     ( import ../../modules/desktop)
-    ( import ../../modules/windowManager/dwm)
-    ( import ../../modules/displayManager/gdm)
-    ( import ../../modules/desktopManager/gnome)
+    ( import ../../modules/desktop/windowManager/dwm)
+    ( import ../../modules/desktop/displayManager/gdm)
+    ( import ../../modules/desktop/desktopManager/gnome)
 ]
