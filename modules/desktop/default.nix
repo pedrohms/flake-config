@@ -29,9 +29,6 @@
         Option "AllowNVIDIAGPUScreens" "True"
       '';                                         # Used so computer does not goes to sleep
 
-      displayManager.sessionCommands = ''
-        ${pkgs.xorg.xrandr}/bin/xrandr --mode 1920x1080 --pos 0x0 --rotate normal
-      '';
     };
     printing.enable = true;
   };
