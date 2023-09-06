@@ -21,12 +21,6 @@
     xserver = {
       enable = true;
       libinput.enable = true; # Enable touchpad
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-      };
       serverFlagsSection = ''
         Option "BlankTime" "0"
         Option "StandbyTime" "0"

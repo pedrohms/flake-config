@@ -1,4 +1,4 @@
-#  Gnome configuration
+#  Gdm configuration
 #
 #  flake.nix
 #   ├─ ./hosts
@@ -6,8 +6,9 @@
 #   │       └─ default.nix
 #   └─ ./modules
 #       └─ ./desktop
-#           └─ ./gnome
-#               └─ default.nix *
+#           └─ ./displayManager
+#               └─ ./gdm
+#                   └─ default.nix *
 #
 
 { inputs, config, lib, pkgs, ... }:
@@ -15,9 +16,10 @@
 {
   services = {
     xserver = {
-      desktopManager = {
-        gnome = {
+      displayManager = {
+        gdm = {
           enable = true;
+          wayland = true;
         };
       };
     };

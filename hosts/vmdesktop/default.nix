@@ -17,8 +17,7 @@
 {
   imports =                                   # For now, if applying to other system, swap files
     [(./hardware-configuration.nix) ] ++               # Current system hardware config @ /etc/nixos/hardware-configuration.nix
-    [( ../../modules/desktop/default.nix)] ++
-    [( ../../modules/desktop/dwm/default.nix)] ++
+    ( ./desktop.nix) ++
     [(../../modules/virtualization/podman.nix)];
 
   boot = {                                      # Boot options
