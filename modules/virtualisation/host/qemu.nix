@@ -2,19 +2,36 @@
 { config, pkgs, user, ... }:
 
 {                                             # Add libvirtd and kvm to userGroups
+
+  users.groups.libvirtd.members = [ "root" "${user}" ];
+
   boot.extraModprobeConfig = ''
     options kvm_intel nested=1
     options kvm_intel emulate_invalid_guest_state=0
     options kvm ignore_nsrs=1
-  '';                                         # Needed to run OSX-KVM 
-
-  users.groups.libvirtd.members = [ "root" "${user}" ];
+  '';
+  # boot.postBootCommands = ''
+  #   ${pkgs.kmod}/bin/modprobe -r nvidiafb
+  #   ${pkgs.kmod}/bin/modprobe -r nouveau
+  #
+  #   ${pkgs.toybox}/bin/echo 0 > /sys/class/vtconsole/vtcon0/bind
+  #   ${pkgs.toybox}/bin/echo 0 > /sys/class/vtconsole/vtcon1/bind
+  #   ${pkgs.toybox}/bin/echo efi-framebuffer.0 > /sys/bus/platform/drivers/efiframebuffer/unbind
+  #
+  #   DEVS="0000:01:00.0 0000:01:00.1"
+  #
+  #   for DEV in $DEVS; do
+  #     ${pkgs.toybox}/bin/echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
+  #   done
+  #   ${pkgs.kmod}/bin/modprobe -i vfio-pci
+  # '';
 
   virtualisation = {
     libvirtd = {
       enable = true;                          # Virtual drivers
       #qemuPackage = pkgs.qemu_kvm;           # Default
       qemu = {
+        ovmf.enable = true;
         verbatimConfig = ''
          nvram = [ "${pkgs.OVMF}/FV/OVMF.fd:${pkgs.OVMF}/FV/OVMF_VARS.fd" ]
         '';
@@ -27,6 +44,7 @@
     systemPackages = with pkgs; [
       virt-manager
       virt-viewer
+      libguestfs
       qemu
       OVMF
       gvfs                                    # Used for shared folders between linux and windows

@@ -53,7 +53,7 @@ in
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
-        #sync.enable = true;
+        # sync.enable = true;
         offload = {
           enable = true;
           enableOffloadCmd = true;
@@ -139,6 +139,11 @@ in
         { x = 1280; y = 720; }
         { x = 1920; y = 1080; }
       ];
+      displayManager = {
+        gdm = {
+          wayland = false;
+        };
+      };
       screenSection = ''
         Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
       '';
