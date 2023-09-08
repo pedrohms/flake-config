@@ -141,12 +141,12 @@ in
       ];
       displayManager = {
         gdm = {
-          wayland = false;
+          wayland = true;
         };
       };
-      screenSection = ''
-        Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
-      '';
+      # screenSection = ''
+      #   Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
+      # '';
 
     };
   };

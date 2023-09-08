@@ -12,7 +12,6 @@
   boot.initrd.kernelModules = [ "nvidia" ];
   boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
   boot.kernelParams =  [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=on" "iommu=pt" "nvidia-drm.modeset=1" ];
-  boot.blacklistedKernelModules = [ "nvidia" "nouveau" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   fileSystems."/" =
