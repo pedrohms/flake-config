@@ -18,6 +18,7 @@ in
     modules = [                                             # Modules that are used.
       ./notepedro
       ./configuration.nix
+      ./shared
     ];
   };
 
@@ -27,6 +28,7 @@ in
     modules = [
       ./desenv07
       ./configuration.nix
+      ./shared
     ];
   };
 
@@ -36,6 +38,7 @@ in
     modules = [                                             # Modules that are used.
       ./g15
       ./configuration.nix
+      ./shared
     ];
   };
 
@@ -45,6 +48,7 @@ in
     modules = [
       ./vm
       ../modules/virtualisation/guest/vmware.nix
+      ./shared
     ];
   };
 
@@ -54,6 +58,7 @@ in
     modules = [
       ./vm
       ../modules/virtualisation/guest/virtualbox.nix
+      ./shared
     ];
   };
 
@@ -63,6 +68,7 @@ in
     modules = [
       ./vmdesktop
       ../modules/virtualisation/guest/vmware.nix
+      ./shared
     ];
   };
 
@@ -72,6 +78,7 @@ in
     modules = [
       ./vmdesktop
       ../modules/virtualisation/guest/virtualbox.nix
+      ./shared
     ];
   };
 }
