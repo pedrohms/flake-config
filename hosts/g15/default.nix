@@ -21,7 +21,7 @@
         efiSupport = true;
         useOSProber = true;                 # Find all boot options
       };
-      timeout = 4;                          # Grub auto select time
+      timeout = 2;                          # Grub auto select time
     };
   };
 
@@ -35,7 +35,7 @@
 
   powerManagement = {
     enable = true;
-    cpuFreqGovernor = "ondemand";
+    cpuFreqGovernor = "performance";
   };
   hardware = {
     nvidia = {
@@ -129,15 +129,17 @@
         { x = 1280; y = 720; }
         { x = 1920; y = 1080; }
       ];
+      displayManager.sessionCommands = ''
+       ${pkgs.xorg.xrandr}/bin/xrandr --auto
+      '';
+      screenSection = ''
+        Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
+      '';
       displayManager = {
         gdm = {
           wayland = true;
         };
       };
-      # screenSection = ''
-      #   Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
-      # '';
-
     };
   };
 

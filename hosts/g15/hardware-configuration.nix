@@ -8,10 +8,12 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  # boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
+  # boot.kernelParams =  [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=on" "iommu=pt" "nvidia-drm.modeset=1" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "nvidia" ];
-  boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
-  boot.kernelParams =  [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=on" "iommu=pt" "nvidia-drm.modeset=1" ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelParams =  [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off" "nvidia-drm.modeset=1" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   fileSystems."/" =

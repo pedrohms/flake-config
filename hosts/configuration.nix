@@ -4,9 +4,6 @@
 
 { config, lib, pkgs, inputs, user, location, ... }:
 {
-
-  imports = [ ../../modules/packages/scripts ];
-
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
