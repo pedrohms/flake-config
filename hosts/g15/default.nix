@@ -1,10 +1,12 @@
-{inputs, config, pkgs, user, ... }:
-
+{inputs, config, pkgs, user, myFlakeVersion, ... }:
+let
+  localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
+in 
 {
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
      (import ./virtualisation.nix) ++                     # virtualisation
-     (import ./desktop.nix)                             # desktop
+     (import ./desktop.nix)                              # desktop
   ;
 
   boot = {                                  # Boot options
@@ -62,9 +64,12 @@
   };
 
   environment = {
+    variables = rec {
+      LIBGL_DRI3_DISABLE        = "true";
+    };
     systemPackages = with pkgs; [
       simple-scan
-    ];
+    ] ++ [  ];
   };
 
   programs = {                              # No xbacklight, this is the alterantive

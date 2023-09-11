@@ -9,20 +9,20 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, nur, ... }:
     let
       myFlakeVersion = "1.0.28";
       user = "pedro"; 
       # user = "framework"; 
       my-overlays = [
-          inputs.neovim-nightly-overlay.overlay
-          inputs.nixpkgs-f2k.overlays.window-managers
-          (self: super: {
-            waybar = super.waybar.overrideAttrs (oldAttrs: {
-              mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-            });
-          })
-        ];
+        inputs.neovim-nightly-overlay.overlay
+        inputs.nixpkgs-f2k.overlays.window-managers
+        (self: super: {
+          waybar = super.waybar.overrideAttrs (oldAttrs: {
+            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+          });
+        })
+      ];
       location = "$HOME/.setup";
     in {
       nixosConfigurations = (

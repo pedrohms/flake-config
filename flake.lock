@@ -471,6 +471,20 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1694288724,
+        "narHash": "sha256-lZ98KdiBDngD5O40iNOKdsngk/nQt9X6zQFnLh1DgPQ=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "0cb78b3a7f8d1ac90c33bfbb5cd20c19508f2018",
+        "type": "github"
+      },
+      "original": {
+        "id": "nur",
+        "type": "indirect"
+      }
+    },
     "parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib_2"
@@ -494,7 +508,8 @@
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-f2k": "nixpkgs-f2k"
+        "nixpkgs-f2k": "nixpkgs-f2k",
+        "nur": "nur"
       }
     },
     "rust-analyzer-src": {

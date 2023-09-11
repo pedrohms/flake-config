@@ -18,7 +18,11 @@
       firefox
       bitcoin
       lutris
-      wine
+      # winePackages.unstable
+      # wineWowPackages.stable
+      wineWowPackages.waylandFull
+      # wine64
+      dxvk
       winetricks
       flameshot
       wezterm
