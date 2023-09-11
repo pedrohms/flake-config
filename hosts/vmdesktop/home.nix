@@ -22,7 +22,7 @@
     stateVersion = "23.11";
     packages = with pkgs; [
       home-manager
-      exa
+      eza
       stow
       starship
       lazygit

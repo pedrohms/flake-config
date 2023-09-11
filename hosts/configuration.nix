@@ -115,7 +115,7 @@
       networkmanagerapplet
       # lxappearance
       home-manager
-      exa
+      eza
       stow
       starship
       picom

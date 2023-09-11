@@ -107,7 +107,7 @@
       zip
       pciutils
       usbutils
-      exa
+      eza
       stow
       starship
       tmux
