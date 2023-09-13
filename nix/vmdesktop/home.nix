@@ -9,8 +9,6 @@
       sumneko-lua-language-server
       jq
       authenticator
-      flameshot
-      wezterm
       wofi
       brave
     ];
