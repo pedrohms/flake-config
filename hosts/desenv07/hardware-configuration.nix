@@ -11,12 +11,14 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "amdgpu" ];
-  boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" ];
+  # boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" ];
+  boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
+
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
-      fsType = "ext4";
+      fsType = "btrfs";
     };
 
   fileSystems."/boot" =
@@ -30,13 +32,14 @@
 #      fsType = "ntfs3";
 #    };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-label/swap"; }
-    ];
+  swapDevices = [ {
+      device = "/var/lib/swapfile"; 
+      size = 16*1024;
+    } ];
 
   networking = {
     useDHCP = lib.mkDefault true;
-    hostName = "desenv07";
+    hostName = "desenv07-nix";
     networkmanager.enable = true;
     firewall.enable = false;
   };

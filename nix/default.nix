@@ -24,8 +24,8 @@ in
       ./desenv07/home.nix
       {
         home = {
-          username = "${user}";
-          homeDirectory = "/home/${user}";
+          username = "framework";
+          homeDirectory = "/home/framework";
           packages = [ pkgs.home-manager ];
           stateVersion = "23.11";
         };
@@ -56,8 +56,8 @@ in
       ./vm/home.nix
       {
         home = {
-          username = "${user}";
-          homeDirectory = "/home/${user}";
+          username = "vmuser";
+          homeDirectory = "/home/vmuser";
           packages = [ pkgs.home-manager ];
           stateVersion = "23.11";
         };

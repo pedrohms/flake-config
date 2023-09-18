@@ -67,7 +67,7 @@
       enable = true;
       shares = {
         share = {
-          "path" = "/home/${user}/Public";
+          "path" = "/home/framework/Public";
           "guest ok" = "true";
           "read only" = "no";
         };
@@ -94,7 +94,6 @@
     uid = 1000;
     shell = pkgs.fish;
     isNormalUser = true;
-    shell = pkgs.fish;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };

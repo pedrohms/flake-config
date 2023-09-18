@@ -9,7 +9,6 @@
       android-studio
       gradle
       vscode
-      authenticator
       discord
       firefox
       google-chrome
@@ -19,6 +18,14 @@
       anydesk
       rustdesk
       moonlight-qt
+      distrobox
+      steam
+      wineWowPackages.waylandFull
+      dxvk
+      winetricks
+      flameshot
+      wezterm
+      wofi
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own

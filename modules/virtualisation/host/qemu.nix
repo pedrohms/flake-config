@@ -3,7 +3,7 @@
 
 {                                             # Add libvirtd and kvm to userGroups
 
-  users.groups.libvirtd.members = [ "root" "${user}" ];
+  users.groups.libvirtd.members = [ "root" "${user}" "framework" ];
 
   boot.extraModprobeConfig = ''
     options kvm_intel nested=1
