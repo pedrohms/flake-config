@@ -41,7 +41,12 @@
     useDHCP = lib.mkDefault true;
     hostName = "desenv07-nix";
     networkmanager.enable = true;
-    firewall.enable = false;
+    firewall = {
+      enable = false;
+      allowedTCPPorts = [
+        1433
+      ];
+    };
   };
   # networking.interfaces.enp0s20f0u2u4.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;

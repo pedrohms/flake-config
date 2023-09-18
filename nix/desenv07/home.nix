@@ -3,10 +3,12 @@
 {
   home = {
     packages = with pkgs; [ 
+      libreoffice 
       authenticator
       parsec-bin
       azuredatastudio
       android-studio
+      sumneko-lua-language-server
       gradle
       vscode
       discord
