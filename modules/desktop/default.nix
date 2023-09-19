@@ -53,6 +53,8 @@
     imagemagick_light
     sway-contrib.grimshot
     wf-recorder
+    xdg-desktop-portal-hyprland
+    swappy
   ];
 
   xdg.portal = {                                  # Required for flatpak with windowmanagers

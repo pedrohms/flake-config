@@ -1,5 +1,7 @@
-{ config, pkgs, user, ... }:
-
+{ config, pkgs, user, myFlakeVersion, ... }:
+let
+  localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
+in 
 {
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
@@ -43,7 +45,7 @@
   environment = {
     systemPackages = with pkgs; [
       simple-scan
-    ];
+    ] ++ [ localPkgs.grimblast ];
   };
 
   programs = {                              # No xbacklight, this is the alterantive

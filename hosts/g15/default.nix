@@ -69,7 +69,7 @@ in
     };
     systemPackages = with pkgs; [
       simple-scan
-    ] ++ [  ];
+    ] ++ [ localPkgs.grimblast ];
   };
 
   programs = {                              # No xbacklight, this is the alterantive

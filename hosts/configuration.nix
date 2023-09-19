@@ -2,7 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, inputs, user, location, ... }:
+{ config, lib, pkgs, inputs, user, location, myFlakeVersion, ... }:
+
 {
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
@@ -60,7 +61,10 @@
     };
   };
 
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+    polkit.enable = true;
+  };
   services = {
     udev.packages = [
      pkgs.android-udev-rules
@@ -138,6 +142,8 @@
       libstdcxx5
       ffmpeg_6
       pamixer
+      polkit
+      polkit_gnome
     ];
   };
 
