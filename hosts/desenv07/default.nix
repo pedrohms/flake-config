@@ -10,7 +10,7 @@ in
   ;
 
   boot = {                                  # Boot options
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages =  pkgs.linuxPackages_latest;
 
     loader = {                              # EFI Boot
       efi = {
@@ -29,6 +29,10 @@ in
   };
 
   hardware = {
+    openrazer = {
+        enable = true;
+        users = [ "framework" ];
+    };
     opengl.extraPackages = with pkgs; [
       amdvlk
     ];
@@ -45,6 +49,9 @@ in
   environment = {
     systemPackages = with pkgs; [
       simple-scan
+      # linuxKernel.packages.linux_latest_libre.openrazer
+      openrazer-daemon
+      polychromatic
     ] ++ [ localPkgs.grimblast ];
   };
 
@@ -96,7 +103,7 @@ in
     uid = 1000;
     shell = pkgs.fish;
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "openrazer" ];
     initialPassword = "123456";
   };
 

@@ -11,14 +11,13 @@
 #               └─ default.nix *
 #
 
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, myFlakeVersion, ... }:
 
 {
   services = {
     xserver = {
       windowManager.qtile = {
         enable = true;
-        package = pkgs.stable.qtile;
         extraPackages = python311Packages: with python311Packages; [
           qtile-extras
         ];
