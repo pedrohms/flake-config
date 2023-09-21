@@ -22,12 +22,15 @@
       moonlight-qt
       distrobox
       steam
+      lutris
       wineWowPackages.waylandFull
       dxvk
       winetricks
       flameshot
       wezterm
       wofi
+      postman
+      openssl
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
