@@ -3,13 +3,14 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    hyprland.url = "github:hyprwm/Hyprland";
     home-manager = {
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nur, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
       myFlakeVersion = "1.0.28";
       user = "pedro"; 
