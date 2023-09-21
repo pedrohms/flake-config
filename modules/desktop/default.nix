@@ -55,6 +55,7 @@
     wf-recorder
     xdg-desktop-portal-hyprland
     swappy
+    libsForQt5.polkit-kde-agent
   ];
 
   xdg.portal = {                                  # Required for flatpak with windowmanagers
