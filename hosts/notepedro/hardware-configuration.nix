@@ -29,6 +29,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/backup" =
+    { device = "/dev/disk/by-label/dados2";
+      fsType = "btrfs";
+      options = [ "defaults" "auto" "rw" "user" ];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-label/swap"; }
     ];
