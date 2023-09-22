@@ -6,4 +6,5 @@
     ( import ../../modules/desktop/windowManager/hyprland)
     ( import ../../modules/desktop/displayManager/gdm)
     # ( import ../../modules/desktop/desktopManager/gnome)
+    # ( import ../../modules/desktop/desktopManager/plasma)
 ]
