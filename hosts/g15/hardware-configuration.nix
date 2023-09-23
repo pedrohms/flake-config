@@ -41,8 +41,8 @@
 
   fileSystems."/mnt/backup" =
     { device = "/dev/disk/by-label/backup";
-      fsType = "btrfs";
-      options = [ "rw" "user" ];
+      fsType = "ext4";
+      options = [ "defaults" "user" "nofail" "exec" ];
     };
 
   swapDevices = [ {

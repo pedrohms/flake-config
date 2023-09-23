@@ -61,6 +61,7 @@ in
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
     };
+    steam-hardware.enable = true;
   };
 
   environment = {
@@ -76,6 +77,7 @@ in
     fish.enable = true;
     dconf.enable = true;
     light.enable = true;
+    steam.enable = true;
   };
 
   services = {
