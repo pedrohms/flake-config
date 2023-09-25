@@ -18,11 +18,12 @@
     xserver = {
       windowManager.qtile = {
         enable = true;
-        extraPackages = python311Packages: with python311Packages; [
+        package = pkgs.stable.qtile;
+        extraPackages = python311Packages: with pkgs.stable.python311Packages; [
           qtile-extras
         ];
       };
-      windowManager.qtile.backend = "x11";
+      # windowManager.qtile.backend = "x11";
     };
   };
 }

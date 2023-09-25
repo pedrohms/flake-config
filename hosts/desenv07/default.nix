@@ -30,7 +30,7 @@ in
 
   hardware = {
     openrazer = {
-        enable = true;
+        enable = false;
         users = [ "framework" ];
     };
     opengl.extraPackages = with pkgs; [
@@ -50,7 +50,7 @@ in
     systemPackages = with pkgs; [
       simple-scan
       # linuxKernel.packages.linux_latest_libre.openrazer
-      openrazer-daemon
+      # openrazer-daemon
       polychromatic
     ] ++ [ localPkgs.grimblast ];
   };
