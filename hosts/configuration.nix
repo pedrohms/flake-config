@@ -122,7 +122,7 @@
       stow
       starship
       picom
-      rofi
+      rofi-wayland
       rofi-calc
       tmux
       lazygit

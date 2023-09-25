@@ -60,6 +60,8 @@
 
   xdg.portal = {                                  # Required for flatpak with windowmanagers
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal ];
+    wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 }
