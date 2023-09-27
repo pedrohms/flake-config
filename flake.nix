@@ -13,7 +13,7 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
-      myFlakeVersion = "1.0.28";
+      myFlakeVersion = "1.0.29";
       user = "pedro"; 
       # user = "framework"; 
       overlay-stable = final: prev: {
