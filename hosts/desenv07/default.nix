@@ -52,7 +52,7 @@ in
       # linuxKernel.packages.linux_latest_libre.openrazer
       # openrazer-daemon
       polychromatic
-    ] ++ [ localPkgs.grimblast ];
+    ] ++ [  ];
   };
 
   programs = {                              # No xbacklight, this is the alterantive

@@ -23,4 +23,12 @@
       enableNvidiaPatches = true;
     };
   };
+  environment.systemPackages = [
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprland-contrib.packages.${pkgs.system}.hyprprop
+    inputs.hyprland-contrib.packages.${pkgs.system}.scratchpad
+    inputs.hyprland-contrib.packages.${pkgs.system}.shellevents
+    pkgs.hyprpicker
+    pkgs.hyprpaper
+  ];
 }

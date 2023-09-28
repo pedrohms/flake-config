@@ -48,6 +48,7 @@
     waybar
     swaybg
     wl-clipboard
+    wlr-randr
     playerctl
     libappindicator-gtk3
     imagemagick_light
@@ -56,6 +57,7 @@
     xdg-desktop-portal-hyprland
     swappy
     libsForQt5.polkit-kde-agent
+    kanshi
   ];
 
   xdg.portal = {                                  # Required for flatpak with windowmanagers
