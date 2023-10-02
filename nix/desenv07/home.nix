@@ -1,6 +1,7 @@
 { inputs, user, pkgs, my-overlays, ... }:
 
 {
+
   home = {
     packages = with pkgs; [ 
       libreoffice 
@@ -18,7 +19,7 @@
       jdk11
       ghq
       anydesk
-      rustdesk
+      # rustdesk
       moonlight-qt
       distrobox
       steam
