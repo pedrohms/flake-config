@@ -32,6 +32,7 @@
       wofi
       postman
       openssl
+      libclang
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
