@@ -18,6 +18,7 @@
   };
 
   services = {
+    dbus.enable = true;
     xserver = {
       enable = true;
       libinput.enable = true; # Enable touchpad
@@ -54,10 +55,15 @@
     imagemagick_light
     sway-contrib.grimshot
     wf-recorder
-    xdg-desktop-portal-hyprland
+    # xdg-desktop-portal-hyprland
     swappy
     libsForQt5.polkit-kde-agent
     kanshi
+    bemenu
+    wdisplays
+    mako
+    glib
+    xdg-utils
   ];
 
   xdg.portal = {                                  # Required for flatpak with windowmanagers

@@ -23,13 +23,13 @@ in
         efiSupport = true;
         useOSProber = true;                 # Find all boot options
       };
-      timeout = 2;                          # Grub auto select time
+      timeout = 0;                          # Grub auto select time
     };
   };
 
   security = {
     tpm2 = {
-      enable = true;
+      enable = false;
       pkcs11.enable = true;
       tctiEnvironment.enable = true;
     };
@@ -39,12 +39,14 @@ in
     enable = true;
     cpuFreqGovernor = "performance";
   };
+
   hardware = {
     nvidia = {
+      # open = true;
       powerManagement.enable = true;
-      modesetting.enable = true;
+      # modesetting.enable = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      # package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
         # sync.enable = true;
         offload = {
@@ -67,6 +69,7 @@ in
   environment = {
     variables = rec {
       LIBGL_DRI3_DISABLE        = "true";
+      PH_MACHINE                = "g15";
     };
     systemPackages = with pkgs; [
       simple-scan
@@ -89,7 +92,7 @@ in
     #   };
     # };
     #logind.lidSwitch = "ignore";            # Laptop does not go to sleep when lid is closed
-    auto-cpufreq.enable = true;
+    # auto-cpufreq.enable = true;
     blueman.enable = true;
 #   printing = {                            # Printing and drivers for TS5300
 #     enable = true;

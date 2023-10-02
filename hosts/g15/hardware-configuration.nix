@@ -11,10 +11,22 @@
   # boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
   # boot.kernelParams =  [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=on" "iommu=pt" "nvidia-drm.modeset=1" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "nvidia" ];
+  boot.initrd.kernelModules = [
+      "nvidia"
+      "nvidia_modeset"
+      "nvidia_uvm"
+      "nvidia_drm"
+  ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.kernelParams =  [ "i915.enable_psr=0" "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off" "nvidia-drm.modeset=1" ];
+  boot.kernelParams =  [ "i915.enable_psr=0" "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off"
+                          "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call ];
+  boot.extraModprobeConfig = ''
+    options kvm_intel nested=1
+    options kvm_intel emulate_invalid_guest_state=0
+    options kvm ignore_nsrs=1
+    options nvidia-drm modeset=1
+  '';
   boot.postBootCommands = ''
     ${pkgs.kmod}/bin/modeprobe -i acpi_call
   ''; 
@@ -69,8 +81,8 @@
     };
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  hardware.enableRedistributableFirmware = true;
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  # powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+  # hardware.enableRedistributableFirmware = true;
+  # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

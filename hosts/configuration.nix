@@ -38,6 +38,9 @@
       ];
     };
     pulseaudio.enable = false;
+    bluetooth = {
+      enable = true;
+    };
   };
 
   programs = {
@@ -143,6 +146,7 @@
       pamixer
       polkit
       polkit_gnome
+      bluez
     ];
   };
 
