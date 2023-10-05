@@ -22,6 +22,7 @@ in
     extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
     modules = [
       ./desenv07/home.nix
+      ./shared
       {
         home = {
           username = "framework";
@@ -38,6 +39,7 @@ in
     extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
     modules = [
       ./notepedro/home.nix
+      ./shared
       {
         home = {
           username = "${user}";
