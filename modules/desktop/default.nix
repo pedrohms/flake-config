@@ -64,6 +64,7 @@
     mako
     glib
     xdg-utils
+    gnome.file-roller
   ];
 
   xdg.portal = {                                  # Required for flatpak with windowmanagers
