@@ -60,6 +60,10 @@ in
 
           TLP_DEFAULT_MODE = "BAT";
           TLP_PERSISTENT_DEFAULT = 1;
+
+          RUNTIME_PM_ON_AC = "auto";
+          RUNTIME_PM_ON_BAT = "auto";
+          RUNTIME_PM_DRIVER_BLACKLIST = "mei_me"; 
         };
       };
       environment = {
@@ -90,6 +94,10 @@ in
 
           TLP_DEFAULT_MODE = "BAT";
           TLP_PERSISTENT_DEFAULT = 1;
+
+          RUNTIME_PM_ON_AC = "auto";
+          RUNTIME_PM_ON_BAT = "auto";
+          RUNTIME_PM_DRIVER_BLACKLIST = "mei_me"; 
         };
       };
       environment = {
