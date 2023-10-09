@@ -16,7 +16,10 @@
       "nvidia_modeset"
       "nvidia_uvm"
       "nvidia_drm"
+      "intel_agp"
+      "i915"
   ];
+  boot.blacklistedKernelModules =  [ "nouveau" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.kernelParams =  [ "i915.enable_psr=0" "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off"
                           "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
@@ -26,6 +29,7 @@
     options kvm_intel emulate_invalid_guest_state=0
     options kvm ignore_nsrs=1
     options nvidia-drm modeset=1
+    options nvidia "NVreg_DynamicPowerManagement=0x02"
   '';
   boot.postBootCommands = ''
     ${pkgs.kmod}/bin/modeprobe -i acpi_call
@@ -83,6 +87,6 @@
 
   # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   # powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  # hardware.enableRedistributableFirmware = true;
-  # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.enableRedistributableFirmware = true;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
