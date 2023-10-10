@@ -179,6 +179,6 @@
     stateVersion = "23.11";
   };
 
-  boot.kernel.sysctl."vm.max_map_count" = 2147483642;
+  # boot.kernel.sysctl."vm.max_map_count" = 2147483642;
 
 }
