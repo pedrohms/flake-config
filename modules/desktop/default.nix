@@ -55,9 +55,9 @@
     imagemagick_light
     sway-contrib.grimshot
     wf-recorder
-    # xdg-desktop-portal-hyprland
+    xdg-desktop-portal-hyprland
     swappy
-    libsForQt5.polkit-kde-agent
+    # libsForQt5.polkit-kde-agent
     kanshi
     bemenu
     wdisplays

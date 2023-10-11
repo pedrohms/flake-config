@@ -46,6 +46,7 @@
   programs = {
     adb.enable = true;
     nm-applet.enable = true;
+    ssh.enableAskPassword = false;
     gnupg.agent = {
         enable = true;
         enableSSHSupport =true;
