@@ -1,4 +1,4 @@
-{inputs, config, pkgs, user, myFlakeVersion, ... }:
+{inputs, config, pkgs, user, myFlakeVersion, lib, ... }:
 let
   localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
 in 
@@ -23,7 +23,32 @@ in
         efiSupport = true;
         useOSProber = true;                 # Find all boot options
       };
-      timeout = 0;                          # Grub auto select time
+      timeout = 5;                          # Grub auto select time
+    };
+  };
+
+  specialisation = {
+    hybrid.configuration = {
+      environment = {
+        variables = rec {
+          LIBGL_DRI3_DISABLE        = "true";
+          PH_MACHINE                = "g15";
+          PH_NVIDIA                 = "2";
+        };
+      };
+      hardware = {
+        nvidia = {
+          # open = true;
+          prime = {
+            sync.enable = lib.mkForce false;
+            # reverseSync.enable = true;
+            offload = {
+              enable = true;
+              enableOffloadCmd = true;
+            };
+          };
+        };
+      };
     };
   };
 
@@ -40,71 +65,25 @@ in
     cpuFreqGovernor = "performance";
   };
 
-  specialisation = {
-    nvidia.configuration = {
-      hardware.nvidia = {
-        prime = {
-          sync.enable = true;
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:1:0:0";
-        };
-      };
-      services.tlp = {                                  # TLP and auto-cpufreq for power management
-        enable = true;
-        settings = {
-          CPU_SCALING_GOVERNOR_ON_AC = "performance";
-          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+  services.power-profiles-daemon.enable = false;
 
-          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+  services.tlp = {                                  # TLP and auto-cpufreq for power management
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-          TLP_DEFAULT_MODE = "BAT";
-          TLP_PERSISTENT_DEFAULT = 1;
+      # CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      # CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-          RUNTIME_PM_ON_AC = "auto";
-          RUNTIME_PM_ON_BAT = "auto";
-          RUNTIME_PM_DRIVER_BLACKLIST = "mei_me"; 
-        };
-      };
-      environment = {
-        variables = rec {
-          PH_NVIDIA                = 1;
-        };
-      };
-    };
-    hybrid.configuration = {
-      hardware.nvidia = {
-        prime = {
-          offload = {
-            enable = true;
-            enableOffloadCmd = true;
-          };
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:1:0:0";
-        };
-      };
-      services.tlp = {                                  # TLP and auto-cpufreq for power management
-        enable = true;
-        settings = {
-          CPU_SCALING_GOVERNOR_ON_AC = "powersave";
-          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      # TLP_DEFAULT_MODE = "BAT";
+      # TLP_PERSISTENT_DEFAULT = 1;
 
-          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-          CPU_ENERGY_PERF_POLICY_ON_AC = "power";
+      # RUNTIME_PM_ON_AC = "on";
+      USB_AUTOSUSPEND = 0;
 
-          TLP_DEFAULT_MODE = "BAT";
-          TLP_PERSISTENT_DEFAULT = 1;
-
-          RUNTIME_PM_ON_AC = "auto";
-          RUNTIME_PM_ON_BAT = "auto";
-          RUNTIME_PM_DRIVER_BLACKLIST = "mei_me"; 
-        };
-      };
-      environment = {
-        variables = rec {
-          PH_NVIDIA                = 0;
-        };
-      };
+      RUNTIME_PM_ON_BAT = "auto";
+      RUNTIME_PM_DRIVER_BLACKLIST = "mei_me nouveau nvidia"; 
     };
   };
 
@@ -115,15 +94,16 @@ in
       powerManagement.enable = true;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
-      # prime = {
-      #   # sync.enable = true;
-      #   offload = {
-      #     enable = true;
-      #     enableOffloadCmd = true;
-      #   };
-      #   intelBusId = "PCI:0:2:0";
-      #   nvidiaBusId = "PCI:1:0:0";
-      # };
+      prime = {
+        sync.enable = true;
+        # reverseSync.enable = true;
+        # offload = {
+        #   enable = true;
+        #   enableOffloadCmd = true;
+        # };
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
 
     pulseaudio.enable = false;
@@ -138,9 +118,11 @@ in
     variables = rec {
       LIBGL_DRI3_DISABLE        = "true";
       PH_MACHINE                = "g15";
+      # PH_NVIDIA                 = "0";
     };
     systemPackages = with pkgs; [
       simple-scan
+      powertop
     ] ++ [  ];
   };
 
