@@ -150,6 +150,10 @@
       polkit
       polkit_gnome
       bluez
+      vulkan-tools
+      glxinfo
+      virtualglLib
+      clinfo
     ];
   };
 

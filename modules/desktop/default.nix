@@ -65,6 +65,7 @@
     glib
     xdg-utils
     gnome.file-roller
+    wayland-utils
   ];
 
   xdg.portal = {                                  # Required for flatpak with windowmanagers
