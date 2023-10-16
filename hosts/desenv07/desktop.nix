@@ -4,7 +4,7 @@
     # ( import ../../modules/desktop/windowManager/qtile)
     ( import ../../modules/desktop/windowManager/awesome)
     ( import ../../modules/desktop/windowManager/hyprland)
-    # ( import ../../modules/desktop/windowManager/sway)
+    ( import ../../modules/desktop/windowManager/sway)
     # ( import ../../modules/desktop/displayManager/lightdm)
     # ( import ../../modules/desktop/displayManager/sddm)
     ( import ../../modules/desktop/displayManager/gdm)
