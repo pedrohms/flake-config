@@ -8,6 +8,6 @@
     # ( import ../../modules/desktop/displayManager/lightdm)
     # ( import ../../modules/desktop/displayManager/sddm)
     ( import ../../modules/desktop/displayManager/gdm)
-    ( import ../../modules/desktop/desktopManager/gnome)
-    ( import ../../modules/desktop/desktopManager/plasma)
+    # ( import ../../modules/desktop/desktopManager/gnome)
+    # ( import ../../modules/desktop/desktopManager/plasma)
 ]
