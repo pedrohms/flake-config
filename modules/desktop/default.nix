@@ -46,7 +46,7 @@
     xorg.xev
     xorg.xkill
     xorg.xrandr
-    waybar
+    pkgs.stable.waybar
     swaybg
     wl-clipboard
     wlr-randr
@@ -72,6 +72,6 @@
     enable = true;
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
-    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 }

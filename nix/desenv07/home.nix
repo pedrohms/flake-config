@@ -7,12 +7,20 @@
       azuredatastudio
       android-studio
       gradle
-      jdk11
+      jdk21
       wezterm
       wofi
       postman
     ];
 
+    sessionVariables = {
+      JAVA_HOME = "${pkgs.jdk17}";
+    };
+
+  };
+
+  systemd.user.sessionVariables = {
+      JAVA_HOME = "${pkgs.jdk17}";
   };
 
   services.kanshi = {

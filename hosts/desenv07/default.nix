@@ -64,7 +64,6 @@ in
   programs = {                              # No xbacklight, this is the alterantive
     fish.enable = true;
     dconf.enable = true;
-    light.enable = true;
   };
 
   services = {

@@ -20,7 +20,6 @@
       xwayland = {
         enable = true;
       };
-      enableNvidiaPatches = true;
     };
   };
   environment.systemPackages = [
