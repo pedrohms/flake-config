@@ -58,6 +58,8 @@ in
       # linuxKernel.packages.linux_latest_libre.openrazer
       # openrazer-daemon
       polychromatic
+      # dwl
+      somebar
     ] ++ [  ];
   };
 
@@ -116,4 +118,26 @@ in
     gid = 1000;
     members = [ "framework" ];
   };
+
+  services.xserver.displayManager.session = [ 
+    {
+      manage = "window";
+      name = "dwl";
+      start = ''
+        export XDG_CURRENT_DESKTOP=dwl 
+        export XDG_SESSION_TYPE=wayland 
+        export XDG_SESSION_DESKTOP=dwl 
+        export XDG_SCREENSHOTS_DIR=~/Pictures/Screenshots
+        export WLR_NO_HARDWARE_CURSORS=1 
+        export MOZ_DISABLE_RDD_SANDBOX=1
+        export MOZ_ENABLE_WAYLAND=1 
+        export OZONE_PLATFORM=wayland
+        export SDL_VIDEODRIVER=wayland 
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+        export GDK_BACKEND=wayland
+
+        env XDG_SESSION_TYPE=wayland dbus-run-session ${pkgs.dwl}/bin/dwl
+      '';
+    }
+  ];
 }

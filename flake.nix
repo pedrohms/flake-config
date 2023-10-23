@@ -13,11 +13,14 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dwl-source = {
+      url = "github:djpohly/dwl/ab87410023a139c124bccb2817e567a7fa4fabab"; flake = false;
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, ... }:
     let
-      myFlakeVersion = "1.0.43";
+      myFlakeVersion = "1.0.45";
       user = "pedro"; 
       # user = "framework"; 
       overlay-stable = final: prev: {
@@ -44,7 +47,7 @@
       homeConfigurations = (
         import ./nix {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user my-overlays myFlakeVersion;
+          inherit inputs nixpkgs home-manager user my-overlays myFlakeVersion dwl-source;
         }
       );
     };

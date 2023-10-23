@@ -6,7 +6,7 @@
 #       └─ default.nix *
 #
 
-{ lib, inputs, nixpkgs, home-manager, user, my-overlays, ... }:
+{ lib, inputs, nixpkgs, home-manager, user, my-overlays, dwl-source, ... }:
 
 let
   system = "x86_64-linux";                                  # System architecture
@@ -19,7 +19,7 @@ in
 {
   desenv07 = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
     inherit pkgs;
-    extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
+    extraSpecialArgs = { inherit inputs user pkgs my-overlays dwl-source; };
     modules = [
       ./desenv07/home.nix
       ./shared
@@ -36,7 +36,7 @@ in
 
   homePedro = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
     inherit pkgs;
-    extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
+    extraSpecialArgs = { inherit inputs user pkgs my-overlays dwl-source; };
     modules = [
       ./notepedro/home.nix
       ./shared
@@ -69,7 +69,7 @@ in
 
   homeVmDesktop = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
     inherit pkgs;
-    extraSpecialArgs = { inherit inputs user pkgs my-overlays; };
+    extraSpecialArgs = { inherit inputs user pkgs my-overlays dwl-source; };
     modules = [
       ./vmdesktop/home.nix
       {

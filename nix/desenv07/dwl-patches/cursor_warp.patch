@@ -1,0 +1,65 @@
+diff --git a/config.def.h b/config.def.h
+index a0e6cd7..960a8e6 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -9,6 +9,9 @@ static const float focuscolor[]     = {1.0, 0.0, 0.0, 1.0};
+ /* pointer constraints */
+ static const int allow_constrain      = 1;
+ 
++/* cursor warping */
++static const bool cursor_warp = true;
++
+ /* tagging - tagcount must be no greater than 31 */
+ static const int tagcount = 9;
+ 
+diff --git a/dwl.c b/dwl.c
+index 1cf7b3b..54c7d39 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -306,6 +306,7 @@ static void updatetitle(struct wl_listener *listener, void *data);
+ static void urgent(struct wl_listener *listener, void *data);
+ static void view(const Arg *arg);
+ static void virtualkeyboard(struct wl_listener *listener, void *data);
++static void warpcursor(const Client *c);
+ static Monitor *xytomon(double x, double y);
+ static struct wlr_scene_node *xytonode(double x, double y, struct wlr_surface **psurface,
+ 		Client **pc, LayerSurface **pl, double *nx, double *ny);
+@@ -503,5 +504,8 @@ arrange(Monitor *m)
+ 	if (m && m->lt[m->sellt]->arrange)
+ 		m->lt[m->sellt]->arrange(m);
++	c = focustop(selmon);
++	if (cursor_warp && c)
++		warpcursor(c);
+ 	motionnotify(0);
+ 	checkidleinhibitor(NULL);
+ }
+@@ -1192,6 +1196,10 @@ focusclient(Client *c, int lift)
+ 	struct wlr_keyboard *kb;
+ 	int i;
+ 
++	/* Warp cursor to center of client if it is outside */
++	if (cursor_warp && c)
++		warpcursor(c);
++
+ 	/* Raise client in stacking order if requested */
+ 	if (c && lift)
+ 		wlr_scene_node_raise_to_top(c->scene);
+@@ -2514,6 +2522,18 @@ virtualkeyboard(struct wl_listener *listener, void *data)
+ 	createkeyboard(device);
+ }
+ 
++void
++warpcursor(const Client *c) {
++	if (cursor->x < c->geom.x ||
++		cursor->x > c->geom.x + c->geom.width ||
++		cursor->y < c->geom.y ||
++		cursor->y > c->geom.y + c->geom.height)
++		wlr_cursor_warp_closest(cursor,
++			  NULL,
++			  c->geom.x + c->geom.width / 2.0,
++			  c->geom.y + c->geom.height / 2.0);
++}
++
+ Monitor *
+ xytomon(double x, double y)
+ {

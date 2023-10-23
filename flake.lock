@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "dwl-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1697076524,
+        "narHash": "sha256-OX/Ts24s+OoDiQSvROd0ZZZR1V0o4QgcpCIsDrLv4o8=",
+        "owner": "djpohly",
+        "repo": "dwl",
+        "rev": "ab87410023a139c124bccb2817e567a7fa4fabab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "djpohly",
+        "repo": "dwl",
+        "rev": "ab87410023a139c124bccb2817e567a7fa4fabab",
+        "type": "github"
+      }
+    },
     "emacs": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -590,6 +607,7 @@
     },
     "root": {
       "inputs": {
+        "dwl-source": "dwl-source",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",

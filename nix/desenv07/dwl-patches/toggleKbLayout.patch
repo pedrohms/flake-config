@@ -1,0 +1,67 @@
+unchanged:
+--- a/config.def.h
++++ b/config.def.h
+@@ -44,6 +44,11 @@ static const struct xkb_rule_names xkb_rules = {
+ static const int repeat_rate = 25;
+ static const int repeat_delay = 600;
+ 
++/* gb will be set the first time togglekblayout is called, then us.. it is
++ * recommended to set the same layout in position 0 of kblayouts and in
++ * xkb_rules */
++static const char *kblayouts[] = {"us", "gb"};
++
+ /* Trackpad */
+ static const int tap_to_click = 1;
+ static const int tap_and_drag = 1;
+@@ -81,6 +86,7 @@ static const Key keys[] = {
+ 	{ MODKEY,                    XKB_KEY_period,     focusmon,       {.i = WLR_DIRECTION_RIGHT} },
+ 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,       tagmon,         {.i = WLR_DIRECTION_LEFT} },
+ 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,    tagmon,         {.i = WLR_DIRECTION_RIGHT} },
++	{ MODKEY,  					 XKB_KEY_w,    	 	 togglekblayout, {0} },
+ 	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                     0),
+ 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
+ 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                 2),
+diff -u b/dwl.c b/dwl.c
+--- b/dwl.c
++++ b/dwl.c
+@@ -234,6 +234,7 @@
+ static void tagmon(const Arg *arg);
+ static void tile(Monitor *m);
+ static void togglefloating(const Arg *arg);
++static void togglekblayout(const Arg *arg);
+ static void togglefullscreen(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+@@ -261,6 +262,7 @@
+ 
+ static struct wlr_seat *seat;
+ static struct wl_list keyboards;
++static unsigned int kblayout = 0; /* index of kblayouts */
+ static unsigned int cursor_mode;
+ static Client *grabc;
+ static int grabcx, grabcy; /* client-relative */
+@@ -1677,4 +1679,24 @@
+ 
+ void
++togglekblayout(const Arg *arg)
++{
++	Keyboard *kb;
++	struct xkb_rule_names newrule = xkb_rules;
++
++	kblayout = (kblayout + 1) % LENGTH(kblayouts);
++	newrule.layout = kblayouts[kblayout];
++	if (newrule.layout == "cz")
++		newrule.variant = "qwerty";
++	wl_list_for_each(kb, &keyboards, link) {
++		struct xkb_context *context = xkb_context_new(XKB_CONTEXT_NO_FLAGS);
++		struct xkb_keymap *keymap = xkb_map_new_from_names(context, &newrule,
++				XKB_KEYMAP_COMPILE_NO_FLAGS);
++		wlr_keyboard_set_keymap(kb->wlr_keyboard, keymap);
++		xkb_keymap_unref(keymap);
++		xkb_context_unref(context);
++	}
++}
++
++void
+ toggletag(const Arg *arg)
+ {
