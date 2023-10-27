@@ -74,6 +74,7 @@
                 "test_no_image"
                 "test_decoration_output"
                 "test_global_menu"
+                "test_strava"
               ];
           });
         })
