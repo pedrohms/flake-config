@@ -1,4 +1,4 @@
-{ config, pkgs, user, myFlakeVersion, ... }:
+{ config, pkgs, user, myFlakeVersion, lib, ... }:
 let
   localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
 in 
@@ -118,6 +118,8 @@ in
     gid = 1000;
     members = [ "framework" ];
   };
+
+  systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
 
   services.xserver.displayManager.session = [ 
     {

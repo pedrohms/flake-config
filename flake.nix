@@ -1,8 +1,12 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs-staging";
+    };
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-contrib = {
@@ -25,6 +29,9 @@
       # user = "framework"; 
       overlay-stable = final: prev: {
         stable = inputs.nixpkgs-stable.legacyPackages.${prev.system};
+      };
+      overlay-staging = final: prev: {
+        staging = inputs.nixpkgs-staging.legacyPackages.${prev.system};
       };
       my-overlays = [
         inputs.neovim-nightly-overlay.overlay

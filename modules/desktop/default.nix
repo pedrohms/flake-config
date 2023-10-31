@@ -46,7 +46,7 @@
     xorg.xev
     xorg.xkill
     xorg.xrandr
-    pkgs.stable.waybar
+    waybar
     swaybg
     wl-clipboard
     wlr-randr
