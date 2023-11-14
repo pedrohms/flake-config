@@ -51,6 +51,7 @@
       enable = false;
       allowedTCPPorts = [
         1433
+        5025
         3000
         16000
         8080

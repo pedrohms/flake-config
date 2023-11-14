@@ -37,7 +37,7 @@
       wofi
       postman
       foot
-      bottles
+      jetbrains.idea-community
     ];
 
     # sessionVariables = {
