@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
@@ -27,13 +27,13 @@
       myFlakeVersion = "1.0.45";
       user = "pedro"; 
       # user = "framework"; 
-      overlay-stable = final: prev: {
-        stable = inputs.nixpkgs-stable.legacyPackages.${prev.system};
-      };
+      # overlay-stable = final: prev: {
+      #   stable = inputs.nixpkgs-stable.legacyPackages.${prev.system};
+      # };
       my-overlays = [
         inputs.neovim-nightly-overlay.overlay
         inputs.nixpkgs-f2k.overlays.window-managers
-        overlay-stable
+        # overlay-stable
         (self: super: {
           waybar = super.waybar.overrideAttrs (oldAttrs: {
             mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

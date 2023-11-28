@@ -1,7 +1,7 @@
 { config, pkgs, user, myFlakeVersion, lib, ... }:
-let
-  localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
-in 
+# let
+#   localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
+# in 
 {
   imports =                                               # For now, if applying to other system, swap files
     [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
@@ -34,11 +34,12 @@ in
     };
   };
 
+  powerManagement.cpuFreqGovernor = "performance";
   hardware = {
-    openrazer = {
-        enable = false;
-        users = [ "framework" ];
-    };
+    # openrazer = {
+    #     enable = false;
+    #     users = [ "framework" ];
+    # };
     opengl.extraPackages = with pkgs; [
       amdvlk
     ];
@@ -54,13 +55,14 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      simple-scan
+     waydroid
+     simple-scan
       # linuxKernel.packages.linux_latest_libre.openrazer
       # openrazer-daemon
-      polychromatic
+      # polychromatic
       # dwl
-      somebar
-    ] ++ [  ];
+      # somebar
+    ];
   };
 
   programs = {                              # No xbacklight, this is the alterantive
@@ -118,28 +120,6 @@ in
     gid = 1000;
     members = [ "framework" ];
   };
-
+  virtualisation.waydroid.enable = true;
   systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
-
-  services.xserver.displayManager.session = [ 
-    {
-      manage = "window";
-      name = "dwl";
-      start = ''
-        export XDG_CURRENT_DESKTOP=dwl 
-        export XDG_SESSION_TYPE=wayland 
-        export XDG_SESSION_DESKTOP=dwl 
-        export XDG_SCREENSHOTS_DIR=~/Pictures/Screenshots
-        export WLR_NO_HARDWARE_CURSORS=1 
-        export MOZ_DISABLE_RDD_SANDBOX=1
-        export MOZ_ENABLE_WAYLAND=1 
-        export OZONE_PLATFORM=wayland
-        export SDL_VIDEODRIVER=wayland 
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-        export GDK_BACKEND=wayland
-
-        env XDG_SESSION_TYPE=wayland dbus-run-session ${pkgs.dwl}/bin/dwl
-      '';
-    }
-  ];
 }

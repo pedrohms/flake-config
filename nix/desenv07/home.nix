@@ -32,6 +32,7 @@
       azuredatastudio
       android-studio
       gradle
+      jetbrains.idea-community
       # jdk21
       wezterm
       wofi
