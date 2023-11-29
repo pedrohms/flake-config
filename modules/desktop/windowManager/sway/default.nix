@@ -76,5 +76,6 @@ in
     swayidle
     configure-gtk
     dbus-sway-environment
+    libappindicator
   ];
 }
