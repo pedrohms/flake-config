@@ -21,6 +21,12 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
+  documentation = {
+    enable = true;
+    dev.enable = true;
+    man.enable = true;
+    nixos.enable = true;
+  };
   # Enable sound.
   sound.enable = true;
 
