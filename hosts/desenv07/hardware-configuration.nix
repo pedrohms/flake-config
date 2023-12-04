@@ -24,7 +24,7 @@
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
+      fsType = "ext4";
     };
 
   fileSystems."/boot" =
@@ -32,11 +32,11 @@
       fsType = "vfat";
     };
 
-#  fileSystems."/mnt/dados" =
-#    { device = "/dev/sdb5";
-#      options = [ "rw" "users" "defaults" ];
-#      fsType = "ntfs3";
-#    };
+ fileSystems."/mnt/dados" =
+   { device = "/dev/disk/by-label/backup";
+     options = [ "rw" "users" "defaults" ];
+     fsType = "ext4";
+   };
 
   swapDevices = [ {
       device = "/var/lib/swapfile"; 
