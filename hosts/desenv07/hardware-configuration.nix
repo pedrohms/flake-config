@@ -38,6 +38,11 @@
      fsType = "ext4";
    };
 
+ fileSystems."/home" =
+   { device = "/dev/disk/by-label/home";
+     fsType = "ext4";
+   };
+
   swapDevices = [ {
       device = "/var/lib/swapfile"; 
       size = 16*1024;

@@ -36,9 +36,10 @@
       # jdk21
       wezterm
       wofi
-      postman
       foot
       bottles
+      hexchat
+      podman-desktop
     ];
 
     # sessionVariables = {

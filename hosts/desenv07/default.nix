@@ -60,8 +60,6 @@
       # linuxKernel.packages.linux_latest_libre.openrazer
       # openrazer-daemon
       # polychromatic
-      # dwl
-      # somebar
     ];
   };
 
@@ -122,4 +120,5 @@
   };
   virtualisation.waydroid.enable = true;
   systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
+
 }
