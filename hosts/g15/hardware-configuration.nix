@@ -43,11 +43,6 @@
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
-      fsType = "ext4";
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-label/store";
       fsType = "btrfs";
     };
 
@@ -61,11 +56,11 @@
       fsType = "btrfs";
     };
 
-  fileSystems."/mnt/backup" =
-    { device = "/dev/disk/by-label/backup";
-      fsType = "ext4";
-      options = [ "defaults" "user" "nofail" "exec" ];
-    };
+# fileSystems."/mnt/backup" =
+#   { device = "/dev/disk/by-label/backup";
+#     fsType = "ext4";
+#     options = [ "defaults" "user" "nofail" "exec" ];
+#   };
 
   swapDevices = [ {
       device = "/var/lib/swapfile"; 
