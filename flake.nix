@@ -30,9 +30,13 @@
       # overlay-stable = final: prev: {
       #   stable = inputs.nixpkgs-stable.legacyPackages.${prev.system};
       # };
+      # overlay-staging = final: prev: {
+      #   staging = inputs.nixpkgs-staging.legacyPackages.${prev.system};
+      # };
       my-overlays = [
         inputs.neovim-nightly-overlay.overlay
         inputs.nixpkgs-f2k.overlays.window-managers
+        # overlay-staging
         # overlay-stable
         (self: super: {
           waybar = super.waybar.overrideAttrs (oldAttrs: {
