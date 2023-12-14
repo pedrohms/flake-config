@@ -23,7 +23,7 @@ in
         efiSupport = true;
         useOSProber = true;                 # Find all boot options
       };
-      timeout = 5;                          # Grub auto select time
+      timeout = 10;                          # Grub auto select time
     };
   };
 
