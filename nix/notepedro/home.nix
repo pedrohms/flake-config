@@ -6,7 +6,6 @@
       dconf
       xarchiver
       android-studio                         # Office packages
-      azuredatastudio
       gradle
       # winePackages.unstable
       # wineWowPackages.stable

@@ -23,7 +23,7 @@
       winetricks
       flameshot
       openssl
-      clang-tools_16
+      clang-tools_17
       lolcat
       gnome.file-roller
       gnome.nautilus

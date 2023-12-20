@@ -29,7 +29,6 @@
 
   home = {
     packages = with pkgs; [ 
-      azuredatastudio
       android-studio
       gradle
       jetbrains.idea-community
