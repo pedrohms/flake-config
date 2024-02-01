@@ -39,6 +39,7 @@
       bottles
       hexchat
       podman-desktop
+      postman
     ];
 
     # sessionVariables = {
