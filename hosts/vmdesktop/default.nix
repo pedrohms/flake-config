@@ -75,8 +75,11 @@
       openFirewall = true;
     };
     xserver = {
-      layout = "us";
-      xkbVariant = "intl";
+      xkb = {
+        layout = "us";
+        variant = "intl";
+        model = "pc105";
+      };
       displayManager.sessionCommands = ''
         ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 1920x1080
       '';

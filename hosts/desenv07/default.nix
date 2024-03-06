@@ -55,7 +55,7 @@
 
   environment = {
     systemPackages = with pkgs; [
-     waydroid
+     # waydroid
      simple-scan
       # linuxKernel.packages.linux_latest_libre.openrazer
       # openrazer-daemon
@@ -69,10 +69,19 @@
   };
 
   services = {
+    # mysql = {
+    #   enable = true;
+    #   package = pkgs.mariadb;
+    # };
+    openssh = {
+      enable = true;
+      openFirewall = true;
+      ports = [ 16989 ];
+    };
     flatpak.enable = true;
     avahi = {                               # Needed to find wireless printer
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {                           # Needed for detecting the scanner
         enable = true;
         addresses = true;
@@ -95,9 +104,11 @@
       openFirewall = true;
     };
     xserver = {
-      layout = "us";
-      xkbVariant = "intl";
-      xkbModel = "pc105";
+      xkb = {
+        layout = "br";
+        variant = "abnt2";
+        model = "pc105";
+      };
       videoDrivers = [ "amdgpu" ];
       resolutions = [
         { x = 1600; y = 920; }
@@ -118,7 +129,7 @@
     gid = 1000;
     members = [ "framework" ];
   };
-  virtualisation.waydroid.enable = true;
+  # virtualisation.waydroid.enable = true;
   systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
 
 }

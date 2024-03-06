@@ -6,19 +6,14 @@
     packages = with pkgs; [ 
       libreoffice 
       authenticator
-      parsec-bin
       sumneko-lua-language-server
       vscode
       discord
-      firefox
       google-chrome
       remmina
-      ghq
       jq
       anydesk
       distrobox
-      steam
-      wineWowPackages.waylandFull
       dxvk
       winetricks
       flameshot
@@ -29,7 +24,6 @@
       gnome.nautilus
       gnome.gnome-autoar
       gnome.sushi
-      gnome.gnome-boxes
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own

@@ -80,7 +80,7 @@ in
 #   };
     avahi = {                               # Needed to find wireless printer
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {                           # Needed for detecting the scanner
         enable = true;
         addresses = true;
@@ -99,9 +99,11 @@ in
       openFirewall = true;
     };
     xserver = {
-      layout = "br";
-      xkbVariant = "abnt2";
-      xkbModel = "pc105";
+      xkb = {
+        layout = "br";
+        variant = "abnt2";
+        model = "pc105";
+      };
       videoDrivers = [ "modeset" "nvidia" ];
       dpi = 88;
       libinput = {                          # Trackpad support & gestures
