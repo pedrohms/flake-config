@@ -57,17 +57,17 @@
         enable = true;
         enableSSHSupport =true;
     };
-    # direnv = {
-    #   enable = true;
-    #   package = pkgs.direnv;
-    #   silent = true;
-    #   loadInNixShell = true;
-    #   direnvrcExtra = "";
-    #   nix-direnv = {
-    #     enable = true;
-    #     package = pkgs.nix-direnv;
-    #   };
-    # };
+    direnv = {
+      enable = true;
+      package = pkgs.direnv;
+      silent = true;
+      loadInNixShell = true;
+      direnvrcExtra = "";
+      nix-direnv = {
+        enable = true;
+        package = pkgs.nix-direnv;
+      };
+    };
   };
 
   security = {

@@ -69,10 +69,10 @@
   };
 
   services = {
-    # mysql = {
-    #   enable = true;
-    #   package = pkgs.mariadb;
-    # };
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
     openssh = {
       enable = true;
       openFirewall = true;
