@@ -12,7 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "amdgpu" ];
   # boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" ];
-  boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
+  boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" "pcie_aspm=off" "nvme_core.default_ps_max_latency_us=0" ];
 
   boot.extraModulePackages = [ ];
 
@@ -24,7 +24,15 @@
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
-      fsType = "ext4";
+      fsType = "btrfs";
+      options = [
+        "autodefrag"
+        "compress-force=zstd:1"
+        "discard=async"
+        "noatime"
+        "subvol=@root"
+        "user_subvol_rm_allowed"
+      ]
     };
 
   fileSystems."/boot" =
@@ -39,8 +47,15 @@
    };
 
  fileSystems."/home" =
-   { device = "/dev/disk/by-label/home";
-     fsType = "ext4";
+   { 
+     device = "/dev/disk/by-label/home";
+     fsType = "btrfs";
+      options = [
+        "autodefrag"
+        "compress-force=zstd:1"
+        "discard=async"
+        "noatime"
+      ]
    };
 
   swapDevices = [ {

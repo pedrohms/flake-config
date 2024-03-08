@@ -40,6 +40,7 @@
       # hexchat
       podman-desktop
       postman
+      steam
     ];
 
     # sessionVariables = {
