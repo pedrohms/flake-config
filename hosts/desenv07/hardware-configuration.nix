@@ -8,11 +8,11 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "amdgpu" ];
   # boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" ];
-  boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" "pcie_aspm=off" "nvme_core.default_ps_max_latency_us=0" ];
+  boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
 
   boot.extraModulePackages = [ ];
 
@@ -23,45 +23,18 @@
   '';
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [
-        "autodefrag"
-        "compress-force=zstd:1"
-        "discard=async"
-        "noatime"
-        "subvol=@root"
-        "user_subvol_rm_allowed"
-      ]
+    { device = "/dev/disk/by-uuid/eb5b50f5-e626-4864-8373-b171601c5f64";
+      fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
+    { device = "/dev/disk/by-uuid/8DEA-DC4B";
       fsType = "vfat";
     };
 
- fileSystems."/mnt/dados" =
-   { device = "/dev/disk/by-label/backup";
-     options = [ "rw" "users" "defaults" ];
-     fsType = "ext4";
-   };
-
- fileSystems."/home" =
-   { 
-     device = "/dev/disk/by-label/home";
-     fsType = "btrfs";
-      options = [
-        "autodefrag"
-        "compress-force=zstd:1"
-        "discard=async"
-        "noatime"
-      ]
-   };
-
-  swapDevices = [ {
-      device = "/var/lib/swapfile"; 
-      size = 16*1024;
-    } ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/caa02e86-32fe-4de3-8894-3c73114e438f"; }
+    ];
 
   networking = {
     useDHCP = lib.mkDefault true;
