@@ -17,9 +17,9 @@
   services = {
     xserver = {
       desktopManager = {
-        plasma5 = {
+        plasma6 = {
           enable = true;
-          useQtScaling = true;
+          # useQtScaling = true;
         };
       };
     };

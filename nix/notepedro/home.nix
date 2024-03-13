@@ -12,6 +12,7 @@
       # wine64
       wezterm
       wofi
+      firefox
     ];
   };
 

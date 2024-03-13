@@ -10,7 +10,7 @@
 
   # boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vfio_pci" "vfio_iommu_type1" "vfio" ];
   # boot.kernelParams =  [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=on" "iommu=pt" "nvidia-drm.modeset=1" ];
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [
       "nvidia"
       "nvidia_modeset"
@@ -44,6 +44,9 @@
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
+      options = [
+      	"subvol=@"
+      ];
     };
 
   fileSystems."/boot" =
@@ -64,7 +67,7 @@
 
   swapDevices = [ {
       device = "/var/lib/swapfile"; 
-      size = 32*1024;
+      size = 16*1024;
     } ];
 
   networking = {
