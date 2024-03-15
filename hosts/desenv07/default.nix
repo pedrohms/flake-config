@@ -77,7 +77,16 @@
       enable = true;
       openFirewall = true;
       ports = [ 16989 ];
+      settings = {
+        X11Forwarding = true;
+      };
     };
+    # xrdp = {
+    #   enable = true;
+    #   openFirewall = true;
+    #   audio.enable =true;
+    #   defaultWindowManager = "none+dwm";
+    # };
     flatpak.enable = true;
     avahi = {                               # Needed to find wireless printer
       enable = true;
