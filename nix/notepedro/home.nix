@@ -13,6 +13,7 @@
       wezterm
       wofi
       firefox
+      postman
     ];
   };
 

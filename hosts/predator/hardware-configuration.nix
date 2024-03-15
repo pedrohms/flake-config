@@ -59,6 +59,10 @@
       fsType = "btrfs";
     };
 
+  fileSystems."/nix/store" =
+    { device = "/dev/disk/by-label/store";
+      fsType = "btrfs";
+    };
 # fileSystems."/mnt/backup" =
 #   { device = "/dev/disk/by-label/backup";
 #     fsType = "ext4";
