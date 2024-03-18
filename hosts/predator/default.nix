@@ -98,12 +98,12 @@ in
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
-        sync.enable = true;
+        # sync.enable = true;
         # reverseSync.enable = true;
-        # offload = {
-        #   enable = true;
-        #   enableOffloadCmd = true;
-        # };
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };

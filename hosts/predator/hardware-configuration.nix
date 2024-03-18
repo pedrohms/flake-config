@@ -44,9 +44,6 @@
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
-      options = [
-      	"subvol=@"
-      ];
     };
 
   fileSystems."/boot" =
@@ -70,8 +67,7 @@
 #   };
 
   swapDevices = [ {
-      device = "/var/lib/swapfile"; 
-      size = 16*1024;
+      device = "/dev/disk/by-label/swap"; 
     } ];
 
   networking = {

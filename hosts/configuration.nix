@@ -5,10 +5,12 @@
 { config, lib, pkgs, inputs, user, location, myFlakeVersion, ... }:
 
 {
+  boot.supportedFilesystems = [ "ntfs" ];
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
+  time.hardwareClockInLocalTime = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -146,7 +148,7 @@
       bat
       ripgrep
       neovim-nightly
-
+      ntfs3g
       scrot
       gnome.gnome-keyring
       acpi
