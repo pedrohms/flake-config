@@ -41,6 +41,7 @@
       podman-desktop
       postman
       steam
+      microsoft-edge-beta
     ];
 
     # sessionVariables = {

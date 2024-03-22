@@ -43,7 +43,7 @@
             mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
           });
         })
-      ] ++ import modules/overlays/qtile.nix;
+      ]; # ++ import modules/overlays/qtile.nix;
       location = "$HOME/.setup";
     in {
       nixosConfigurations = (

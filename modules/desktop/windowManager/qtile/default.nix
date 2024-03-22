@@ -18,10 +18,10 @@
     xserver = {
       windowManager.qtile = {
         enable = true;
-        package = pkgs.python3Packages.qtile;
+        # package = pkgs.python3Packages.qtile;
         extraPackages = python311Packages: with pkgs.python311Packages; [
           pkgs.python3Packages.qtile-extras
-          cairocffi
+          # cairocffi
           mypy
         ];
       };

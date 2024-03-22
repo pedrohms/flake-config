@@ -81,12 +81,13 @@
         X11Forwarding = true;
       };
     };
-    # xrdp = {
-    #   enable = true;
-    #   openFirewall = true;
-    #   audio.enable =true;
-    #   defaultWindowManager = "none+dwm";
-    # };
+    xrdp = {
+      enable = true;
+      openFirewall = true;
+      port = 16988;
+      audio.enable =true;
+      defaultWindowManager = "xfce4-session";
+    };
     flatpak.enable = true;
     avahi = {                               # Needed to find wireless printer
       enable = true;
@@ -113,6 +114,7 @@
       openFirewall = true;
     };
     xserver = {
+      desktopManager.xfce.enable = true;
       xkb = {
         layout = "br";
         variant = "abnt2";

@@ -46,6 +46,7 @@
     xorg.xev
     xorg.xkill
     xorg.xrandr
+    xorg.xauth
     waybar
     swaybg
     wl-clipboard

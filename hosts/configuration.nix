@@ -5,7 +5,9 @@
 { config, lib, pkgs, inputs, user, location, myFlakeVersion, ... }:
 
 {
+
   boot.supportedFilesystems = [ "ntfs" ];
+
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
