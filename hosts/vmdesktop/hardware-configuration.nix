@@ -12,13 +12,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
+    { device = "/dev/sda1";
+      fsType = "ext4";
     };
 
   swapDevices = [ {
-      device = "/var/lib/swapfile"; 
-      size = 8*1024;
+      device = "/dev/sda2"; 
     } ];
 
   networking = {

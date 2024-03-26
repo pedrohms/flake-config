@@ -84,26 +84,26 @@
         ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 1920x1080
       '';
     };
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
-      jack.enable = true;
-    };
+    # pipewire = {
+    #   enable = true;
+    #   alsa.enable = true;
+    #   alsa.support32Bit = true;
+    #   pulse.enable = true;
+    #   # If you want to use JACK applications, uncomment this
+    #   jack.enable = true;
+    # };
   };
 
-  users.users.vmuser = {
+  users.users.pedro = {
     uid = 1001;
     shell = pkgs.fish;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" ];
     initialPassword = "123456";
   };
-  users.groups.vmuser = {
+  users.groups.pedro = {
     gid = 1001;
-    members = [ "vmuser" ];
+    members = [ "pedro" ];
   };
 
   fonts.packages = with pkgs; [                # Fonts
@@ -141,6 +141,7 @@
       eza
       stow
       starship
+      pcmanfm
       tmux
       lazygit
       fzf
@@ -156,6 +157,7 @@
       wireplumber
       conky
       lxde.lxsession
+      brave
     ];
   };
 

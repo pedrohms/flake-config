@@ -12,7 +12,6 @@
       google-chrome
       remmina
       jq
-      anydesk
       distrobox
       dxvk
       winetricks

@@ -38,6 +38,7 @@
       # foot
       # bottles
       # hexchat
+      anydesk
       podman-desktop
       postman
       steam
