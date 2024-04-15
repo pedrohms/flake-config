@@ -1,4 +1,4 @@
-{ lib, inputs, nixpkgs, home-manager, user, location, my-overlays, myFlakeVersion, ... }:
+{ lib, inputs, nixpkgs, home-manager, user, location, my-overlays, myFlakeVersion, pkgs-staging-next, ... }:
 
 let
   system = "x86_64-linux";                                  # System architecture
@@ -24,7 +24,7 @@ in
 
   desenv07 = lib.nixosSystem {                                # Laptop profile
     inherit system;
-    specialArgs = { inherit inputs user location pkgs myFlakeVersion; };
+    specialArgs = { inherit inputs user location pkgs myFlakeVersion pkgs-staging-next; };
     modules = [
       ./desenv07
       ./configuration.nix

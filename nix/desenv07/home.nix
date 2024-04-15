@@ -32,6 +32,7 @@
       android-studio
       gradle
       jetbrains.idea-community
+      parsec-bin
       # jdk21
       # wezterm
       # wofi
@@ -43,6 +44,7 @@
       postman
       steam
       microsoft-edge-beta
+      moonlight-qt
     ];
 
     # sessionVariables = {

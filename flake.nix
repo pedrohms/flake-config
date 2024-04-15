@@ -3,6 +3,7 @@
     # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
+    nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       # inputs.nixpkgs.follows = "nixpkgs-staging";
@@ -22,7 +23,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, nixpkgs-staging-next, ... }:
     let
       myFlakeVersion = "1.0.45";
       user = "pedro"; 
@@ -33,6 +34,10 @@
       # overlay-staging = final: prev: {
       #   staging = inputs.nixpkgs-staging.legacyPackages.${prev.system};
       # };
+      pkgs-staging-next = import nixpkgs-staging-next {
+        system = "x86_64-linux";
+      };
+
       my-overlays = [
         inputs.neovim-nightly-overlay.overlay
         inputs.nixpkgs-f2k.overlays.window-managers
@@ -49,7 +54,7 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs user location  home-manager my-overlays myFlakeVersion;
+          inherit inputs nixpkgs user location  home-manager my-overlays myFlakeVersion pkgs-staging-next;
         }
       );
       homeConfigurations = (

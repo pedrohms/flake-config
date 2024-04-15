@@ -1,4 +1,4 @@
-{ config, pkgs, user, myFlakeVersion, lib, ... }:
+{ config, pkgs, user, myFlakeVersion, lib, pkgs-staging-next, ... }:
 # let
 #   localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
 # in 
@@ -68,26 +68,32 @@
     dconf.enable = true;
   };
 
+  services.openssh.enable = lib.mkForce false;
+
+  system.replaceRuntimeDependencies = [
+    {
+      original = pkgs.xz;
+      replacement = pkgs-staging-next.xz;
+    }
+  ];
+
   services = {
+    # zerotierone = {
+    #   enable = false;
+    #   joinNetworks = [ "8bd5124fd6092278"];
+    # };
     mysql = {
       enable = true;
       package = pkgs.mariadb;
     };
-    openssh = {
-      enable = true;
-      openFirewall = true;
-      ports = [ 16989 ];
-      settings = {
-        X11Forwarding = true;
-      };
-    };
-    xrdp = {
-      enable = true;
-      openFirewall = true;
-      port = 16988;
-      audio.enable =true;
-      defaultWindowManager = "xfce4-session";
-    };
+    # openssh = {
+    #   enable = false;
+    #   openFirewall = true;
+    #   ports = [ 16989 ];
+    #   settings = {
+    #     X11Forwarding = true;
+    #   };
+    # };
     flatpak.enable = true;
     avahi = {                               # Needed to find wireless printer
       enable = true;
@@ -114,7 +120,7 @@
       openFirewall = true;
     };
     xserver = {
-      desktopManager.xfce.enable = true;
+      # desktopManager.xfce.enable = true;
       xkb = {
         layout = "br";
         variant = "abnt2";

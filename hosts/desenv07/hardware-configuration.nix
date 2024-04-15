@@ -41,25 +41,25 @@
     hostName = "desenv07-nix";
     networkmanager.enable = true;
     firewall = {
-      enable = false;
-      allowedUDPPorts = [
-        25565
-        19132
-      ];
-      allowedTCPPorts = [
-        1433
-        3000
-        16000
-        8080
-        8000
-        8090
-        3306
-        25565
-        19132
-        3389
-        16989
-        16988
-      ];
+      enable = true;
+      # allowedUDPPorts = [
+      #   25565
+      #   19132
+      # ];
+      # allowedTCPPorts = [
+      #   1433
+      #   3000
+      #   16000
+      #   8080
+      #   8000
+      #   8090
+      #   3306
+      #   25565
+      #   19132
+      #   3389
+      #   16989
+      #   16988
+      # ];
     };
   };
   # networking.interfaces.enp0s20f0u2u4.useDHCP = lib.mkDefault true;
