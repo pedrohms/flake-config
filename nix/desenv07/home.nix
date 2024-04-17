@@ -39,6 +39,7 @@
       # foot
       # bottles
       # hexchat
+      neovide
       anydesk
       podman-desktop
       postman

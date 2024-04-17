@@ -17,7 +17,7 @@ let
   };
 in
 {
-  desenv07 = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
+  desenv07-nix = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
     inherit pkgs;
     extraSpecialArgs = { inherit inputs user pkgs my-overlays dwl-source; };
     modules = [

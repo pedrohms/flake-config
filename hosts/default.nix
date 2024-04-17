@@ -22,7 +22,7 @@ in
     ];
   };
 
-  desenv07 = lib.nixosSystem {                                # Laptop profile
+  desenv07-nix = lib.nixosSystem {                                # Laptop profile
     inherit system;
     specialArgs = { inherit inputs user location pkgs myFlakeVersion pkgs-staging-next; };
     modules = [

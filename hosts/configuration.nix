@@ -135,6 +135,7 @@
       # lxappearance
       home-manager
       eza
+      nh
       stow
       starship
       picom
@@ -164,6 +165,8 @@
       glxinfo
       virtualglLib
       clinfo
+      nvd
+      nix-output-monitor
     ];
   };
 

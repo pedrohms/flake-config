@@ -61,9 +61,13 @@
       # openrazer-daemon
       # polychromatic
     ];
+    sessionVariables = {
+      FLAKE = "/home/framework/.setup";
+    };
   };
 
   programs = {                              # No xbacklight, this is the alterantive
+    # zsh.enable = true;
     fish.enable = true;
     dconf.enable = true;
   };
@@ -137,6 +141,7 @@
   users.users.framework = {
     uid = 1000;
     shell = pkgs.fish;
+    # shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "openrazer" ];
     initialPassword = "123456";
