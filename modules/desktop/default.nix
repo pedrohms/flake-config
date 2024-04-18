@@ -55,8 +55,10 @@
     libappindicator-gtk3
     imagemagick_light
     sway-contrib.grimshot
+    grim
+    slurp
     wf-recorder
-    xdg-desktop-portal-hyprland
+    # xdg-desktop-portal-hyprland
     swappy
     # libsForQt5.polkit-kde-agent
     kanshi

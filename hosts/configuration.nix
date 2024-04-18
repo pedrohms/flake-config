@@ -124,6 +124,7 @@
       brave
       fish
       alacritty
+      kitty
       xorg.xrandr
       lshw
       killall
@@ -167,6 +168,7 @@
       clinfo
       nvd
       nix-output-monitor
+      mpv
     ];
   };
 

@@ -29,5 +29,6 @@
     inputs.hyprland-contrib.packages.${pkgs.system}.shellevents
     pkgs.hyprpicker
     pkgs.hyprpaper
+    pkgs.pyprland
   ];
 }
