@@ -42,24 +42,25 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      # allowedUDPPorts = [
-      #   25565
-      #   19132
-      # ];
-      # allowedTCPPorts = [
-      #   1433
-      #   3000
-      #   16000
-      #   8080
-      #   8000
-      #   8090
-      #   3306
-      #   25565
-      #   19132
-      #   3389
-      #   16989
-      #   16988
-      # ];
+      allowedUDPPorts = [
+        25565
+        19132
+      ];
+      allowedTCPPorts = [
+        1433
+        3000
+        16000
+        8080
+        8000
+        8090
+        3306
+        25565
+        19132
+        3389
+        16989
+        16988
+        29418
+      ];
     };
   };
   # networking.interfaces.enp0s20f0u2u4.useDHCP = lib.mkDefault true;
