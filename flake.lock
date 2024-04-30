@@ -3,18 +3,18 @@
     "dwl-source": {
       "flake": false,
       "locked": {
-        "lastModified": 1697076524,
-        "narHash": "sha256-OX/Ts24s+OoDiQSvROd0ZZZR1V0o4QgcpCIsDrLv4o8=",
-        "owner": "djpohly",
-        "repo": "dwl",
-        "rev": "ab87410023a139c124bccb2817e567a7fa4fabab",
-        "type": "github"
+        "lastModified": 1710180073,
+        "narHash": "sha256-Dd2466wNfR/foZsBh8r0l/Q+lbr7zIFFumnQr2IVKb0=",
+        "ref": "refs/heads/main",
+        "rev": "2b171fd5010379a8674afa012245fea5a590e472",
+        "revCount": 1155,
+        "type": "git",
+        "url": "https://codeberg.org/dwl/dwl"
       },
       "original": {
-        "owner": "djpohly",
-        "repo": "dwl",
-        "rev": "ab87410023a139c124bccb2817e567a7fa4fabab",
-        "type": "github"
+        "rev": "2b171fd5010379a8674afa012245fea5a590e472",
+        "type": "git",
+        "url": "https://codeberg.org/dwl/dwl"
       }
     },
     "emacs": {
@@ -581,7 +581,8 @@
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-f2k": "nixpkgs-f2k",
-        "nixpkgs-staging-next": "nixpkgs-staging-next"
+        "nixpkgs-staging-next": "nixpkgs-staging-next",
+        "yambar-source": "yambar-source"
       }
     },
     "rust-analyzer-src": {
@@ -694,6 +695,23 @@
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
         "type": "github"
+      }
+    },
+    "yambar-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1713795796,
+        "narHash": "sha256-JIpwpakk2yUxDMsX2qjjXfhLsGXC7j+rwYnEkGnfwHM=",
+        "ref": "refs/heads/master",
+        "rev": "547cef5afbfbcbf9fe78705c7b5661059b706346",
+        "revCount": 1565,
+        "type": "git",
+        "url": "https://codeberg.org/dnkl/yambar"
+      },
+      "original": {
+        "rev": "547cef5afbfbcbf9fe78705c7b5661059b706346",
+        "type": "git",
+        "url": "https://codeberg.org/dnkl/yambar"
       }
     }
   },

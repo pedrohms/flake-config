@@ -19,13 +19,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dwl-source = {
-      url = "github:djpohly/dwl/ab87410023a139c124bccb2817e567a7fa4fabab"; flake = false;
+      url = "git+https://codeberg.org/dwl/dwl?rev=2b171fd5010379a8674afa012245fea5a590e472";
+      flake = false;
+    };
+    yambar-source = {
+      url = "git+https://codeberg.org/dnkl/yambar?rev=547cef5afbfbcbf9fe78705c7b5661059b706346";
+      flake = false;
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, nixpkgs-staging-next, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, yambar-source, nixpkgs-staging-next, ... }:
     let
-      myFlakeVersion = "1.0.45";
+      myFlakeVersion = "1.0.46";
       user = "pedro"; 
       # user = "framework"; 
       # overlay-stable = final: prev: {
@@ -48,19 +53,36 @@
             mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
           });
         })
+        (self: super: {
+          yambar = super.yambar.overrideAttrs (oldAttrs: rec {
+            src = yambar-source;
+          });
+          dwl = super.dwl.overrideAttrs (oldAttrs: rec {
+            src = dwl-source;
+            patches = [
+              ./dwl-patches/focusdirection.patch
+              ./dwl-patches/attachbottom.patch
+              ./dwl-patches/monfig.patch
+              ./dwl-patches/restoreTiling.patch
+              ./dwl-patches/toggleKbLayout.patch
+              ./dwl-patches/autostart.patch
+              ./dwl-patches/vanitygaps.patch
+            ];
+          });
+        })
       ]; # ++ import modules/overlays/qtile.nix;
       location = "$HOME/.setup";
     in {
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs user location  home-manager my-overlays myFlakeVersion pkgs-staging-next;
+          inherit inputs nixpkgs user location  home-manager my-overlays myFlakeVersion pkgs-staging-next dwl-source yambar-source;
         }
       );
       homeConfigurations = (
         import ./nix {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user my-overlays myFlakeVersion dwl-source;
+          inherit inputs nixpkgs home-manager user my-overlays myFlakeVersion dwl-source yambar-source;
         }
       );
     };

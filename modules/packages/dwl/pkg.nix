@@ -5,11 +5,12 @@ pkgs.dwl.overrideAttrs
     inherit patches;
     postPatch =
       let
-        configFile = ../dwl-config.h;
+        configFile = ./dwl-config.h;
       in
       ''
         cp ${configFile} config.def.h
-        substituteInPlace ./config.def.h --replace "@FUZZEL_TIMER" "${cmd.fuzzel_timer}"
+        substituteInPlace ./config.def.h --replace "@FUZZEL_TIMER" "${cmd.rtimer}"
         substituteInPlace ./config.def.h --replace "@TERMINAL" "${cmd.terminal}"
+        substituteInPlace ./config.def.h --replace "@MPC" "${cmd.mpc}"
       '';
   })

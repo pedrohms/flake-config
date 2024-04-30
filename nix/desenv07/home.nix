@@ -2,31 +2,6 @@
 
 {
 
-  # imports = [ ../../modules/desktop/windowManager/dwl/default.nix ];
-
-  # programs = {
-    # dwl = {
-    #   enable = true;
-    #   # patches = [
-    #     # ./dwl-patches/focusdirection.patch
-    #     # ./dwl-patches/attachbottom.patch
-    #     # ./dwl-patches/monfig.patch
-    #     # ./dwl-patches/point.patch
-    #     # ./dwl-patches/restoreTiling.patch
-    #     # ./dwl-patches/toggleKbLayout.patch
-    #     # ./dwl-patches/cursor_warp.patch
-    #     # ./dwl-patches/output-power-management.patch
-    #     # ./dwl-patches/autostart.patch
-    #     # ./dwl-patches/vanitygaps.patch
-    #   # ];
-    #   cmd = {
-    #     # fuzzel_timer = "${fuzzel_timer_helper}/bin/fuzzel_timer_helper";
-    #     terminal = "${pkgs.foot}/bin/foot";
-    #   };
-    # };
-    # i3status.enable = true;
-  # };
-
   home = {
     packages = with pkgs; [ 
       android-studio
@@ -46,6 +21,8 @@
       steam
       microsoft-edge-beta
       moonlight-qt
+      dbeaver
+      imagemagick
     ];
 
     # sessionVariables = {
