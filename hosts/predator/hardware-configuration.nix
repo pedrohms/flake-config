@@ -40,35 +40,23 @@
   boot.postBootCommands = ''
     ${pkgs.kmod}/bin/modeprobe -i acpi_call
   ''; 
-
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+    { device = "/dev/disk/by-uuid/47fece2c-bd17-4bda-bf83-6b0a0ee954b7";
       fsType = "btrfs";
+      options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
+    { device = "/dev/disk/by-uuid/782A-9452";
       fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-label/home";
+    { device = "/dev/disk/by-uuid/54fd37bb-1c70-4d96-9c2e-45744b88a617";
       fsType = "btrfs";
     };
 
-  fileSystems."/nix/store" =
-    { device = "/dev/disk/by-label/store";
-      fsType = "btrfs";
-    };
-# fileSystems."/mnt/backup" =
-#   { device = "/dev/disk/by-label/backup";
-#     fsType = "ext4";
-#     options = [ "defaults" "user" "nofail" "exec" ];
-#   };
-
-  swapDevices = [ {
-      device = "/dev/disk/by-label/swap"; 
-    } ];
+  swapDevices = [];
 
   networking = {
     hostName = "notepedro-predator";

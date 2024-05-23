@@ -132,7 +132,7 @@
       zip
       pciutils
       usbutils
-      networkmanagerapplet
+      #networkmanagerapplet
       # lxappearance
       home-manager
       eza

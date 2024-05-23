@@ -12,6 +12,8 @@ in
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
 
+#   loader.systemd-boot.enable = true;
+#   loader.efi.canTouchEfiVariables = true;
     loader = {                              # EFI Boot
       efi = {
         canTouchEfiVariables = true;
@@ -65,30 +67,30 @@ in
     cpuFreqGovernor = "performance";
   };
 
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = true;
 
-  services.tlp = {                                  # TLP and auto-cpufreq for power management
-    enable = true;
-    settings = {
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 0;
+# services.tlp = {                                  # TLP and auto-cpufreq for power management
+#   enable = true;
+#   settings = {
+#     CPU_BOOST_ON_AC = 1;
+#     CPU_BOOST_ON_BAT = 0;
 
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+#     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+#     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+#     CPU_SCALING_GOVERNOR_ON_AC = "performance";
+#     CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-      # TLP_DEFAULT_MODE = "BAT";
-      # TLP_PERSISTENT_DEFAULT = 1;
+#     # TLP_DEFAULT_MODE = "BAT";
+#     # TLP_PERSISTENT_DEFAULT = 1;
 
-      # RUNTIME_PM_ON_AC = "on";
-      USB_AUTOSUSPEND = 0;
+#     # RUNTIME_PM_ON_AC = "on";
+#     USB_AUTOSUSPEND = 0;
 
-      RUNTIME_PM_ON_BAT = "auto";
-      RUNTIME_PM_DRIVER_BLACKLIST = "mei_me nouveau nvidia"; 
-    };
-  };
+#     RUNTIME_PM_ON_BAT = "auto";
+#     RUNTIME_PM_DRIVER_BLACKLIST = "mei_me nouveau nvidia"; 
+#   };
+# };
 
   hardware = {
     nvidia = {
