@@ -83,7 +83,7 @@
      pkgs.android-udev-rules
     ];
     gnome.gnome-keyring.enable = true;
-    pcscd.enable = true;
+    pcscd.enable = false;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -169,6 +169,7 @@
       nvd
       nix-output-monitor
       mpv
+      lxqt.lxqt-openssh-askpass
     ];
   };
 
@@ -181,7 +182,7 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
-    package = pkgs.nixVersions.unstable;
+    package = pkgs.nixVersions.git;
     registry.nixpkgs.flake = inputs.nixpkgs;
     extraOptions = ''
       experimental-features = nix-command flakes

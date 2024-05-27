@@ -23,6 +23,10 @@
       moonlight-qt
       dbeaver
       imagemagick
+      transmission-gtk
+      sqlcmd
+      minecraft
+      appimage-run
     ];
 
     # sessionVariables = {

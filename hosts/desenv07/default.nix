@@ -72,7 +72,7 @@
     dconf.enable = true;
   };
 
-  services.openssh.enable = lib.mkForce false;
+  # services.openssh.enable = lib.mkForce false;
 
   system.replaceRuntimeDependencies = [
     {
@@ -86,18 +86,17 @@
     #   enable = false;
     #   joinNetworks = [ "8bd5124fd6092278"];
     # };
-    mysql = {
-      enable = true;
-      package = pkgs.mariadb;
-    };
-    # openssh = {
-    #   enable = false;
-    #   openFirewall = true;
-    #   ports = [ 16989 ];
-    #   settings = {
-    #     X11Forwarding = true;
-    #   };
+    # mysql = {
+    #   enable = true;
+    #   package = pkgs.mariadb;
     # };
+    openssh = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        X11Forwarding = true;
+      };
+    };
     flatpak.enable = true;
     avahi = {                               # Needed to find wireless printer
       enable = true;
@@ -111,15 +110,20 @@
     samba = {
       enable = true;
       shares = {
-        share = {
-          "path" = "/home/framework/Public";
-          "guest ok" = "true";
+        public = {
+          path = "/home/framework/Public";
+          public = "yes";
+          browseable = "yes";
           "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "framework";
+          "force group" = "framework";
         };
       };
-      extraConfig =''
-        force user = framework
-        force group = framework
+      extraConfig = ''
+        guest account = framework
       '';
       openFirewall = true;
     };
@@ -153,5 +157,8 @@
   };
   # virtualisation.waydroid.enable = true;
   systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
-
+  systemd.user.services.xdg-desktop-portal-gtk = {
+    wantedBy = [ "xdg-desktop-portal.service" ];
+    before = [ "xdg-desktop-portal.service" ];
+  };
 }

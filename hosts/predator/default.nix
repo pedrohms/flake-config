@@ -122,6 +122,7 @@ in
       LIBGL_DRI3_DISABLE        = "true";
       PH_MACHINE                = "predator";
       # PH_NVIDIA                 = "0";
+      FLAKE = "/home/pedro/.setup";
     };
     systemPackages = with pkgs; [
       simple-scan
