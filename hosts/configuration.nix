@@ -45,6 +45,8 @@
         vaapiVdpau
         libvdpau-va-gl
         intel-media-driver
+        vulkan-tools
+        mesa.drivers
       ];
     };
     pulseaudio.enable = false;
@@ -162,7 +164,6 @@
       polkit
       polkit_gnome
       bluez
-      vulkan-tools
       glxinfo
       virtualglLib
       clinfo
@@ -170,6 +171,7 @@
       nix-output-monitor
       mpv
       lxqt.lxqt-openssh-askpass
+      vulkan-tools
     ];
   };
 
@@ -200,6 +202,6 @@
     stateVersion = "24.05";
   };
 
-  # boot.kernel.sysctl."vm.max_map_count" = 2147483642;
+  boot.kernel.sysctl."vm.max_map_count" = 2147483642;
 
 }

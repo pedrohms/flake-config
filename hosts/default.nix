@@ -42,7 +42,7 @@ in
     ];
   };
 
-  predator = lib.nixosSystem {                               # Desktop profile
+  notepedro-predator = lib.nixosSystem {                               # Desktop profile
     inherit system;
     specialArgs = { inherit inputs user location pkgs myFlakeVersion; }; # Pass flake variable
     modules = [                                             # Modules that are used.
