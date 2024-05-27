@@ -5,11 +5,11 @@
     # nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
     nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
     neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
+      url = "github:nix-community/neovim-nightly-overlay?rev=7b5ca2486bba58cac80b9229209239740b67cf90";
       # inputs.nixpkgs.follows = "nixpkgs-staging";
     };
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland?rev=387127b12ab5df8f8f40e8da7d76f47636562cab";
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +30,7 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, yambar-source, nixpkgs-staging-next, ... }:
     let
-      myFlakeVersion = "1.0.46";
+      myFlakeVersion = "1.0.47";
       user = "pedro"; 
       # user = "framework"; 
       # overlay-stable = final: prev: {
@@ -42,7 +42,6 @@
       pkgs-staging-next = import nixpkgs-staging-next {
         system = "x86_64-linux";
       };
-
       my-overlays = [
         inputs.neovim-nightly-overlay.overlay
         inputs.nixpkgs-f2k.overlays.window-managers

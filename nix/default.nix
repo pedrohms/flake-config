@@ -34,6 +34,23 @@ in
     ];
   };
 
+  notepedro-predator = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
+    inherit pkgs;
+    extraSpecialArgs = { inherit inputs user pkgs my-overlays dwl-source; };
+    modules = [
+      ./notepedro/home.nix
+      ./shared
+      {
+        home = {
+          username = "${user}";
+          homeDirectory = "/home/${user}";
+          packages = [ pkgs.home-manager ];
+          stateVersion = "24.05";
+        };
+      }
+    ];
+  };
+
   homePedro = home-manager.lib.homeManagerConfiguration {    # Currently only host that can be built
     inherit pkgs;
     extraSpecialArgs = { inherit inputs user pkgs my-overlays dwl-source; };

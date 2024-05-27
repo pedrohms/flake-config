@@ -11,22 +11,21 @@ in
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
-
-#   loader.systemd-boot.enable = true;
-#   loader.efi.canTouchEfiVariables = true;
-    loader = {                              # EFI Boot
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
-      grub = {                              # Most of grub is set up for dual boot
-        enable = true;
-        devices = [ "nodev" ];
-        efiSupport = true;
-        useOSProber = true;                 # Find all boot options
-      };
-      timeout = 10;                          # Grub auto select time
-    };
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    # loader = {                              # EFI Boot
+    #   efi = {
+    #     canTouchEfiVariables = true;
+    #     efiSysMountPoint = "/boot";
+    #   };
+    #   grub = {                              # Most of grub is set up for dual boot
+    #     enable = true;
+    #     devices = [ "nodev" ];
+    #     efiSupport = true;
+    #     useOSProber = true;                 # Find all boot options
+    #   };
+    #   timeout = 10;                          # Grub auto select time
+    # };
   };
 
   specialisation = {
@@ -36,11 +35,14 @@ in
           LIBGL_DRI3_DISABLE        = "true";
           PH_MACHINE                = "predator";
           PH_NVIDIA                 = "2";
+          # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
+          # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
         };
       };
       hardware = {
         nvidia = {
           # open = true;
+          package = config.boot.kernelPackages.nvidiaPackages.production;
           prime = {
             sync.enable = lib.mkForce false;
             # reverseSync.enable = true;
@@ -62,10 +64,10 @@ in
     };
   };
 
-  powerManagement = {
-    enable = true;
-    cpuFreqGovernor = "performance";
-  };
+  # powerManagement = {
+  #   enable = true;
+  #   cpuFreqGovernor = "performance";
+  # };
 
   services.power-profiles-daemon.enable = true;
 
@@ -94,17 +96,17 @@ in
 
   hardware = {
     nvidia = {
-      # open = true;
+      open = false;
       modesetting.enable = true;
       powerManagement.enable = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
       prime = {
-        # sync.enable = true;
+        sync.enable = true;
         # reverseSync.enable = true;
         offload = {
-          enable = true;
-          enableOffloadCmd = true;
+          enable = lib.mkForce false;
+          enableOffloadCmd = lib.mkForce false;
         };
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -120,9 +122,19 @@ in
   };
 
   environment = {
+    sessionVariables.VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
     variables = rec {
       LIBGL_DRI3_DISABLE        = "true";
       PH_MACHINE                = "predator";
+      FLAKE                     = "/home/pedro/.setup";
+      KWIN_DRM_DEVICES          = "/dev/dri/card1:/dev/dri/card2";
+      # QT_AUTO_SCREEN_SET_FACTOR = 0;
+      # QT_SCALE_FACTOR           = 1.1;
+      # QT_FONT_DPI               = 96;
+      # GDK_SCALE                 = 1.1;
+      # GDK_DPI_SCALE             = 0.5;
+      # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
+      # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
       # PH_NVIDIA                 = "0";
     };
     systemPackages = with pkgs; [
@@ -136,6 +148,15 @@ in
     dconf.enable = true;
     light.enable = true;
     steam.enable = true;
+    steam.gamescopeSession.enable = true;
+    gamescope = {
+      enable = true;
+      # env = {
+      #   __NV_PRIME_RENDER_OFFLOAD = "1";
+      #   __VK_LAYER_NV_optimus = "NVIDIA_only";
+      #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      # };
+    };
   };
 
   services = {
@@ -143,7 +164,7 @@ in
     thermald.enable = true;
     #logind.lidSwitch = "ignore";            # Laptop does not go to sleep when lid is closed
     # auto-cpufreq.enable = true;
-    blueman.enable = true;
+    # blueman.enable = true;
 #   printing = {                            # Printing and drivers for TS5300
 #     enable = true;
 #     drivers = [ pkgs.cnijfilter2 ];
@@ -160,12 +181,21 @@ in
     samba = {
       enable = true;
       shares = {
-        share = {
-          "path" = "/home/${user}/Public";
-          "guest ok" = "no";
+        public = {
+          path = "/home/${user}/Public";
+          public = "yes";
+          browseable = "yes";
           "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+          "force user" = "pedro";
+          "force group" = "pedro";
         };
       };
+      extraConfig = ''
+        guest account = pedro
+      '';
       openFirewall = true;
     };
     xserver = {
@@ -208,20 +238,31 @@ in
   #temporary bluetooth fix
   systemd.tmpfiles.rules = [
     "d /var/lib/bluetooth 700 root root - -"
+    "d /var/spool/samba 1777 root root -"
   ];
   systemd.targets."bluetooth".after = ["systemd-tmpfiles-setup.service"];
 
-
-  users.users.${user} = {
-    uid = 1000;
-    shell = pkgs.fish;
-    isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "tss"];
-    initialPassword = "123456";
+  users = {
+    users.${user} = {
+      uid = 1000;
+      shell = pkgs.fish;
+      isNormalUser = true;
+      extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "tss"];
+      initialPassword = "123456";
+      subUidRanges = [
+        { count = 65535; startUid = 100000; }
+      ];
+      subGidRanges = [
+        { count = 65535; startGid = 100000; }
+      ];
+    };
+    # extraUsers.${user} = {
+    # };
   };
-  
   users.groups.${user} = {
     gid = 1000;
     members = [ "${user}" ];
   };
+
+  systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
 }

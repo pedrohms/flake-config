@@ -45,6 +45,8 @@
         vaapiVdpau
         libvdpau-va-gl
         intel-media-driver
+        vulkan-tools
+        mesa.drivers
       ];
     };
     pulseaudio.enable = false;
@@ -132,7 +134,7 @@
       zip
       pciutils
       usbutils
-      #networkmanagerapplet
+      networkmanagerapplet
       # lxappearance
       home-manager
       eza
@@ -162,13 +164,13 @@
       polkit
       polkit_gnome
       bluez
-      vulkan-tools
       glxinfo
       virtualglLib
       clinfo
       nvd
       nix-output-monitor
       mpv
+      vulkan-tools
     ];
   };
 
@@ -181,7 +183,7 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
-    package = pkgs.nixVersions.unstable;
+    package = pkgs.nixVersions.git;
     registry.nixpkgs.flake = inputs.nixpkgs;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -199,6 +201,6 @@
     stateVersion = "24.05";
   };
 
-  # boot.kernel.sysctl."vm.max_map_count" = 2147483642;
+  boot.kernel.sysctl."vm.max_map_count" = 2147483642;
 
 }
