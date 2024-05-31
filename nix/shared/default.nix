@@ -19,10 +19,6 @@
       openssl
       clang-tools_17
       lolcat
-      gnome.file-roller
-      gnome.nautilus
-      gnome.gnome-autoar
-      gnome.sushi
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own

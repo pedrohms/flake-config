@@ -21,12 +21,12 @@
       steam
       microsoft-edge-beta
       moonlight-qt
-      dbeaver
+      dbeaver-bin
       imagemagick
       transmission-gtk
       sqlcmd
-      minecraft
       appimage-run
+      firefox
     ];
 
     # sessionVariables = {

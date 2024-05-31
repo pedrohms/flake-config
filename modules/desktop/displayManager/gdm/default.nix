@@ -31,4 +31,10 @@
       };
     };
   };
+  environment.systemPackages = with pkgs; [       # Packages installed
+    gnome.file-roller
+    gnome.nautilus
+    gnome.gnome-autoar
+    gnome.sushi
+  ];
 }
