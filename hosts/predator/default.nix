@@ -42,7 +42,7 @@ in
       hardware = {
         nvidia = {
           # open = true;
-          package = config.boot.kernelPackages.nvidiaPackages.production;
+          package = config.boot.kernelPackages.nvidiaPackages.latest;
           prime = {
             sync.enable = lib.mkForce false;
             # reverseSync.enable = true;
@@ -100,13 +100,13 @@ in
       modesetting.enable = true;
       powerManagement.enable = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
-        sync.enable = true;
+        sync.enable = false;
         # reverseSync.enable = true;
         offload = {
-          enable = lib.mkForce false;
-          enableOffloadCmd = lib.mkForce false;
+          enable = lib.mkForce true;
+          enableOffloadCmd = lib.mkForce true;
         };
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -128,6 +128,7 @@ in
       PH_MACHINE                = "predator";
       FLAKE                     = "/home/pedro/.setup";
       KWIN_DRM_DEVICES          = "/dev/dri/card1:/dev/dri/card2";
+      CHROMIUM_USER_FLAGS       = "$HOME/.config/chromium-flags.conf";
       # QT_AUTO_SCREEN_SET_FACTOR = 0;
       # QT_SCALE_FACTOR           = 1.1;
       # QT_FONT_DPI               = 96;
@@ -135,8 +136,7 @@ in
       # GDK_DPI_SCALE             = 0.5;
       # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
       # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
-      # PH_NVIDIA                 = "0";
-      FLAKE = "/home/pedro/.setup";
+      PH_NVIDIA                 = "2";
     };
     systemPackages = with pkgs; [
       simple-scan
