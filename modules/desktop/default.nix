@@ -67,7 +67,6 @@
     mako
     glib
     xdg-utils
-    gnome.file-roller
     wayland-utils
     # dwl
     # somebar

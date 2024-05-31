@@ -90,6 +90,7 @@
     #   enable = true;
     #   package = pkgs.mariadb;
     # };
+    power-profiles-daemon.enable = true;
     openssh = {
       enable = true;
       openFirewall = true;
