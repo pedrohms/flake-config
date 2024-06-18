@@ -15,6 +15,7 @@
 {
   programs = {
     dconf.enable = true;
+    xwayland.enable = true;
   };
 
   services = {

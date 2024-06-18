@@ -153,7 +153,7 @@
       dmenu
       bat
       ripgrep
-      neovim-nightly
+      neovim
       ntfs3g
       scrot
       gnome.gnome-keyring

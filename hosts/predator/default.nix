@@ -1,6 +1,7 @@
 {inputs, config, pkgs, user, myFlakeVersion, lib, ... }:
 let
   localPkgs = import ../../modules/packages { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
+
 in 
 {
   imports =                                               # For now, if applying to other system, swap files
@@ -28,6 +29,7 @@ in
     # };
   };
 
+
   specialisation = {
     hybrid.configuration = {
       environment = {
@@ -41,8 +43,8 @@ in
       };
       hardware = {
         nvidia = {
-          # open = true;
-          package = config.boot.kernelPackages.nvidiaPackages.latest;
+          open = true;
+          package = config.boot.kernelPackages.nvidiaPackages.beta;
           prime = {
             sync.enable = lib.mkForce false;
             # reverseSync.enable = true;
@@ -96,23 +98,22 @@ in
 
   hardware = {
     nvidia = {
-      open = false;
+      open = true;
       modesetting.enable = true;
       powerManagement.enable = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
       prime = {
-        sync.enable = false;
+        sync.enable = true;
         # reverseSync.enable = true;
         offload = {
-          enable = lib.mkForce true;
-          enableOffloadCmd = lib.mkForce true;
+          enable = lib.mkForce false;
+          enableOffloadCmd = lib.mkForce false;
         };
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
     };
-
     pulseaudio.enable = false;
     sane = {                           # Used for scanning with Xsane
       enable = true;
@@ -136,7 +137,7 @@ in
       # GDK_DPI_SCALE             = 0.5;
       # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
       # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
-      PH_NVIDIA                 = "2";
+      # PH_NVIDIA                 = "2";
     };
     systemPackages = with pkgs; [
       simple-scan

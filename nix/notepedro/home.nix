@@ -17,6 +17,7 @@ in {
       wezterm
       wofi
       firefox
+      brave
       postman
       appimage-run
       lutris
