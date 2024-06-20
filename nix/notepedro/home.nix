@@ -21,6 +21,7 @@ in {
       postman
       appimage-run
       lutris
+      podman-desktop
     ];
   };
 

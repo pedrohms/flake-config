@@ -199,7 +199,7 @@
       enable = true;
       channel = "https://nixos.org/channels/nixos-unstable";
     };
-    stateVersion = "24.05";
+    stateVersion = "24.11";
   };
 
   boot.kernel.sysctl."vm.max_map_count" = 2147483642;

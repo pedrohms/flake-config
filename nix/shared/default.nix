@@ -19,6 +19,7 @@
       openssl
       clang-tools_17
       lolcat
+      sshfs
     ];
 
     pointerCursor = {                         # This will set cursor systemwide so applications can not choose their own
@@ -56,4 +57,5 @@
       name = "JetBrains Mono Medium";         # or FiraCode Nerd Font Mono Medium
     };                                        # Cursor is declared under home.pointerCursor
   };
+  services.kdeconnect.enable = true;
 }

@@ -14,9 +14,6 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
-  programs = {
-    kdeconnect.enable = true;
-  };
   services = {
     xserver = {
       desktopManager = {

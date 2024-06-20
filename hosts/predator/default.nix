@@ -246,7 +246,7 @@ in
 
   users = {
     users.${user} = {
-      uid = 1000;
+      uid = 1001;
       shell = pkgs.fish;
       isNormalUser = true;
       extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "tss"];
@@ -262,7 +262,7 @@ in
     # };
   };
   users.groups.${user} = {
-    gid = 1000;
+    gid = 1001;
     members = [ "${user}" ];
   };
 
