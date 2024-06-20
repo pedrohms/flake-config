@@ -184,7 +184,7 @@
       dates = "weekly";
       options = "--delete-older-than 5d";
     };
-    package = pkgs.nixVersions.git;
+    package = pkgs.nixVersions.latest;
     registry.nixpkgs.flake = inputs.nixpkgs;
     extraOptions = ''
       experimental-features = nix-command flakes

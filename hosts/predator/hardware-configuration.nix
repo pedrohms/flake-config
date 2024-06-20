@@ -41,21 +41,22 @@
     ${pkgs.kmod}/bin/modeprobe -i acpi_call
   ''; 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+    { device = "/dev/disk/by-uuid/61f1d605-fa82-4630-88f6-da28e9af0ddb";
       fsType = "btrfs";
+      options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
+    { device = "/dev/disk/by-uuid/653C-17DD";
       fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-label/home";
+    { device = "/dev/disk/by-uuid/91f74ba3-e7a1-40fb-840c-3d32da686100";
       fsType = "btrfs";
     };
 
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [{ device = "/dev/disk/by-uuid/d372bd4a-3150-4a3d-996a-fb240d5ddc10 "; }];
 
   networking = {
     hostName = "notepedro-predator";
