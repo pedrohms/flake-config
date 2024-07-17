@@ -148,7 +148,7 @@
     shell = pkgs.fish;
     # shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "openrazer" ];
+    extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "openrazer" "usbmux"];
     initialPassword = "123456";
   };
 

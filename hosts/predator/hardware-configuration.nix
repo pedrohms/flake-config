@@ -22,8 +22,10 @@
   ];
   boot.blacklistedKernelModules =  [ "nouveau" ];
   boot.kernelModules = [ "kvm-intel" ];
+  # boot.kernelParams =  [ "i915.enable_psr=0" "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off"
+  #                        "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   boot.kernelParams =  [ "i915.enable_psr=0" "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off"
-                          "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+                         "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call ];
   boot.extraModprobeConfig = ''
     options kvm_intel nested=1
@@ -40,23 +42,23 @@
   boot.postBootCommands = ''
     ${pkgs.kmod}/bin/modeprobe -i acpi_call
   ''; 
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/61f1d605-fa82-4630-88f6-da28e9af0ddb";
+    { device = "/dev/disk/by-uuid/437b967b-0cbd-4555-ab06-549d148311e7";
       fsType = "btrfs";
-      options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/653C-17DD";
+    { device = "/dev/disk/by-uuid/FB1C-1771";
       fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/91f74ba3-e7a1-40fb-840c-3d32da686100";
+    { device = "/dev/disk/by-uuid/432d080b-da20-412c-a4ea-676d4f13434d";
       fsType = "btrfs";
     };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/d372bd4a-3150-4a3d-996a-fb240d5ddc10 "; }];
+  swapDevices = [ { device = "/dev/disk/by-uuid/9fcc469d-38ee-4b60-8923-b7391f14ea3a"; } ];
 
   networking = {
     hostName = "notepedro-predator";
@@ -73,7 +75,7 @@
     firewall = {
       enable = true;
       #allowedUDPPorts = [ 53 67 ];
-      #allowedTCPPorts = [ 53 80 443 9443 ];
+      allowedTCPPorts = [ 3389 ];
     };
   };
 

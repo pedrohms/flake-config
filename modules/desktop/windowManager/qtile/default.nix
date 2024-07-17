@@ -26,7 +26,6 @@
         ];
       };
       # windowManager.qtile.backend = "x11";
-      windowManager.qtile.backend = "wayland";
     };
   };
 }

@@ -22,6 +22,7 @@ in {
       appimage-run
       lutris
       podman-desktop
+      vlc
     ];
   };
 

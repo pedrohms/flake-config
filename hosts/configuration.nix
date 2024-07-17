@@ -38,7 +38,6 @@
     opengl = {
       enable = true;
       driSupport32Bit = true;
-      driSupport = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
       extraPackages = with pkgs; [
         vaapiIntel
@@ -81,6 +80,9 @@
     polkit.enable = true;
   };
   services = {
+    usbmuxd = {
+      enable = true;
+    };
     udev.packages = [
      pkgs.android-udev-rules
     ];

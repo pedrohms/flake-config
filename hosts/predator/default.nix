@@ -44,7 +44,7 @@ in
       hardware = {
         nvidia = {
           open = true;
-          package = config.boot.kernelPackages.nvidiaPackages.beta;
+          package = config.boot.kernelPackages.nvidiaPackages.latest;
           prime = {
             sync.enable = lib.mkForce false;
             # reverseSync.enable = true;
@@ -102,7 +102,7 @@ in
       modesetting.enable = true;
       powerManagement.enable = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
         sync.enable = true;
         # reverseSync.enable = true;
@@ -142,6 +142,9 @@ in
     systemPackages = with pkgs; [
       simple-scan
       powertop
+      ifuse
+      ipad_charge
+      libimobiledevice
     ] ++ [  ];
   };
 
@@ -149,15 +152,16 @@ in
     fish.enable = true;
     dconf.enable = true;
     light.enable = true;
+    gamemode.enable = true;
     steam.enable = true;
-    steam.gamescopeSession.enable = true;
+    # steam.gamescopeSession.enable = true;
     gamescope = {
       enable = true;
-      # env = {
-      #   __NV_PRIME_RENDER_OFFLOAD = "1";
-      #   __VK_LAYER_NV_optimus = "NVIDIA_only";
-      #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      # };
+      env = {
+        __NV_PRIME_RENDER_OFFLOAD = "1";
+        __VK_LAYER_NV_optimus = "NVIDIA_only";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      };
     };
   };
 
@@ -249,7 +253,7 @@ in
       uid = 1000;
       shell = pkgs.fish;
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "tss"];
+      extraGroups = [ "wheel" "video" "audio" "networkmanager" "lp" "scanner" "plugdev" "sambashare" "kvm" "libvirtd" "camera" "adbusers" "plugdev" "users" "tss" "usbmux"];
       initialPassword = "123456";
       subUidRanges = [
         { count = 65535; startUid = 100000; }
@@ -265,6 +269,5 @@ in
     gid = 1000;
     members = [ "${user}" ];
   };
-
   systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
 }
