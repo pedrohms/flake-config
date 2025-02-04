@@ -44,21 +44,18 @@
   ''; 
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/437b967b-0cbd-4555-ab06-549d148311e7";
-      fsType = "btrfs";
+    { device = "/dev/disk/by-uuid/f4b7d0c2-59f8-4614-80e5-3680be91ce32";
+      fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/FB1C-1771";
+    { device = "/dev/disk/by-uuid/6408-C479";
       fsType = "vfat";
     };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/432d080b-da20-412c-a4ea-676d4f13434d";
-      fsType = "btrfs";
-    };
-
-  swapDevices = [ { device = "/dev/disk/by-uuid/9fcc469d-38ee-4b60-8923-b7391f14ea3a"; } ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/deaf8bb7-9823-45d3-a481-e66c7c96239d"; }
+    ];
 
   networking = {
     hostName = "notepedro-predator";

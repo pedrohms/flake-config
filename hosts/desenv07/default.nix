@@ -123,9 +123,9 @@
           "force group" = "framework";
         };
       };
-      extraConfig = ''
-        guest account = framework
-      '';
+      # extraConfig = ''
+      #   guest account = framework
+      # '';
       openFirewall = true;
     };
     xserver = {
@@ -157,7 +157,7 @@
     members = [ "framework" ];
   };
   # virtualisation.waydroid.enable = true;
-  systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
+  # systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
   systemd.user.services.xdg-desktop-portal-gtk = {
     wantedBy = [ "xdg-desktop-portal.service" ];
     before = [ "xdg-desktop-portal.service" ];

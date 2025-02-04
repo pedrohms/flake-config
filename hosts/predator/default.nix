@@ -30,33 +30,33 @@ in
   };
 
 
-  specialisation = {
-    hybrid.configuration = {
-      environment = {
-        variables = rec {
-          LIBGL_DRI3_DISABLE        = "true";
-          PH_MACHINE                = "predator";
-          PH_NVIDIA                 = "2";
-          # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
-          # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
-        };
-      };
-      hardware = {
-        nvidia = {
-          open = true;
-          package = config.boot.kernelPackages.nvidiaPackages.latest;
-          prime = {
-            sync.enable = lib.mkForce false;
-            # reverseSync.enable = true;
-            offload = {
-              enable = true;
-              enableOffloadCmd = true;
-            };
-          };
-        };
-      };
-    };
-  };
+  # specialisation = {
+  #   hybrid.configuration = {
+  #     environment = {
+  #       variables = rec {
+  #         LIBGL_DRI3_DISABLE        = "true";
+  #         PH_MACHINE                = "predator";
+  #         PH_NVIDIA                 = "2";
+  #         # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
+  #         # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
+  #       };
+  #     };
+  #     hardware = {
+  #       nvidia = {
+  #         open = true;
+  #         package = config.boot.kernelPackages.nvidiaPackages.latest;
+  #         prime = {
+  #           sync.enable = lib.mkForce false;
+  #           # reverseSync.enable = true;
+  #           offload = {
+  #             enable = true;
+  #             enableOffloadCmd = true;
+  #           };
+  #         };
+  #       };
+  #     };
+  #   };
+  # };
 
   security = {
     tpm2 = {
@@ -104,11 +104,11 @@ in
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
-        sync.enable = true;
+        sync.enable = false;
         # reverseSync.enable = true;
         offload = {
-          enable = lib.mkForce false;
-          enableOffloadCmd = lib.mkForce false;
+          enable = lib.mkForce true;
+          enableOffloadCmd = lib.mkForce true;
         };
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
@@ -199,9 +199,9 @@ in
           "force group" = "pedro";
         };
       };
-      extraConfig = ''
-        guest account = pedro
-      '';
+      # extraConfig = ''
+      #   guest account = pedro
+      # '';
       openFirewall = true;
     };
     xserver = {
@@ -269,5 +269,5 @@ in
     gid = 1000;
     members = [ "${user}" ];
   };
-  systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
+  # systemd.enableUnifiedCgroupHierarchy = lib.mkForce true;
 }
