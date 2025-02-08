@@ -16,9 +16,10 @@ in {
     packages = with pkgs; [ 
       dconf
       xarchiver
-      android-wayland                         # Office packages
-      android-studio
-      gradle
+      # android-wayland                         # Office packages
+      # android-studio
+      # flutter
+      # gradle
       # winePackages.unstable
       wineWowPackages.stable
       # wine64
@@ -32,6 +33,8 @@ in {
       podman-desktop
       vlc
       microsoft-edge
+      obs-studio
+
     ];
   };
 

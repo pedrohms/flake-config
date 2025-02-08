@@ -12,21 +12,21 @@ in
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_latest;
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    # loader = {                              # EFI Boot
-    #   efi = {
-    #     canTouchEfiVariables = true;
-    #     efiSysMountPoint = "/boot";
-    #   };
-    #   grub = {                              # Most of grub is set up for dual boot
-    #     enable = true;
-    #     devices = [ "nodev" ];
-    #     efiSupport = true;
-    #     useOSProber = true;                 # Find all boot options
-    #   };
-    #   timeout = 10;                          # Grub auto select time
-    # };
+    # loader.systemd-boot.enable = true;
+    # loader.efi.canTouchEfiVariables = true;
+    loader = {                              # EFI Boot
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {                              # Most of grub is set up for dual boot
+        enable = true;
+        devices = [ "nodev" ];
+        efiSupport = true;
+        useOSProber = true;                 # Find all boot options
+      };
+      timeout = 10;                          # Grub auto select time
+    };
   };
 
 

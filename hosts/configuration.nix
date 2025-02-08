@@ -239,6 +239,18 @@
       mpv
       lxqt.lxqt-openssh-askpass
       vulkan-tools
+      alsa-utils
+      # alsa-lib
+      # xz
+      # libGLU
+      # clang
+      # cmake
+      # ninja
+      # pkg-config
+      # gtk3
+      # lzlib
+      # libgcc
+      # ocamlPackages.alsa
     ];
   };
 
