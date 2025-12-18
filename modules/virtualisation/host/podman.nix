@@ -11,9 +11,9 @@
         gvisor
       ];
     };
-    containers.cdi.dynamic.nvidia.enable = true;
   };
-
+  
+  hardware.nvidia-container-toolkit.enable = true;
   
   environment.systemPackages = with pkgs; [
     podman-compose

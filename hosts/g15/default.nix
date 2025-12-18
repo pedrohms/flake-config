@@ -108,8 +108,6 @@ in
         nvidiaBusId = "PCI:1:0:0";
       };
     };
-
-    pulseaudio.enable = false;
     sane = {                           # Used for scanning with Xsane
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
@@ -146,6 +144,7 @@ in
 #     enable = true;
 #     drivers = [ pkgs.cnijfilter2 ];
 #   };
+    pulseaudio.enable = false;
     avahi = {                               # Needed to find wireless printer
       enable = true;
       nssmdns4 = true;
@@ -157,7 +156,7 @@ in
     };
     samba = {
       enable = true;
-      shares = {
+      settings = {
         share = {
           "path" = "/home/${user}/Public";
           "guest ok" = "no";
@@ -165,6 +164,16 @@ in
         };
       };
       openFirewall = true;
+    };
+    libinput = {                          # Trackpad support & gestures
+      touchpad = {
+        tapping = true;
+        scrollMethod = "twofinger";
+        naturalScrolling = true;            # The correct way of scrolling
+        accelProfile = "adaptive";          # Speed settings
+        #accelSpeed = "-0.5";
+        disableWhileTyping = true;
+      };
     };
     xserver = {
       xkb = {
@@ -174,16 +183,6 @@ in
       };
       videoDrivers = [ "nvidia" ];
       dpi = 88;
-      libinput = {                          # Trackpad support & gestures
-        touchpad = {
-          tapping = true;
-          scrollMethod = "twofinger";
-          naturalScrolling = true;            # The correct way of scrolling
-          accelProfile = "adaptive";          # Speed settings
-          #accelSpeed = "-0.5";
-          disableWhileTyping = true;
-        };
-      };
       resolutions = [
         { x = 1600; y = 920; }
         { x = 1280; y = 720; }
@@ -195,10 +194,10 @@ in
       screenSection = ''
         Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
       '';
-      displayManager = {
-        gdm = {
-          wayland = true;
-        };
+    };
+    displayManager = {
+      gdm = {
+        wayland = true;
       };
     };
   };

@@ -33,20 +33,18 @@
   };
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport32Bit = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
       extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
+        intel-vaapi-driver
+        libva-vdpau-driver
         libvdpau-va-gl
         intel-media-driver
         vulkan-tools
-        mesa.drivers
+        mesa
       ];
     };
-    pulseaudio.enable = false;
     alsa.enable = false;
     bluetooth = {
       enable = true;
@@ -82,11 +80,9 @@
     usbmuxd = {
       enable = true;
     };
-    udev.packages = [
-     pkgs.android-udev-rules
-    ];
     gnome.gnome-keyring.enable = true;
     pcscd.enable = false;
+    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -153,7 +149,7 @@
     nerd-fonts.monofur
     nerd-fonts.monoid
     nerd-fonts.mononoki
-    nerd-fonts.mplus
+    #nerd-fonts.mplus
     nerd-fonts.noto
     nerd-fonts.open-dyslexic
     nerd-fonts.overpass
@@ -210,7 +206,7 @@
       stow
       starship
       picom
-      rofi-wayland
+      rofi
       rofi-calc
       tmux
       lazygit
@@ -231,7 +227,7 @@
       polkit
       polkit_gnome
       bluez
-      glxinfo
+      mesa-demos
       virtualglLib
       clinfo
       nvd
@@ -278,7 +274,7 @@
       enable = true;
       channel = "https://nixos.org/channels/nixos-unstable";
     };
-    stateVersion = "24.11";
+    stateVersion = "26.05";
   };
 
   boot.kernel.sysctl."vm.max_map_count" = 2147483642;

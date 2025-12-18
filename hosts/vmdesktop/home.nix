@@ -19,7 +19,7 @@
     username = "${user}";
     homeDirectory = "/home/${user}";
    
-    stateVersion = "24.11";
+    stateVersion = "26.05";
     packages = with pkgs; [
       home-manager
       eza

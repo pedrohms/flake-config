@@ -28,7 +28,7 @@ in
           username = "framework";
           homeDirectory = "/home/framework";
           packages = [ pkgs.home-manager ];
-          stateVersion = "24.11";
+          stateVersion = "26.05";
         };
       }
     ];
@@ -45,7 +45,7 @@ in
           username = "${user}";
           homeDirectory = "/home/${user}";
           packages = [ pkgs.home-manager ];
-          stateVersion = "24.11";
+          stateVersion = "26.05";
         };
       }
     ];
@@ -62,7 +62,7 @@ in
           username = "${user}";
           homeDirectory = "/home/${user}";
           packages = [ pkgs.home-manager ];
-          stateVersion = "24.11";
+          stateVersion = "26.05";
         };
       }
     ];
@@ -78,7 +78,7 @@ in
           username = "vmuser";
           homeDirectory = "/home/vmuser";
           packages = [ pkgs.home-manager ];
-          stateVersion = "24.11";
+          stateVersion = "26.05";
         };
       }
     ];
@@ -94,7 +94,7 @@ in
           username = "vmuser";
           homeDirectory = "/home/vmuser";
           packages = [ pkgs.home-manager ];
-          stateVersion = "24.11";
+          stateVersion = "26.05";
         };
       }
     ];

@@ -1,6 +1,6 @@
 {
   inputs = {
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-staging.url = "github:nixos/nixpkgs/staging";
     nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
@@ -29,14 +29,14 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, yambar-source, nixpkgs-staging-next, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, yambar-source, nixpkgs-staging-next, nixpkgs-stable, ... }:
     let
       myFlakeVersion = "1.0.47";
       user = "pedro"; 
       # user = "framework"; 
-      # overlay-stable = final: prev: {
-      #   stable = inputs.nixpkgs-stable.legacyPackages.${prev.system};
-      # };
+      #overlay-stable = final: prev: {
+      #  stable = inputs.nixpkgs-stable.legacyPackages.${prev.system};
+      #};
       # overlay-staging = final: prev: {
       #   staging = inputs.nixpkgs-staging.legacyPackages.${prev.system};
       # };
@@ -47,7 +47,7 @@
         inputs.neovim-nightly-overlay.overlays.default
         inputs.nixpkgs-f2k.overlays.window-managers
         # overlay-staging
-        # overlay-stable
+        #overlay-stable
         (self: super: {
           waybar = super.waybar.overrideAttrs (oldAttrs: {
             mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

@@ -31,7 +31,6 @@
       enable = true;                          # Virtual drivers
       #qemuPackage = pkgs.qemu_kvm;           # Default
       qemu = {
-        ovmf.enable = true;
         verbatimConfig = ''
          nvram = [ "${pkgs.OVMF}/FV/OVMF.fd:${pkgs.OVMF}/FV/OVMF_VARS.fd" ]
         '';

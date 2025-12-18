@@ -20,9 +20,9 @@
 
   services = {
     dbus.enable = true;
+    libinput.enable = true; # Enable touchpad
     xserver = {
       enable = true;
-      libinput.enable = true; # Enable touchpad
       serverFlagsSection = ''
         Option "BlankTime" "0"
         Option "StandbyTime" "0"
@@ -43,6 +43,8 @@
     # deckmaster
     dunst
     # pywal
+    gtklock
+    swayidle
     clipmenu
     xorg.xev
     xorg.xkill

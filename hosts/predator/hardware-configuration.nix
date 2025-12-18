@@ -37,24 +37,36 @@
 
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="187c", ATTRS{idProduct}=="0550", MODE="0660", GROUP="plugdev", SYMLINK+="awelc"
+    # Força modo bateria quando desconectado
+    SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${pkgs.tlp}/bin/tlp bat"
+    # Força modo tomada quando conectado
+    SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${pkgs.tlp}/bin/tlp ac"
   '';  
 
   boot.postBootCommands = ''
     ${pkgs.kmod}/bin/modeprobe -i acpi_call
   ''; 
+  boot.resumeDevice = "/dev/disk/by-uuid/f4c5ac63-2d9b-4b54-9cff-bdd79cda9cae";
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f4b7d0c2-59f8-4614-80e5-3680be91ce32";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/4b7a3dd4-2827-4552-a938-0411b5561898";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6408-C479";
+    { device = "/dev/disk/by-uuid/6F19-6303";
       fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/e5b5e293-7de0-4985-9f74-7762935175f2";
+      fsType = "btrfs";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/deaf8bb7-9823-45d3-a481-e66c7c96239d"; }
+    [ { device = "/dev/disk/by-uuid/f4c5ac63-2d9b-4b54-9cff-bdd79cda9cae"; }
     ];
 
   networking = {

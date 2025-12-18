@@ -1,12 +1,11 @@
 { inputs, user, pkgs, my-overlays, ... }:
 
 {
-
   home = {
     packages = with pkgs; [ 
       libreoffice 
       authenticator
-      sumneko-lua-language-server
+      lua-language-server
       vscode
       discord
       google-chrome
@@ -17,7 +16,6 @@
       winetricks
       flameshot
       openssl
-      clang-tools_17
       lolcat
       sshfs
     ];

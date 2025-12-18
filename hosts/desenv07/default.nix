@@ -40,13 +40,12 @@
     #     enable = false;
     #     users = [ "framework" ];
     # };
-    opengl.extraPackages = with pkgs; [
+    graphics.extraPackages = with pkgs; [
       amdvlk
     ];
-    opengl.extraPackages32 = with pkgs; [
+    graphics.extraPackages32 = with pkgs; [
       driversi686Linux.amdvlk
     ];
-    pulseaudio.enable = false;
     sane = {                           # Used for scanning with Xsane
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
@@ -90,6 +89,7 @@
     #   enable = true;
     #   package = pkgs.mariadb;
     # };
+    pulseaudio.enable = false;
     power-profiles-daemon.enable = true;
     openssh = {
       enable = true;
@@ -110,7 +110,7 @@
     };
     samba = {
       enable = true;
-      shares = {
+      settings = {
         public = {
           path = "/home/framework/Public";
           public = "yes";

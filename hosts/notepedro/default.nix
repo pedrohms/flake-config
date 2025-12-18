@@ -43,8 +43,6 @@ in
         nvidiaBusId = "PCI:1:0:0";
       };
     };
-
-    pulseaudio.enable = false;
     sane = {                           # Used for scanning with Xsane
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
@@ -74,6 +72,7 @@ in
     #logind.lidSwitch = "ignore";            # Laptop does not go to sleep when lid is closed
     auto-cpufreq.enable = true;
     blueman.enable = true;
+    pulseaudio.enable = false;
 #   printing = {                            # Printing and drivers for TS5300
 #     enable = true;
 #     drivers = [ pkgs.cnijfilter2 ];
@@ -89,7 +88,7 @@ in
     };
     samba = {
       enable = true;
-      shares = {
+      settings = {
         share = {
           "path" = "/home/${user}/Public";
           "guest ok" = "no";
@@ -97,6 +96,16 @@ in
         };
       };
       openFirewall = true;
+    };
+    libinput = {                          # Trackpad support & gestures
+      touchpad = {
+        tapping = true;
+        scrollMethod = "twofinger";
+        naturalScrolling = true;            # The correct way of scrolling
+        accelProfile = "adaptive";          # Speed settings
+        #accelSpeed = "-0.5";
+        disableWhileTyping = true;
+      };
     };
     xserver = {
       xkb = {
@@ -106,16 +115,6 @@ in
       };
       videoDrivers = [ "modeset" "nvidia" ];
       dpi = 88;
-      libinput = {                          # Trackpad support & gestures
-        touchpad = {
-          tapping = true;
-          scrollMethod = "twofinger";
-          naturalScrolling = true;            # The correct way of scrolling
-          accelProfile = "adaptive";          # Speed settings
-          #accelSpeed = "-0.5";
-          disableWhileTyping = true;
-        };
-      };
       resolutions = [
         { x = 1600; y = 920; }
         { x = 1280; y = 720; }
