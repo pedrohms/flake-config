@@ -16,7 +16,7 @@
   programs = {
     niri = {
       enable = true;
-      useNautilus = true;
+      useNautilus = false;
     };
   };
   environment.systemPackages = with pkgs; [
@@ -24,6 +24,8 @@
     xwayland-satellite
     gtklock
     swayidle
+    # nautilus
+    # bazaar
   ];
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";   
 }

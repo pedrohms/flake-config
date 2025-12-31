@@ -51,7 +51,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4b7a3dd4-2827-4552-a938-0411b5561898";
       fsType = "btrfs";
-      options = [ "subvol=@" ];
+      options = [ "subvol=@" "compress=zstd:3" "noatime" "ssd" "space_cache=v2" ];
     };
 
   fileSystems."/boot" =
@@ -63,6 +63,7 @@
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/e5b5e293-7de0-4985-9f74-7762935175f2";
       fsType = "btrfs";
+      options = [ "compress=zstd:3" "noatime" "ssd" "space_cache=v2" ];
     };
 
   swapDevices =

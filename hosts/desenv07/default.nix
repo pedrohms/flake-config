@@ -31,6 +31,8 @@
       "net.ipv6.conf.all.proxy_ndp" = "1";
       "net.ipv4.conf.all.forwarding" = "1";
       "net.ipv4.conf.all.proxy_ndp" = "1";
+      "net.core.default_qdisc" = "fq";
+      "net.ipv4.tcp_congestion_control" = "bbr";
     };
   };
 

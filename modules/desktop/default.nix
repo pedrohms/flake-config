@@ -71,6 +71,7 @@
     glib
     xdg-utils
     wayland-utils
+    warehouse
     # dwl
     # somebar
     # bemenu
@@ -84,5 +85,6 @@
     # configPackages = [ pkgs.xdg-desktop-portal-gtk ];
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
   };
 }

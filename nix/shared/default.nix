@@ -25,7 +25,9 @@
       name = "Catppuccin-Mocha-Dark-Cursors";
       #package = pkgs.dracula-theme;
       package = pkgs.catppuccin-cursors.mochaDark;
-      size = 16;
+      size = 10;
+      x11.enable = true;
+      gtk.enable = true;
     };
 
   };

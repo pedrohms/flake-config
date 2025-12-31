@@ -27,9 +27,23 @@ in
       };
       timeout = 10;                          # Grub auto select time
     };
+    tmp = {
+      useTmpfs = true;
+      tmpfsSize = "75%";
+    };
+    kernel.sysctl = {
+      "net.core.default_qdisc" = "fq";
+      "net.ipv4.tcp_congestion_control" = "bbr";
+    };
   };
 
-
+  # Exemplo de ajuste no configuration.nix para garantir zstd
+  zramSwap = {
+    enable = true;
+    priority = 100; # Prioridade alta para usar antes do disco
+    memoryPercent = 100; # Pode usar até 100% da RAM total se precisar
+    algorithm = "zstd"; # Melhor equilíbrio performance/compressão
+  };
   # specialisation = {
   #   hybrid.configuration = {
   #     environment = {
@@ -63,6 +77,12 @@ in
       enable = false;
       pkcs11.enable = true;
       tctiEnvironment.enable = true;
+    };
+    pam = {
+      services = {
+        sddm.enableKwallet = false;
+        login.enableKwallet = false;
+      };
     };
   };
 
@@ -172,12 +192,16 @@ services.tlp = {
   };
 
   environment = {
-    sessionVariables.VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+    sessionVariables =  {
+      NIXOS_OZONE_WL = "1"; # Força apps Electron/Chromium a usar Wayland nativo
+      VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+      # EXTRA_CHROMIUM_ARGS = "--password-store=kwallet6";
+    };
     variables = rec {
-      LIBGL_DRI3_DISABLE        = "true";
+      # LIBGL_DRI3_DISABLE        = "true";
       PH_MACHINE                = "predator";
       FLAKE                     = "/home/pedro/.setup";
-      KWIN_DRM_DEVICES          = "/dev/dri/card1:/dev/dri/card2";
+      KWIN_DRM_DEVICES          = "/dev/dri/card1:/dev/dri/card0";
       CHROMIUM_USER_FLAGS       = "$HOME/.config/chromium-flags.conf";
       # QT_AUTO_SCREEN_SET_FACTOR = 0;
       # QT_SCALE_FACTOR           = 1.1;
@@ -195,10 +219,15 @@ services.tlp = {
       ipad_charge
       libimobiledevice
       lm_sensors
+      # kdePackages.kwallet
+      # kdePackages.kwallet-pam
+      # kdePackages.polkit-kde-agent-1 # Necessário para janelas de senha
     ] ++ [  ];
   };
 
   programs = {                              # No xbacklight, this is the alterantive
+    # dwl.enable = true;
+    ccache.enable = true;
     fish.enable = true;
     dconf.enable = true;
     light.enable = true;
@@ -220,6 +249,11 @@ services.tlp = {
     thermald.enable = true;
     pulseaudio.enable = false;
     logind.lidSwitch = "hibernate";            # Laptop does not go to sleep when lid is closed
+    fstrim = {
+      enable = true;
+      interval = "weekly";
+    };
+    fwupd.enable = true;
     # auto-cpufreq.enable = true;
     # blueman.enable = true;
 #   printing = {                            # Printing and drivers for TS5300
@@ -278,12 +312,12 @@ services.tlp = {
         { x = 1280; y = 720; }
         { x = 1920; y = 1080; }
       ];
-      displayManager.sessionCommands = ''
-       ${pkgs.xorg.xrandr}/bin/xrandr --auto
-      '';
-      screenSection = ''
-        Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
-      '';
+      # displayManager.sessionCommands = ''
+      #  ${pkgs.xorg.xrandr}/bin/xrandr --auto
+      # '';
+      # screenSection = ''
+      #   Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
+      # '';
     };
     displayManager = {
       gdm = {
@@ -293,11 +327,26 @@ services.tlp = {
   };
 
   #temporary bluetooth fix
-  systemd.tmpfiles.rules = [
-    "d /var/lib/bluetooth 700 root root - -"
-    "d /var/spool/samba 1777 root root -"
-  ];
-  systemd.targets."bluetooth".after = ["systemd-tmpfiles-setup.service"];
+  systemd = {
+    tmpfiles.rules = [
+      "d /var/lib/bluetooth 700 root root - -"
+      "d /var/spool/samba 1777 root root -"
+    ];
+    targets."bluetooth".after = ["systemd-tmpfiles-setup.service"];
+    user.services.polkit-gnome-authentication-agent-1 = {
+        description = "polkit-gnome-authentication-agent-1";
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+            Type = "simple";
+            ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+            Restart = "on-failure";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
+        };
+    };
+  };
 
   users = {
     users.${user} = {

@@ -91,6 +91,9 @@
       # If you want to use JACK applications, uncomment this
       jack.enable = true;
     };
+    journald.extraConfig = ''
+      SystemMaxUse=500M
+    '';
   };
 
   fonts.packages = with pkgs; [                # Fonts

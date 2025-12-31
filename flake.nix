@@ -19,17 +19,18 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dwl-source = {
-      url = "git+https://codeberg.org/dwl/dwl?rev=2b171fd5010379a8674afa012245fea5a590e472";
-      flake = false;
-    };
+    # dwl-source = {
+    #   url = "git+https://codeberg.org/dwl/dwl?rev=2b171fd5010379a8674afa012245fea5a590e472";
+    #   flake = false;
+    # };
     yambar-source = {
       url = "git+https://codeberg.org/dnkl/yambar?rev=547cef5afbfbcbf9fe78705c7b5661059b706346";
       flake = false;
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, yambar-source, nixpkgs-staging-next, nixpkgs-stable, ... }:
+  # outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, yambar-source, nixpkgs-staging-next, nixpkgs-stable, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, yambar-source, nixpkgs-staging-next, nixpkgs-stable, ... }:
     let
       myFlakeVersion = "1.0.47";
       user = "pedro"; 
@@ -57,18 +58,18 @@
           yambar = super.yambar.overrideAttrs (oldAttrs: rec {
             src = yambar-source;
           });
-          dwl = super.dwl.overrideAttrs (oldAttrs: rec {
-            src = dwl-source;
-            patches = [
-              ./dwl-patches/focusdirection.patch
-              ./dwl-patches/attachbottom.patch
-              ./dwl-patches/monfig.patch
-              ./dwl-patches/restoreTiling.patch
-              ./dwl-patches/toggleKbLayout.patch
-              ./dwl-patches/autostart.patch
-              ./dwl-patches/vanitygaps.patch
-            ];
-          });
+          # dwl = super.dwl.overrideAttrs (oldAttrs: rec {
+          #   src = dwl-source;
+          #   patches = [
+          #     ./dwl-patches/focusdirection.patch
+          #     ./dwl-patches/attachbottom.patch
+          #     ./dwl-patches/monfig.patch
+          #     ./dwl-patches/restoreTiling.patch
+          #     ./dwl-patches/toggleKbLayout.patch
+          #     ./dwl-patches/autostart.patch
+          #     ./dwl-patches/vanitygaps.patch
+          #   ];
+          # });
         })
       ]; # ++ import modules/overlays/qtile.nix;
       location = "$HOME/.setup";
@@ -76,13 +77,15 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs user location  home-manager my-overlays myFlakeVersion pkgs-staging-next dwl-source yambar-source;
+          inherit inputs nixpkgs user location  home-manager my-overlays myFlakeVersion pkgs-staging-next yambar-source;
+          # inherit inputs nixpkgs user location  home-manager my-overlays myFlakeVersion pkgs-staging-next dwl-source yambar-source;
         }
       );
       homeConfigurations = (
         import ./nix {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs home-manager user my-overlays myFlakeVersion dwl-source yambar-source;
+          inherit inputs nixpkgs home-manager user my-overlays myFlakeVersion yambar-source;
+          # inherit inputs nixpkgs home-manager user my-overlays myFlakeVersion dwl-source yambar-source;
         }
       );
     };
