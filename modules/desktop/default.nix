@@ -72,19 +72,28 @@
     xdg-utils
     wayland-utils
     warehouse
+    libsecret
+    seahorse
+    xidlehook
+    slock
     # dwl
     # somebar
     # bemenu
     # yambar
   ];
 
+  # security.pam.services.login.enableKwallet = true;
+  # security.pam.services.sddm.enableKwallet = true; # só se usar sddm
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.sddm.enableGnomeKeyring = true; # se usar SDDM
+
   xdg.portal = {                                  # Required for flatpak with windowmanagers
     enable = true;
-    # wlr.enable = true;
+    wlr.enable = true;
     config.common.default = "*";
     # configPackages = [ pkgs.xdg-desktop-portal-gtk ];
     # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    # extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde pkgs.xdg-desktop-portal-gnome ];
   };
 }

@@ -8,14 +8,22 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking = {
+    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    enableIPv6 = false;
+  };
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
   time.hardwareClockInLocalTime = true;
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  # Certifique-se que os arquivos de localização para pt_BR foram gerados
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "pt_BR.UTF-8/UTF-8"
+  ];
+# i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
    LC_TIME = "pt_BR.UTF-8";
    LC_MONETARY = "pt_BR.UTF-8";
@@ -239,6 +247,7 @@
       lxqt.lxqt-openssh-askpass
       vulkan-tools
       alsa-utils
+      pavucontrol
       # alsa-lib
       # xz
       # libGLU

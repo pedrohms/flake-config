@@ -49,5 +49,10 @@
     # # Performance
     VDPAU_DRIVER = "va_gl";
     LIBVA_DRIVER_NAME = "iHD";
+    # Força apps GTK (Gnome, Chrome, VS Code) a usar o módulo de cedilha
+    GTK_IM_MODULE = "cedilla";
+    # Em alguns casos para Qt (KDE), embora o Qt costuma respeitar o sistema melhor
+    QT_IM_MODULE = "cedilla";
   };
+
 }

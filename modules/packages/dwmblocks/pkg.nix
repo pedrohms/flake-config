@@ -9,8 +9,8 @@ stdenv.mkDerivation rec {
     name  = "1.0.0-${myFlakeVersion}";
     owner = "pedrohms";
     repo  = "dwmblocks";
-    rev   = "7c1742bf2c813b64c5b1864bfe9eebc9d1126efb";
-    sha256 = "nGFRMoeKTjKnyAxxEMrb1zOXRjuBVwlUW1YKGAxtLXs=";
+    rev   = "cf4ebac6f85aee0a114ddc5b4f951aee1b363aa2";
+    sha256 = "pLjBEzlc94Ip50DhW5b1QXENHY1Q58uzaiIxRVvEo3w=";
   };
 
   # unpackPhase = ''tar -xf $src'';

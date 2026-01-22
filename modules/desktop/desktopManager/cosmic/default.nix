@@ -1,4 +1,5 @@
-#  Lightdm configuration
+
+#  Gnome configuration
 #
 #  flake.nix
 #   ├─ ./hosts
@@ -6,16 +7,19 @@
 #   │       └─ default.nix
 #   └─ ./modules
 #       └─ ./desktop
-#           └─ ./displayManager
-#               └─ ./lightdm
+#           └─ ./desktopManager
+#               └─ ./cosmic
 #                   └─ default.nix *
 #
 
 { inputs, config, lib, pkgs, ... }:
 
 {
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true; # Necessário para temas baseados em Qt6/Plasma 6
+  services = {
+    desktopManager = {
+      cosmic = {
+        enable = true;
+      };
+    };
   };
 }

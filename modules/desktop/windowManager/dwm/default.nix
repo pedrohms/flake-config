@@ -15,9 +15,18 @@
 { config, lib, pkgs, myFlakeVersion, ... }:
 let
   localPkgs = import ../../../packages/default.nix { pkgs = pkgs; myFlakeVersion = myFlakeVersion; };
+
+  dwmWrapped = pkgs.writeShellScriptBin "dwm" ''
+    unset WAYLAND_DISPLAY
+    eval $(${pkgs.gnome-keyring}/bin/gnome-keyring-daemon --start --components=secrets)
+    export SSH_AUTH_SOCK
+
+    exec ${localPkgs.dwm}/bin/dwm "$@"
+  '';
+
   customPackages = with localPkgs; [
-    dwm
-    dwmblocks
+    dwmWrapped 
+    localPkgs.dwmblocks
   ];
 in 
 {
@@ -26,6 +35,7 @@ in
       windowManager = {
         dwm = {                                 # Window Manager
           enable = true;
+          package = dwmWrapped;
         };
       };
     };

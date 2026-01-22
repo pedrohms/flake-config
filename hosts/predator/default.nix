@@ -4,11 +4,12 @@ let
 
 in 
 {
-  imports =                                               # For now, if applying to other system, swap files
-    [(import ./hardware-configuration.nix)] ++            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
-     (import ./virtualisation.nix) ++                     # virtualisation
-     (import ./desktop.nix)                              # desktop
-  ;
+  imports = [                                             # For now, if applying to other system, swap files
+     ./hardware-configuration.nix            # Current system hardware config @ /etc/nixos/hardware-configuration.nix
+     ./virtualisation.nix                     # virtualisation
+     ./desktop.nix                              # desktop
+     ./gpu-hybrid.nix
+   ];
 
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_zen;
@@ -32,8 +33,23 @@ in
       tmpfsSize = "75%";
     };
     kernel.sysctl = {
+      # Habilita o algoritmo BBR do Google (melhora muito a vazão em redes instáveis)
       "net.core.default_qdisc" = "fq";
       "net.ipv4.tcp_congestion_control" = "bbr";
+
+      # Aumenta o limite de conexões simultâneas
+      "net.core.somaxconn" = 8192;
+
+      # Aumenta os buffers de memória para TCP
+      "net.core.rmem_max" = 16777216;
+      "net.core.wmem_max" = 16777216;
+      "net.ipv4.tcp_rmem" = "4096 87380 16777216";
+      "net.ipv4.tcp_wmem" = "4096 65536 16777216";
+
+      # Melhora o reuso de sockets (útil para builds Nuxt/Spring que fazem muitas requisições)
+      "net.ipv4.tcp_tw_reuse" = 1;
+      "net.ipv4.tcp_fin_timeout" = 15;
+      "net.ipv4.tcp_slow_start_after_idle" = 0;
     };
   };
 
@@ -44,33 +60,25 @@ in
     memoryPercent = 100; # Pode usar até 100% da RAM total se precisar
     algorithm = "zstd"; # Melhor equilíbrio performance/compressão
   };
-  # specialisation = {
-  #   hybrid.configuration = {
-  #     environment = {
-  #       variables = rec {
-  #         LIBGL_DRI3_DISABLE        = "true";
-  #         PH_MACHINE                = "predator";
-  #         PH_NVIDIA                 = "2";
-  #         # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
-  #         # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
-  #       };
-  #     };
-  #     hardware = {
-  #       nvidia = {
-  #         open = true;
-  #         package = config.boot.kernelPackages.nvidiaPackages.latest;
-  #         prime = {
-  #           sync.enable = lib.mkForce false;
-  #           # reverseSync.enable = true;
-  #           offload = {
-  #             enable = true;
-  #             enableOffloadCmd = true;
-  #           };
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
+
+  specialisation = {
+    intelOnly.configuration = {
+      environment = {
+        variables = rec {
+          PH_MACHINE                = "predator";
+          PH_NVIDIA                 = "2";
+          # KWIN_DRM_DEVICES          = "/dev/dri/card0:/dev/dri/card1";
+          # WLR_DRM_DEVICES           = "/dev/dri/card0:/dev/dri/card1";
+        };
+      };
+      hardware.nvidia.modesetting.enable = lib.mkForce false;
+      hardware.nvidia-container-toolkit.enable = lib.mkForce false;
+      disabledModules = [ ./gpu-hybrid.nix ];
+      imports =  [                                             # For now, if applying to other system, swap files
+        ./gpu-intel.nix
+      ];
+    };
+  };
 
   security = {
     tpm2 = {
@@ -80,10 +88,18 @@ in
     };
     pam = {
       services = {
-        sddm.enableKwallet = false;
-        login.enableKwallet = false;
+        # sddm.enableKwallet = false;
+        # login.enableKwallet = false;
       };
     };
+    sudo.extraRules = [
+      {
+        users = [ "pedro" ];
+        commands = [
+          { command = "/run/current-system/sw/bin/tlp"; options = [ "NOPASSWD" ]; }
+        ];
+      }
+    ];
   };
 
   # powerManagement = {
@@ -121,8 +137,8 @@ services.tlp = {
 
       # Define limites de frequência (Opcional, mas útil para economizar bateria).
       # Deixar em branco usa os padrões do hardware.
-      # "CPU_MAX_PERF_ON_AC" = 100;
-      # "CPU_MAX_PERF_ON_BAT" = 50; # Limita a CPU a 50% na bateria
+      "CPU_MAX_PERF_ON_AC" = 100;
+      "CPU_MAX_PERF_ON_BAT" = 35; # Limita a CPU a 50% na bateria
 
       # --- PLATFORM PROFILE (Se suportado pelo hardware) ---
       # Controla perfis térmicos e de energia do sistema (ACPI).
@@ -164,26 +180,6 @@ services.tlp = {
   };
 
   hardware = {
-    nvidia = {
-      open = true;
-      modesetting.enable = true;
-      powerManagement = {
-        enable = true;
-        finegrained = true;
-      };
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
-      prime = {
-        sync.enable = false;
-        # reverseSync.enable = true;
-        offload = {
-          enable = lib.mkForce true;
-          enableOffloadCmd = lib.mkForce true;
-        };
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    };
     sane = {                           # Used for scanning with Xsane
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
@@ -232,7 +228,12 @@ services.tlp = {
     dconf.enable = true;
     light.enable = true;
     gamemode.enable = true;
-    steam.enable = true;
+    steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    }; 
     steam.gamescopeSession.enable = true;
     gamescope = {
       enable = true;
@@ -255,7 +256,7 @@ services.tlp = {
     };
     fwupd.enable = true;
     # auto-cpufreq.enable = true;
-    # blueman.enable = true;
+    blueman.enable = true;
 #   printing = {                            # Printing and drivers for TS5300
 #     enable = true;
 #     drivers = [ pkgs.cnijfilter2 ];
@@ -305,7 +306,7 @@ services.tlp = {
         variant = "intl";
         model = "pc105";
       };
-      videoDrivers = [ "nvidia" ];
+      # videoDrivers = [ "nvidia" ];
       dpi = 88;
       resolutions = [
         { x = 1600; y = 920; }
@@ -324,6 +325,7 @@ services.tlp = {
         wayland = true;
       };
     };
+    irqbalance.enable = true;
   };
 
   #temporary bluetooth fix

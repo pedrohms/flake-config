@@ -32,7 +32,7 @@
   # outputs = inputs @ { self, nixpkgs, home-manager, dwl-source, yambar-source, nixpkgs-staging-next, nixpkgs-stable, ... }:
   outputs = inputs @ { self, nixpkgs, home-manager, yambar-source, nixpkgs-staging-next, nixpkgs-stable, ... }:
     let
-      myFlakeVersion = "1.0.47";
+      myFlakeVersion = "1.0.51";
       user = "pedro"; 
       # user = "framework"; 
       #overlay-stable = final: prev: {

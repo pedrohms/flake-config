@@ -8,7 +8,9 @@
       lua-language-server
       vscode
       discord
-      google-chrome
+      (google-chrome.override {
+          commandLineArgs = "--password-store=gnome-libsecret";
+      })
       remmina
       jq
       distrobox
