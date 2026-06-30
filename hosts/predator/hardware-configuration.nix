@@ -40,29 +40,40 @@
   boot.postBootCommands = ''
     ${pkgs.kmod}/bin/modeprobe -i acpi_call
   ''; 
-  boot.resumeDevice = "/dev/disk/by-uuid/f4c5ac63-2d9b-4b54-9cff-bdd79cda9cae";
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4b7a3dd4-2827-4552-a938-0411b5561898";
+    { device = "/dev/disk/by-uuid/80f21c71-039c-4064-8fcd-dd7d288e96cf";
       fsType = "btrfs";
-      options = [ "subvol=@" "compress=zstd:3" "noatime" "ssd" "space_cache=v2" ];
+      options = [ "compress=zstd:3" "noatime" "ssd" "space_cache=v2" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/80f21c71-039c-4064-8fcd-dd7d288e96cf";
+      fsType = "btrfs";
+      options = [ "subvol=nix" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6F19-6303";
+    { device = "/dev/disk/by-uuid/A367-4C2E";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/e5b5e293-7de0-4985-9f74-7762935175f2";
+    { device = "/dev/disk/by-uuid/9cb9c548-c8b7-4e10-9490-967733dccd1f";
       fsType = "btrfs";
       options = [ "compress=zstd:3" "noatime" "ssd" "space_cache=v2" ];
     };
 
+  fileSystems."/home/backup" =
+    { device = "/dev/disk/by-uuid/70ca7d9f-9228-4260-9d23-94bf8a7f8d57";
+      fsType = "btrfs";
+    };
+
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/f4c5ac63-2d9b-4b54-9cff-bdd79cda9cae"; }
+    [ { device = "/dev/disk/by-uuid/f6dbb24a-e10f-4e2e-88dc-0ee579bc1875"; }
     ];
+
 
   networking = {
     hostName = "notepedro-predator";

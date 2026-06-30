@@ -60,7 +60,6 @@
   };
 
   programs = {
-    adb.enable = true;
     nm-applet.enable = true;
     ssh.enableAskPassword = false;
     gnupg.agent = {
@@ -228,7 +227,7 @@
       dmenu
       bat
       ripgrep
-      neovim
+      #neovim
       ntfs3g
       scrot
       gnome-keyring

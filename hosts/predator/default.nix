@@ -11,6 +11,7 @@ in
      ./gpu-hybrid.nix
    ];
 
+  system.boot.loader.kernelFile = "vmlinuz";
   boot = {                                  # Boot options
     kernelPackages = pkgs.linuxPackages_zen;
     # loader.systemd-boot.enable = true;
@@ -226,7 +227,6 @@ services.tlp = {
     ccache.enable = true;
     fish.enable = true;
     dconf.enable = true;
-    light.enable = true;
     gamemode.enable = true;
     steam = {
       enable = true;
@@ -319,11 +319,6 @@ services.tlp = {
       # screenSection = ''
       #   Option "metamodes" "eDP-1: 1920x1080_120 +0_0, HDMI-1-0: 1920x1080_60 +1920+0"
       # '';
-    };
-    displayManager = {
-      gdm = {
-        wayland = true;
-      };
     };
     irqbalance.enable = true;
   };

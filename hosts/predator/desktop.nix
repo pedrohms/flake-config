@@ -10,8 +10,8 @@
     # ( import ../../modules/desktop/windowManager/sway)
    # ../../modules/desktop/displayManager/gdm
     ../../modules/desktop/displayManager/sddm
-    # ( import ../../modules/desktop/desktopManager/gnome)
+   # ../../modules/desktop/desktopManager/gnome
     ../../modules/desktop/desktopManager/plasma
-    ../../modules/desktop/desktopManager/cosmic
+   # ../../modules/desktop/desktopManager/cosmic
   ];
 }
